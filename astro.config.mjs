@@ -22,6 +22,12 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      // Jamais d'inline (scripts <script> ou polices data:) : la CSP du
+      // .htaccess est stricte (script-src/font-src 'self') et bloquerait
+      // ces ressources. Tout doit être un fichier externe hashé.
+      assetsInlineLimit: 0,
+    },
   },
   build: {
     // Inline les petits assets CSS pour réduire les requêtes bloquantes
