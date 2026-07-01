@@ -1,0 +1,106 @@
+---
+/**
+ * Section « Nos créations » : la gamme actuelle (La Métisse, rhum brun gaïac,
+ * arrangés) et les cuvées à venir (whiskies, brandy d'hydromel).
+ * Cartes en reveal stagger au scroll.
+ */
+import { Image } from 'astro:assets';
+import logoMetisse from '@/assets/images/logo-la-metisse-rhum-traditionnel-or.png';
+import { products } from '@/data/site';
+
+const disponibles = products.filter((p) => p.available);
+const aVenir = products.filter((p) => !p.available);
+---
+
+<section id="creations" class="bg-grain relative z-20 bg-noir py-24 md:py-36">
+  <div class="mx-auto max-w-6xl px-5 md:px-8">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <p class="mb-4 text-xs tracking-[0.35em] text-or uppercase">Nos créations</p>
+      <h2
+        class="font-display text-balance text-3xl font-semibold tracking-wide text-creme md:text-4xl lg:text-5xl"
+      >
+        Des spiritueux <span class="text-or">d'exception</span>
+      </h2>
+      <div class="gold-rule mx-auto mt-8 max-w-xs">
+        <span class="text-or" aria-hidden="true">◆</span>
+      </div>
+    </div>
+
+    <!-- Gamme actuelle -->
+    <div class="mt-16 grid gap-8 md:grid-cols-3" data-reveal-group>
+      {
+        disponibles.map((product) => (
+          <article
+            class:list={[
+              'group relative flex flex-col border bg-noir-800/60 p-8 transition-all duration-700',
+              product.signature
+                ? 'border-or/60 shadow-[0_0_40px_rgb(201_164_92/0.08)]'
+                : 'border-or/15 hover:border-or/40',
+            ]}
+          >
+            {product.signature && (
+              <p class="absolute -top-3 left-1/2 -translate-x-1/2 bg-or px-4 py-1 text-[0.65rem] font-medium tracking-[0.2em] whitespace-nowrap text-noir uppercase">
+                Unique au monde
+              </p>
+            )}
+            <p class="text-xs tracking-[0.25em] text-or-light/80 uppercase">
+              {product.category}
+            </p>
+            <h3 class="font-display mt-3 text-xl leading-snug font-semibold text-creme">
+              {product.name}
+            </h3>
+            <p class="mt-4 flex-1 text-sm leading-relaxed text-creme-muted">
+              {product.description}
+            </p>
+            {product.notes && (
+              <p class="mt-4 border-t border-or/15 pt-4 text-sm text-or-light/90 italic">
+                {product.notes}
+              </p>
+            )}
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- Marque La Métisse -->
+    <div
+      class="mt-16 flex flex-col items-center gap-8 border-y border-or/15 py-12 md:flex-row md:justify-center md:gap-14"
+      data-reveal
+    >
+      <Image
+        src={logoMetisse}
+        alt="Logo La Métisse, rhum traditionnel de la Distillerie Rolland"
+        width={280}
+        densities={[1, 2]}
+        class="w-44 md:w-56"
+      />
+      <p class="max-w-md text-center text-sm leading-relaxed text-creme-muted md:text-left">
+        <strong class="font-display text-base tracking-widest text-or">LA MÉTISSE</strong><br />
+        La marque de rhum de la maison Rolland : un hommage au métissage des cultures
+        calédoniennes, entre tradition rhumière et caractère du Caillou.
+      </p>
+    </div>
+
+    <!-- À venir -->
+    <div class="mt-16" data-reveal-group>
+      <h3 class="text-center text-sm tracking-[0.35em] text-creme/60 uppercase">
+        En cours d'élevage
+      </h3>
+      <div class="mt-8 grid gap-8 md:grid-cols-2">
+        {
+          aVenir.map((product) => (
+            <article class="relative border border-dashed border-or/25 bg-noir-800/30 p-8">
+              <p class="text-xs tracking-[0.25em] text-or/70 uppercase">{product.category}</p>
+              <h4 class="font-display mt-3 text-lg font-semibold text-creme/90">
+                {product.name}
+              </h4>
+              <p class="mt-4 text-sm leading-relaxed text-creme-muted/80">
+                {product.description}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

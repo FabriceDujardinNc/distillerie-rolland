@@ -1,0 +1,74 @@
+---
+/**
+ * Page teaser de pré-lancement. Servie à la place du site par le .htaccess
+ * tant que le visiteur n'a pas le code d'accès (?acces=…) — voir README.
+ * noindex : Google ne doit pas indexer ce placeholder comme page d'accueil.
+ */
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import monogrammeOr from '@/assets/images/logo-distillerie-rolland-monogramme-or.png';
+import { site } from '@/data/site';
+---
+
+<BaseLayout
+  title="Distillerie Rolland — Site en préparation"
+  description="Le site de la Distillerie Rolland, distillerie artisanale en Nouvelle-Calédonie, ouvre bientôt ses portes."
+  path="/en-preparation"
+  noindex
+>
+  <main
+    class="bg-grain relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-5 text-center"
+  >
+    <div
+      class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgb(12_10_8/0.9)_100%)]"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div class="relative z-10 flex max-w-2xl flex-col items-center">
+      <Image
+        src={monogrammeOr}
+        alt=""
+        width={380}
+        densities={[1, 2]}
+        loading="eager"
+        fetchpriority="high"
+        class="w-48 opacity-90 md:w-60"
+      />
+
+      <h1
+        class="font-display mt-8 text-4xl font-semibold tracking-[0.1em] text-or uppercase md:text-6xl"
+      >
+        Distillerie<br />Rolland
+      </h1>
+
+      <div class="gold-rule my-8 w-full max-w-xs">
+        <span class="text-or" aria-hidden="true">◆</span>
+      </div>
+
+      <p class="text-sm tracking-[0.35em] text-creme uppercase md:text-base">
+        Site en préparation
+      </p>
+
+      <p class="mt-6 max-w-md leading-relaxed text-creme-muted">
+        Nos alambics chauffent, nos rhums s'affinent. Le site de la Distillerie Rolland —
+        {site.address.locality}, {site.address.country} — ouvre bientôt ses portes.
+      </p>
+
+      <p class="font-script mt-8 text-2xl text-or-light md:text-3xl">{site.motto}</p>
+
+      <a
+        href={`mailto:${site.email}`}
+        class="mt-10 inline-block border border-or/50 px-8 py-3 text-xs tracking-[0.25em] text-or uppercase transition-all duration-500 hover:bg-or hover:text-noir"
+      >
+        {site.email}
+      </a>
+    </div>
+
+    <p
+      class="absolute bottom-6 left-1/2 w-full -translate-x-1/2 px-4 text-[0.65rem] tracking-widest text-creme/40 uppercase"
+    >
+      L'abus d'alcool est dangereux pour la santé. À consommer avec modération.
+    </p>
+  </main>
+</BaseLayout>

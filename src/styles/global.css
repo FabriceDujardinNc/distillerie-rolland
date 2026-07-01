@@ -1,0 +1,109 @@
+@import 'tailwindcss';
+
+/* ==========================================================================
+   Design system — Distillerie Rolland
+   DA « noir & or premium » héritée de la carte de visite :
+   noir profond, or vieilli, crème, serif Cinzel pour les titres.
+   ========================================================================== */
+
+@theme {
+  /* Palette */
+  --color-noir: #0c0a08;
+  --color-noir-800: #14110d;
+  --color-noir-700: #1d1913;
+  --color-noir-600: #2a241b;
+  --color-or: #c9a45c;
+  --color-or-light: #e3c98b;
+  --color-or-dark: #9a7a3e;
+  --color-creme: #f2ebdd;
+  --color-creme-muted: #bfb6a3;
+  --color-acajou: #7a3b1e;
+
+  /* Typographie */
+  --font-display: 'Cinzel', 'Georgia', serif;
+  --font-body: 'Jost Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-script: 'Great Vibes', cursive;
+
+  /* Rythme des animations — lentes et douces, jamais brusques */
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+  /* La barre de nav sticky ne doit pas masquer les ancres */
+  scroll-padding-top: 5rem;
+  /* Même fond que le body : aucun blanc visible en cas d'overscroll */
+  background-color: var(--color-noir);
+}
+
+body {
+  background-color: var(--color-noir);
+  color: var(--color-creme);
+  font-family: var(--font-body);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--color-or);
+  color: var(--color-noir);
+}
+
+/* --------------------------------------------------------------------------
+   Utilitaires maison
+   -------------------------------------------------------------------------- */
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+/* Filet doré décoratif de part et d'autre d'un élément (style carte de visite) */
+@utility gold-rule {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  &::before,
+  &::after {
+    content: '';
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(90deg, transparent, var(--color-or) 50%, transparent);
+    opacity: 0.6;
+  }
+}
+
+/* Texture grain très subtile pour donner de la matière au noir */
+@utility bg-grain {
+  background-image: radial-gradient(
+      circle at 20% 30%,
+      rgb(201 164 92 / 0.05),
+      transparent 45%
+    ),
+    radial-gradient(circle at 80% 70%, rgb(201 164 92 / 0.04), transparent 40%);
+}
+
+/* --------------------------------------------------------------------------
+   Accessibilité : si l'utilisateur refuse les animations, tout est visible
+   et immobile. GSAP est également désactivé côté JS via matchMedia.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

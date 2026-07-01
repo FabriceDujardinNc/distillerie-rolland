@@ -1,0 +1,130 @@
+---
+/**
+ * Navigation : transparente au-dessus du hero, puis fond noir translucide
+ * une fois qu'on scrolle (classe .is-scrolled posée par animations.ts).
+ */
+import { Image } from 'astro:assets';
+import monogrammeOr from '@/assets/images/logo-distillerie-rolland-monogramme-or.png';
+
+const links = [
+  { href: '#distillerie', label: 'La distillerie' },
+  { href: '#gaiac', label: 'Le gaïac' },
+  { href: '#creations', label: 'Nos créations' },
+  { href: '#contact', label: 'Contact' },
+];
+---
+
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,padding] duration-500"
+>
+  <nav
+    class="mx-auto flex max-w-6xl items-center justify-between px-5 py-5 md:px-8"
+    aria-label="Navigation principale"
+  >
+    <a
+      href="#accueil"
+      class="font-display flex items-center gap-3 text-sm tracking-[0.25em] text-or transition-colors duration-300 hover:text-or-light md:text-base"
+    >
+      <Image
+        src={monogrammeOr}
+        alt=""
+        width={96}
+        densities={[1, 2]}
+        loading="eager"
+        class="nav-logo h-9 w-9 object-contain md:h-10 md:w-10"
+      />
+      DISTILLERIE&nbsp;ROLLAND
+    </a>
+
+    <!-- Desktop (le burger reste actif jusqu'à 1024px : en dessous, les
+         liens n'ont pas la place et se replient sur deux lignes) -->
+    <ul class="hidden items-center gap-8 lg:flex">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="group relative text-sm whitespace-nowrap tracking-[0.15em] text-creme/80 uppercase transition-colors duration-300 hover:text-or"
+            >
+              {link.label}
+              <span
+                class="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-or transition-transform duration-500 ease-out group-hover:origin-left group-hover:scale-x-100"
+                aria-hidden="true"
+              />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Mobile -->
+    <button
+      id="menu-toggle"
+      type="button"
+      class="flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Ouvrir le menu"
+    >
+      <span class="menu-bar h-px w-6 bg-or transition-transform duration-300"></span>
+      <span class="menu-bar h-px w-6 bg-or transition-opacity duration-300"></span>
+      <span class="menu-bar h-px w-6 bg-or transition-transform duration-300"></span>
+    </button>
+  </nav>
+
+  <div
+    id="mobile-menu"
+    class="grid grid-rows-[0fr] bg-noir/95 backdrop-blur-md transition-[grid-template-rows] duration-500 lg:hidden"
+  >
+    <ul class="overflow-hidden px-8">
+      {
+        links.map((link) => (
+          <li class="border-b border-or/10 last:border-0">
+            <a
+              href={link.href}
+              class="mobile-link block py-4 text-sm tracking-[0.2em] text-creme/90 uppercase transition-colors hover:text-or"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</header>
+
+<style>
+  /* Sur desktop, le grand sigle du hero occupe déjà le coin gauche : celui
+     du header n'apparaît qu'une fois qu'on a scrollé (évite le doublon) */
+  @media (min-width: 1024px) {
+    .nav-logo {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    #site-header.is-scrolled .nav-logo {
+      opacity: 1;
+    }
+  }
+
+  /* États pilotés par src/scripts/animations.ts */
+  #site-header.is-scrolled {
+    background-color: rgb(12 10 8 / 0.88);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 rgb(201 164 92 / 0.15);
+  }
+
+  #site-header.menu-open #mobile-menu {
+    grid-template-rows: 1fr;
+  }
+
+  #site-header.menu-open .menu-bar:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  #site-header.menu-open .menu-bar:nth-child(2) {
+    opacity: 0;
+  }
+  #site-header.menu-open .menu-bar:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+</style>

@@ -1,0 +1,66 @@
+---
+/**
+ * Section signature « Le cœur de gaïac torréfié » : le storytelling clé de la
+ * maison — premier alcool au monde vieilli au gaïac. Fond noir plus profond,
+ * photo de la bouteille ambrée, parallax.
+ */
+import { Image } from 'astro:assets';
+import bouteille from '@/assets/images/bouteille-rhum-brun-coeur-de-gaiac-nouvelle-caledonie.jpg';
+---
+
+<section id="gaiac" class="relative z-10 overflow-hidden bg-noir-800 py-24 md:py-36">
+  <!-- Halo doré d'ambiance -->
+  <div
+    class="pointer-events-none absolute -top-40 right-0 h-[32rem] w-[32rem] rounded-full bg-or/5 blur-3xl"
+    aria-hidden="true"
+    data-parallax="18"
+  >
+  </div>
+
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 md:grid-cols-2 md:gap-16 md:px-8">
+    <div data-reveal-group>
+      <p class="mb-4 text-xs tracking-[0.35em] text-or uppercase">Notre signature</p>
+      <h2
+        class="font-display text-balance text-3xl font-semibold tracking-wide text-creme md:text-4xl lg:text-5xl"
+      >
+        Le cœur de gaïac torréfié,<br />
+        <span class="text-or">une première mondiale</span>
+      </h2>
+
+      <p class="mt-8 leading-relaxed text-creme-muted">
+        Le gaïac est un bois précieux et dense, emblématique de la Nouvelle-Calédonie.
+        Torréfié puis marié à nos alcools, il livre une robe dorée aux reflets rouge
+        acajou et des notes boisées d'une profondeur rare.
+      </p>
+
+      <p class="mt-5 leading-relaxed text-creme-muted">
+        La Distillerie Rolland signe ainsi le tout premier alcool distillé vieilli au
+        cœur de gaïac torréfié — un spiritueux qui n'existe nulle part ailleurs au
+        monde, excellent sec comme en cocktail.
+      </p>
+
+      <blockquote class="mt-10 border-l-2 border-or pl-6">
+        <p class="font-script text-2xl text-or-light md:text-3xl">
+          « Un bois d'ici, un goût d'ailleurs, une exclusivité mondiale. »
+        </p>
+      </blockquote>
+    </div>
+
+    <div class="relative mx-auto w-full max-w-sm" data-reveal>
+      <div class="overflow-hidden rounded-t-full border border-or/25 p-3">
+        <Image
+          src={bouteille}
+          alt="Bouteille de rhum brun infusé au cœur de gaïac torréfié, robe dorée aux reflets rouge acajou — Distillerie Rolland"
+          width={680}
+          widths={[400, 680, 1020]}
+          sizes="(min-width: 768px) 24rem, 88vw"
+          class="aspect-[9/16] w-full rounded-t-full object-cover"
+          data-parallax-img
+        />
+      </div>
+      <p class="mt-5 text-center text-xs tracking-[0.3em] text-creme/50 uppercase">
+        Robe dorée · Reflets acajou · Notes boisées
+      </p>
+    </div>
+  </div>
+</section>

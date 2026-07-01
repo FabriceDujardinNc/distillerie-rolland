@@ -1,0 +1,71 @@
+---
+/**
+ * Footer : rappel de marque, navigation, mentions légales et
+ * avertissement loi Évin (obligatoire pour un site d'alcool).
+ */
+import { site } from '@/data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="relative z-30 border-t border-or/15 bg-noir">
+  <div class="mx-auto max-w-6xl px-5 py-14 md:px-8">
+    <div class="flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-between">
+      <div class="text-center md:text-left">
+        <p class="font-display text-lg tracking-[0.25em] text-or">DISTILLERIE ROLLAND</p>
+        <p class="font-script mt-2 text-xl text-or-light/80">{site.motto}</p>
+        <p class="mt-4 text-sm leading-relaxed text-creme/50">
+          {site.address.street}<br />
+          {site.address.postalCode} {site.address.locality}, {site.address.country}
+        </p>
+      </div>
+
+      <nav aria-label="Navigation de bas de page">
+        <ul class="flex flex-col items-center gap-3 text-sm md:items-end">
+          <li>
+            <a href="#distillerie" class="text-creme/60 transition-colors hover:text-or"
+              >La distillerie</a
+            >
+          </li>
+          <li>
+            <a href="#gaiac" class="text-creme/60 transition-colors hover:text-or">Le gaïac</a>
+          </li>
+          <li>
+            <a href="#creations" class="text-creme/60 transition-colors hover:text-or"
+              >Nos créations</a
+            >
+          </li>
+          <li>
+            <a href="#contact" class="text-creme/60 transition-colors hover:text-or">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="mt-12 border-t border-or/10 pt-8 text-center">
+      <p class="text-xs font-medium tracking-[0.15em] text-creme/70 uppercase">
+        L'abus d'alcool est dangereux pour la santé. À consommer avec modération.
+      </p>
+      <p class="mt-2 text-xs text-creme/40">
+        La vente d'alcool est interdite aux mineurs.
+      </p>
+
+      <!-- Bloc légal -->
+      <ul
+        class="mt-8 flex flex-col items-center gap-2 text-xs text-creme/40 sm:flex-row sm:justify-center sm:gap-6"
+      >
+        <li>© {year} {site.name}</li>
+        <li>
+          <a href="/mentions-legales" class="transition-colors hover:text-or">
+            Mentions légales
+          </a>
+        </li>
+        <li>
+          <a href="/politique-de-confidentialite" class="transition-colors hover:text-or">
+            Politique de confidentialité
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,93 @@
+---
+/**
+ * Mentions légales : éditeur, hébergeur, propriété intellectuelle,
+ * données personnelles (formulaire) et rappels loi Évin.
+ * ⚠️ Compléter le n° RIDET avant la mise en ligne.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Footer from '@/components/Footer.astro';
+import { site } from '@/data/site';
+---
+
+<BaseLayout
+  title="Mentions légales — Distillerie Rolland"
+  description="Mentions légales du site de la Distillerie Rolland, distillerie artisanale à Moindou, Nouvelle-Calédonie."
+  path="/mentions-legales"
+>
+  <main class="mx-auto max-w-3xl px-5 py-24 md:px-8">
+    <a
+      href="/"
+      class="text-xs tracking-[0.25em] text-or uppercase transition-colors hover:text-or-light"
+    >
+      ← Retour au site
+    </a>
+
+    <h1 class="font-display mt-8 text-3xl font-semibold tracking-wide text-or md:text-4xl">
+      Mentions légales
+    </h1>
+
+    <div
+      class="mt-10 space-y-10 text-sm leading-relaxed text-creme-muted [&_h2]:font-display [&_h2]:text-lg [&_h2]:tracking-widest [&_h2]:text-creme [&_h2]:uppercase"
+    >
+      <section>
+        <h2>Éditeur du site</h2>
+        <p class="mt-3">
+          {site.name}<br />
+          {site.address.street}, {site.address.postalCode}
+          {site.address.locality}, {site.address.country}<br />
+          Téléphone : <a href={`tel:${site.phoneHref}`} class="text-or">{site.phone}</a><br />
+          Email : <a href={`mailto:${site.email}`} class="text-or">{site.email}</a><br />
+          RIDET : [à compléter]
+        </p>
+      </section>
+
+      <section>
+        <h2>Hébergement</h2>
+        <p class="mt-3">
+          Hostinger International Ltd.<br />
+          61 Lordou Vironos Street, 6023 Larnaca, Chypre —&nbsp;<a
+            href="https://www.hostinger.fr"
+            rel="noopener"
+            class="text-or">hostinger.fr</a
+          >
+        </p>
+      </section>
+
+      <section>
+        <h2>Propriété intellectuelle</h2>
+        <p class="mt-3">
+          L'ensemble des contenus de ce site (textes, photographies, logos, marques « Distillerie
+          Rolland » et « La Métisse ») est protégé par le droit de la propriété intellectuelle.
+          Toute reproduction, même partielle, est interdite sans autorisation écrite préalable.
+        </p>
+      </section>
+
+      <section>
+        <h2>Données personnelles</h2>
+        <p class="mt-3">
+          Les informations transmises via le formulaire de contact (nom, email, message) sont
+          utilisées exclusivement pour répondre à votre demande. Elles ne sont ni revendues, ni
+          utilisées à des fins publicitaires. L'acheminement technique des messages est assuré par
+          le service Web3Forms. Vous disposez d'un droit d'accès, de rectification et de
+          suppression de vos données en écrivant à&nbsp;<a
+            href={`mailto:${site.email}`}
+            class="text-or">{site.email}</a
+          >. Ce site n'utilise
+          aucun cookie de suivi ou de publicité.
+        </p>
+      </section>
+
+      <section>
+        <h2>Alcool et santé</h2>
+        <p class="mt-3">
+          L'abus d'alcool est dangereux pour la santé, à consommer avec modération. La vente
+          d'alcool à des mineurs de moins de dix-huit (18) ans est interdite. En accédant à ce
+          site, vous déclarez avoir l'âge légal requis pour la consommation d'alcool dans votre
+          pays de résidence.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

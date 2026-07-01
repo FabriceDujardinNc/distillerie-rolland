@@ -1,0 +1,71 @@
+---
+/**
+ * Section « La distillerie » : alternance image + texte,
+ * photo des cuves inox à Moindou, reveal au scroll.
+ */
+import { Image } from 'astro:assets';
+import cuves from '@/assets/images/cuves-inox-distillerie-rolland-moindou.jpg';
+import { site } from '@/data/site';
+---
+
+<section id="distillerie" class="relative z-10 overflow-hidden bg-noir py-24 md:py-36">
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 md:grid-cols-2 md:gap-16 md:px-8">
+    <div class="relative order-2 md:order-1" data-reveal>
+      <div class="overflow-hidden">
+        <Image
+          src={cuves}
+          alt="Cuves de fermentation en inox de la Distillerie Rolland à Moindou, Nouvelle-Calédonie"
+          width={760}
+          widths={[420, 760, 1140]}
+          sizes="(min-width: 768px) 45vw, 92vw"
+          class="aspect-[4/5] w-full object-cover transition-transform duration-[1.8s] ease-out hover:scale-105"
+          data-parallax-img
+        />
+      </div>
+      <!-- Cadre doré décalé, rappel du liseré de la carte de visite -->
+      <div
+        class="pointer-events-none absolute -inset-3 -z-10 border border-or/30 md:-inset-4"
+        aria-hidden="true"
+      >
+      </div>
+    </div>
+
+    <div class="order-1 md:order-2" data-reveal-group>
+      <p class="mb-4 text-xs tracking-[0.35em] text-or uppercase">La distillerie</p>
+      <h2
+        class="font-display text-balance text-3xl font-semibold tracking-wide text-creme md:text-4xl lg:text-5xl"
+      >
+        L'art de distiller,<br />
+        <span class="text-or">au cœur du Caillou</span>
+      </h2>
+
+      <p class="mt-8 leading-relaxed text-creme-muted">
+        À {site.address.locality}, en {site.address.country}, la Distillerie Rolland fait
+        naître des spiritueux d'exception entre terre rouge et pâturages. Ici, chaque
+        goutte est le fruit d'un savoir-faire de maître distillateur : fermentations
+        patientes, distillations précises, et une exigence absolue de la matière première
+        à la mise en bouteille.
+      </p>
+
+      <p class="mt-5 leading-relaxed text-creme-muted">
+        Une démarche artisanale et authentique, portée par une conviction simple :
+        l'excellence ne se décrète pas, elle se distille — lentement, passionnément.
+      </p>
+
+      <ul class="mt-10 grid grid-cols-3 gap-6 border-t border-or/20 pt-8">
+        <li>
+          <p class="font-display text-2xl text-or md:text-3xl">100<span class="text-lg">%</span></p>
+          <p class="mt-1 text-xs tracking-widest text-creme/60 uppercase">Artisanal</p>
+        </li>
+        <li>
+          <p class="font-display text-2xl text-or md:text-3xl">NC</p>
+          <p class="mt-1 text-xs tracking-widest text-creme/60 uppercase">Made in Calédonie</p>
+        </li>
+        <li>
+          <p class="font-display text-2xl text-or md:text-3xl">1<span class="text-lg">er</span></p>
+          <p class="mt-1 text-xs tracking-widest text-creme/60 uppercase">Rhum au gaïac</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,120 @@
+---
+/**
+ * Page d'accueil one-page : hero, distillerie, gaïac, créations, contact.
+ * Le JSON-LD LocalBusiness (+ catalogue produits) est injecté ici — c'est
+ * la page d'entité principale pour le SEO local Nouvelle-Calédonie.
+ */
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import AgeGate from '@/components/AgeGate.astro';
+import Header from '@/components/Header.astro';
+import monogrammeOr from '@/assets/images/logo-distillerie-rolland-monogramme-or.png';
+import Hero from '@/components/Hero.astro';
+import About from '@/components/About.astro';
+import Gaiac from '@/components/Gaiac.astro';
+import Products from '@/components/Products.astro';
+import Contact from '@/components/Contact.astro';
+import Footer from '@/components/Footer.astro';
+import { site, products } from '@/data/site';
+
+const title =
+  'Distillerie Rolland — Rhum artisanal au cœur de gaïac | Moindou, Nouvelle-Calédonie';
+const description =
+  'Distillerie artisanale à Moindou (Nouvelle-Calédonie) : rhum blanc traditionnel La Métisse, rhum brun au cœur de gaïac torréfié unique au monde, rhums arrangés letchi, passion, banane et épices.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'LocalBusiness',
+      '@id': `${site.domain}/#distillerie`,
+      name: site.name,
+      description: site.description,
+      slogan: site.tagline,
+      url: `${site.domain}/`,
+      telephone: site.phoneHref,
+      email: site.email,
+      image: `${site.domain}/images/og-distillerie-rolland.jpg`,
+      priceRange: '$$',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: site.address.street,
+        addressLocality: site.address.locality,
+        postalCode: site.address.postalCode,
+        addressRegion: site.address.region,
+        addressCountry: site.address.countryCode,
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: site.geo.lat,
+        longitude: site.geo.lng,
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Spiritueux de la Distillerie Rolland',
+        itemListElement: products
+          .filter((p) => p.available)
+          .map((p) => ({
+            '@type': 'Offer',
+            availability: 'https://schema.org/InStock',
+            itemOffered: {
+              '@type': 'Product',
+              name: p.name,
+              description: p.description,
+              brand: { '@type': 'Brand', name: 'La Métisse' },
+            },
+          })),
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${site.domain}/#website`,
+      url: `${site.domain}/`,
+      name: site.name,
+      inLanguage: 'fr-FR',
+      publisher: { '@id': `${site.domain}/#distillerie` },
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} path="/">
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(jsonLd)}
+    slot="head"
+  />
+
+  <AgeGate />
+  <Header />
+
+  <!-- Le sigle de la maison, flottant dans la marge gauche : en grand format
+       sur le hero, il reprend sa taille normale en le quittant puis descend
+       en parallax jusqu'au footer (grands écrans — piloté par animations.ts) -->
+  <Image
+    src={monogrammeOr}
+    alt=""
+    aria-hidden="true"
+    id="logo-flottant"
+    width={440}
+    densities={[1, 2]}
+    loading="eager"
+    class="pointer-events-none fixed top-[11vh] left-4 z-40 hidden w-[clamp(6.5rem,calc((100vw-76rem)/2),17rem)] opacity-95 drop-shadow-[0_2px_16px_rgb(12_10_8/0.85)] xl:block 2xl:left-8"
+  />
+
+  <main>
+    <Hero />
+    <About />
+    <Gaiac />
+    <Products />
+    <Contact />
+  </main>
+
+  <Footer />
+
+  <script>
+    import '@/scripts/animations.ts';
+    import '@/scripts/contact.ts';
+  </script>
+</BaseLayout>

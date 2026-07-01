@@ -1,0 +1,100 @@
+# ==========================================================================
+# Distillerie Rolland — configuration Apache/LiteSpeed (Hostinger)
+# Ce fichier est copié tel quel dans dist/ lors du build Astro.
+# ==========================================================================
+
+Options -Indexes
+ServerSignature Off
+
+# Le déploiement se fait par git pull dans public_html : le dépôt ne doit
+# jamais être servi
+RedirectMatch 404 /\.git
+
+# --------------------------------------------------------------------------
+# 1) HTTPS + domaine canonique (www)
+# --------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Force HTTPS
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  # Force www (canonique : https://www.distillerie-rolland.com)
+  RewriteCond %{HTTP_HOST} ^distillerie-rolland\.com$ [NC]
+  RewriteRule ^ https://www.distillerie-rolland.com%{REQUEST_URI} [R=301,L]
+
+  # ------------------------------------------------------------------------
+  # 2) MODE PRÉ-LANCEMENT — ⚠️ SUPPRIMER CE BLOC AU LANCEMENT OFFICIEL ⚠️
+  #
+  # Par défaut, tous les visiteurs voient la page « site en préparation ».
+  # L'URL https://www.distillerie-rolland.com/?acces=gaiac2026 débloque le
+  # vrai site pour 30 jours (cookie). Le code se change ici (2 occurrences).
+  # ------------------------------------------------------------------------
+
+  # Le code d'accès dans l'URL pose un cookie d'aperçu
+  RewriteCond %{QUERY_STRING} (^|&)acces=gaiac2026($|&)
+  RewriteRule ^ - [E=DR_PREVIEW_OK:1]
+
+  # Sans cookie ni code → page teaser (les assets restent accessibles)
+  RewriteCond %{HTTP_COOKIE} !dr_preview=ok
+  RewriteCond %{QUERY_STRING} !(^|&)acces=gaiac2026($|&)
+  RewriteCond %{REQUEST_URI} !^/en-preparation
+  RewriteCond %{REQUEST_URI} !^/_astro/
+  RewriteCond %{REQUEST_URI} !\.(css|js|mjs|jpg|jpeg|png|webp|avif|svg|gif|ico|woff2?|ttf|xml|txt|webmanifest)$
+  RewriteRule ^ /en-preparation/index.html [L]
+
+  # ---------------------------- FIN DU BLOC PRÉ-LANCEMENT -------------------
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Pose le cookie d'aperçu quand le code d'accès est présent (pré-lancement)
+  Header always set Set-Cookie "dr_preview=ok; Path=/; Max-Age=2592000; Secure; SameSite=Lax" env=DR_PREVIEW_OK
+
+  # --------------------------------------------------------------------------
+  # 3) Sécurité
+  # --------------------------------------------------------------------------
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
+
+  # --------------------------------------------------------------------------
+  # 4) Cache navigateur
+  # --------------------------------------------------------------------------
+  # Assets Astro : noms hashés → cache agressif immutable
+  <FilesMatch "^.+\.(js|mjs|css|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # Images : un mois
+  <FilesMatch "\.(jpg|jpeg|png|webp|avif|svg|gif|ico)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  # HTML : toujours revalidé (le contenu peut changer à chaque déploiement)
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# --------------------------------------------------------------------------
+# 5) Compression
+# --------------------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml application/xml
+</IfModule>
+
+# --------------------------------------------------------------------------
+# 6) Types MIME modernes
+# --------------------------------------------------------------------------
+<IfModule mod_mime.c>
+  AddType image/avif .avif
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+</IfModule>
+
+# Page 404 personnalisée (retombe sur l'accueil one-page)
+ErrorDocument 404 /index.html

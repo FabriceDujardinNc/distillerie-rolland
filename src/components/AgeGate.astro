@@ -1,0 +1,123 @@
+---
+/**
+ * Modale de vérification d'âge (obligation pour un site d'alcool).
+ * - SEO-safe : le contenu du site reste dans le HTML, la modale est un
+ *   simple calque au-dessus — Google indexe normalement.
+ * - Le choix est mémorisé 30 jours (localStorage) : pas de re-demande,
+ *   et aucun flash pour les visiteurs déjà validés (cachée par défaut,
+ *   affichée par le script uniquement si nécessaire).
+ * - Le script est bundlé par Astro (externe) : compatible avec notre CSP
+ *   `script-src 'self'` — pas de JS inline.
+ */
+---
+
+<div
+  id="age-gate"
+  class="fixed inset-0 z-[60] hidden items-center justify-center bg-noir/95 px-5 backdrop-blur-md"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="age-gate-title"
+>
+  <div
+    class="w-full max-w-md border border-or/40 bg-noir-800 p-8 text-center shadow-[0_0_80px_rgb(201_164_92/0.12)] md:p-10"
+  >
+    <p class="font-display text-sm tracking-[0.3em] text-or uppercase">Distillerie Rolland</p>
+    <div class="gold-rule mx-auto mt-5 max-w-[10rem]">
+      <span class="text-or text-xs" aria-hidden="true">◆</span>
+    </div>
+
+    <div id="age-gate-question">
+      <h2 id="age-gate-title" class="font-display mt-6 text-xl leading-snug text-creme md:text-2xl">
+        Avez-vous l'âge légal pour consommer de l'alcool&nbsp;?
+      </h2>
+      <p class="mt-4 text-sm leading-relaxed text-creme-muted">
+        Ce site présente des boissons alcoolisées. Pour y accéder, vous devez avoir
+        18&nbsp;ans ou plus.
+      </p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+        <button
+          id="age-yes"
+          type="button"
+          class="border border-or bg-or px-7 py-3 text-xs font-medium tracking-[0.2em] text-noir uppercase transition-all duration-300 hover:bg-transparent hover:text-or"
+        >
+          Oui, j'ai 18 ans ou plus
+        </button>
+        <button
+          id="age-no"
+          type="button"
+          class="border border-creme/25 px-7 py-3 text-xs tracking-[0.2em] text-creme/70 uppercase transition-colors duration-300 hover:border-creme/60 hover:text-creme"
+        >
+          Non
+        </button>
+      </div>
+    </div>
+
+    <div id="age-gate-refused" class="hidden">
+      <h2 class="font-display mt-6 text-xl leading-snug text-creme md:text-2xl">
+        Ce site est réservé aux adultes
+      </h2>
+      <p class="mt-4 text-sm leading-relaxed text-creme-muted">
+        Vous devez avoir l'âge légal pour consommer de l'alcool afin de visiter ce site.
+        Merci de votre compréhension, et à bientôt&nbsp;!
+      </p>
+    </div>
+
+    <p class="mt-8 text-[0.65rem] leading-relaxed tracking-[0.15em] text-creme/50 uppercase">
+      L'abus d'alcool est dangereux pour la santé.<br />À consommer avec modération.
+    </p>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'dr-age-ok';
+  const TTL_DAYS = 30;
+
+  const gate = document.getElementById('age-gate');
+  const question = document.getElementById('age-gate-question');
+  const refused = document.getElementById('age-gate-refused');
+  const yes = document.getElementById('age-yes');
+  const no = document.getElementById('age-no');
+
+  function isVerified(): boolean {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return false;
+      return Date.now() - Number(raw) < TTL_DAYS * 24 * 60 * 60 * 1000;
+    } catch {
+      // localStorage indisponible (navigation privée stricte) : on ne bloque
+      // pas le visiteur en boucle, la modale s'affichera à chaque visite
+      return false;
+    }
+  }
+
+  function open() {
+    if (!gate) return;
+    gate.classList.remove('hidden');
+    gate.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    yes?.focus();
+  }
+
+  function close() {
+    if (!gate) return;
+    gate.classList.add('hidden');
+    gate.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  if (!isVerified()) open();
+
+  yes?.addEventListener('click', () => {
+    try {
+      localStorage.setItem(STORAGE_KEY, String(Date.now()));
+    } catch {
+      /* navigation privée : tant pis, on laisse passer pour la session */
+    }
+    close();
+  });
+
+  no?.addEventListener('click', () => {
+    question?.classList.add('hidden');
+    refused?.classList.remove('hidden');
+  });
+</script>

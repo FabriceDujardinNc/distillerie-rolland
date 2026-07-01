@@ -1,0 +1,132 @@
+---
+/**
+ * Hero plein écran, DA carte de visite : noir profond, monogramme doré
+ * en filigrane, titre Cinzel, baseline script. Le H1 est le LCP : il est
+ * rendu immédiatement, GSAP n'anime que des transforms/opacity après coup.
+ */
+import { Image } from 'astro:assets';
+import bouteille from '@/assets/images/bouteille-rhum-brun-coeur-de-gaiac-nouvelle-caledonie.jpg';
+import monogrammeOr from '@/assets/images/logo-distillerie-rolland-monogramme-or.png';
+import { site } from '@/data/site';
+---
+
+<!--
+  Le hero est sticky : il reste en place pendant que la section suivante
+  glisse par-dessus au scroll (effet rideau).
+  Les sections suivantes ont un fond opaque et un z-index supérieur.
+  Piège du sticky évité côté JS (animations.ts) : si le contenu du hero
+  dépasse la hauteur de l'écran, son `top` devient négatif pour qu'il défile
+  d'abord jusqu'à son bas (boutons visibles), puis s'épingle.
+-->
+<section
+  id="accueil"
+  class="sticky top-0 z-0 flex min-h-svh flex-col items-center justify-center overflow-hidden px-5 py-24 text-center"
+>
+  <!--
+    Image d'ambiance plein écran : lent zoom à l'arrivée,
+    parallax au scroll. Photo provisoire — à remplacer par un visuel
+    haute résolution du client (alambic, fûts, paysage…) au même endroit.
+  -->
+  <div class="absolute inset-0 overflow-hidden" aria-hidden="true">
+    <Image
+      src={bouteille}
+      alt=""
+      width={720}
+      densities={[1]}
+      loading="eager"
+      fetchpriority="high"
+      class="h-full w-full scale-110 object-cover object-[center_35%]"
+      data-hero-zoom
+    />
+    <!-- Voile sombre : lisibilité du texte + ambiance nocturne premium -->
+    <div class="absolute inset-0 bg-noir/60"></div>
+    <div
+      class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgb(12_10_8/0.25)_0%,rgb(12_10_8/0.9)_100%)]"
+    >
+    </div>
+    <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-noir/80 to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-noir to-transparent"></div>
+  </div>
+
+  <!-- Sur grand écran le titre descend : composition en diagonale avec le
+       sigle flottant qui occupe le coin supérieur gauche -->
+  <div class="hero-content relative z-10 max-w-4xl xl:mt-[14vh]">
+    <!-- Mobile / tablette : le sigle centré au-dessus du titre ;
+         sur grand écran, c'est le sigle flottant (index.astro) qui descend
+         en parallax le long de la page -->
+    <Image
+      src={monogrammeOr}
+      alt="Sigle de la Distillerie Rolland : chapeau de brousse et lasso"
+      width={440}
+      densities={[1, 2]}
+      loading="eager"
+      fetchpriority="high"
+      class="hero-logo mx-auto mb-5 w-32 drop-shadow-[0_2px_12px_rgb(12_10_8/0.8)] md:mb-7 md:w-44 xl:hidden"
+    />
+
+    <p
+      class="hero-kicker mb-6 text-xs tracking-[0.4em] text-or-light/90 uppercase md:text-sm"
+    >
+      Distillerie artisanale · {site.address.locality}, {site.address.country}
+    </p>
+
+    <h1
+      class="hero-title font-display text-balance text-5xl font-semibold tracking-[0.08em] text-or uppercase md:text-8xl lg:text-9xl"
+    >
+      Distillerie<br />Rolland
+    </h1>
+
+    <div class="hero-rule gold-rule mx-auto my-8 max-w-md">
+      <span class="text-or" aria-hidden="true">◆</span>
+    </div>
+
+    <p class="hero-tagline text-lg font-light tracking-[0.12em] text-creme md:text-2xl">
+      {site.tagline}
+    </p>
+
+    <p class="hero-motto font-script mt-4 text-2xl text-or-light/90 md:text-3xl">
+      {site.motto}
+    </p>
+
+    <div
+      class="hero-ctas mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row"
+    >
+      <a
+        href="#creations"
+        class="group inline-flex items-center gap-3 border border-or bg-or/10 px-8 py-3.5 text-sm tracking-[0.2em] text-or uppercase transition-all duration-500 hover:bg-or hover:text-noir"
+      >
+        Découvrir nos rhums
+        <span class="transition-transform duration-500 group-hover:translate-x-1" aria-hidden="true"
+          >→</span
+        >
+      </a>
+      <a
+        href="#contact"
+        class="inline-flex items-center px-8 py-3.5 text-sm tracking-[0.2em] text-creme/70 uppercase transition-colors duration-500 hover:text-or"
+      >
+        Nous contacter
+      </a>
+    </div>
+  </div>
+
+  <!-- Indicateur de scroll -->
+  <a
+    href="#distillerie"
+    class="hero-scroll absolute bottom-8 left-1/2 hidden -translate-x-1/2 text-creme/50 transition-colors hover:text-or [@media(min-height:44rem)]:block"
+    aria-label="Faire défiler vers la section suivante"
+  >
+    <svg
+      width="24"
+      height="36"
+      viewBox="0 0 24 36"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      aria-hidden="true"
+    >
+      <rect x="7" y="2" width="10" height="18" rx="5"></rect>
+      <line x1="12" y1="7" x2="12" y2="11" class="animate-pulse"></line>
+      <path d="M7 28l5 5 5-5"></path>
+    </svg>
+  </a>
+</section>

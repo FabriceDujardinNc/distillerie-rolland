@@ -1,0 +1,165 @@
+---
+/**
+ * Section contact : coordonnées réelles (carte de visite Moindou) + formulaire
+ * Web3Forms (statique, sans backend). Volet dédié aux professionnels
+ * (bars, restaurants, cavistes) — canal de distribution voulu par le client.
+ */
+import { site } from '@/data/site';
+
+/**
+ * Clé d'accès Web3Forms : à créer gratuitement sur https://web3forms.com
+ * avec l'adresse distillerie.rolland@gmail.com, puis à renseigner dans un
+ * fichier .env → PUBLIC_WEB3FORMS_KEY=xxxx (voir README).
+ */
+const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_ACCESS_KEY';
+---
+
+<section id="contact" class="relative z-30 bg-noir-800 py-24 md:py-36">
+  <div class="mx-auto max-w-6xl px-5 md:px-8">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <p class="mb-4 text-xs tracking-[0.35em] text-or uppercase">Contact</p>
+      <h2
+        class="font-display text-balance text-3xl font-semibold tracking-wide text-creme md:text-4xl lg:text-5xl"
+      >
+        Parlons <span class="text-or">spiritueux</span>
+      </h2>
+      <p class="mt-6 leading-relaxed text-creme-muted">
+        Professionnels — bars, restaurants, cavistes : dégustations et partenariats sur
+        rendez-vous. Particuliers : écrivez-nous, nous vous répondrons avec plaisir.
+      </p>
+    </div>
+
+    <div class="mt-16 grid gap-12 md:grid-cols-5 md:gap-16">
+      <!-- Coordonnées -->
+      <address class="space-y-8 not-italic md:col-span-2" data-reveal-group>
+        <div>
+          <p class="text-xs tracking-[0.3em] text-or uppercase">Téléphone</p>
+          <a
+            href={`tel:${site.phoneHref}`}
+            class="mt-2 inline-block text-lg text-creme transition-colors hover:text-or"
+          >
+            {site.phone}
+          </a>
+        </div>
+        <div>
+          <p class="text-xs tracking-[0.3em] text-or uppercase">Email</p>
+          <a
+            href={`mailto:${site.email}`}
+            class="mt-2 inline-block text-lg break-all text-creme transition-colors hover:text-or"
+          >
+            {site.email}
+          </a>
+        </div>
+        <div>
+          <p class="text-xs tracking-[0.3em] text-or uppercase">Adresse</p>
+          <p class="mt-2 text-lg leading-relaxed text-creme">
+            {site.address.street}<br />
+            {site.address.postalCode}&nbsp;{site.address.locality}<br />
+            {site.address.country}
+          </p>
+        </div>
+        <div class="border-t border-or/15 pt-8">
+          <p class="font-script text-2xl text-or-light">{site.motto}</p>
+        </div>
+      </address>
+
+      <!-- Formulaire -->
+      <form
+        id="contact-form"
+        class="space-y-6 md:col-span-3"
+        method="POST"
+        action="https://api.web3forms.com/submit"
+        data-reveal
+        novalidate
+      >
+        <input type="hidden" name="access_key" value={web3formsKey} />
+        <input type="hidden" name="subject" value="Nouveau message — distillerie-rolland.com" />
+        <input type="hidden" name="from_name" value="Site Distillerie Rolland" />
+        <!-- Anti-spam honeypot : champ invisible pour les humains -->
+        <input
+          type="checkbox"
+          name="botcheck"
+          class="hidden"
+          style="display:none"
+          tabindex="-1"
+          autocomplete="off"
+        />
+
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div>
+            <label for="name" class="mb-2 block text-xs tracking-[0.25em] text-creme/70 uppercase">
+              Nom <span class="text-or">*</span>
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              autocomplete="name"
+              class="w-full border border-or/25 bg-noir px-4 py-3 text-creme transition-colors duration-300 outline-none placeholder:text-creme/30 focus:border-or"
+              placeholder="Votre nom"
+            />
+          </div>
+          <div>
+            <label for="email" class="mb-2 block text-xs tracking-[0.25em] text-creme/70 uppercase">
+              Email <span class="text-or">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              autocomplete="email"
+              class="w-full border border-or/25 bg-noir px-4 py-3 text-creme transition-colors duration-300 outline-none placeholder:text-creme/30 focus:border-or"
+              placeholder="vous@exemple.com"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label for="profil" class="mb-2 block text-xs tracking-[0.25em] text-creme/70 uppercase">
+            Vous êtes
+          </label>
+          <select
+            id="profil"
+            name="profil"
+            class="w-full border border-or/25 bg-noir px-4 py-3 text-creme transition-colors duration-300 outline-none focus:border-or"
+          >
+            <option value="Particulier">Particulier</option>
+            <option value="Bar / Restaurant">Bar / Restaurant</option>
+            <option value="Caviste / Revendeur">Caviste / Revendeur</option>
+            <option value="Autre professionnel">Autre professionnel</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="message" class="mb-2 block text-xs tracking-[0.25em] text-creme/70 uppercase">
+            Message <span class="text-or">*</span>
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows="5"
+            class="w-full resize-y border border-or/25 bg-noir px-4 py-3 text-creme transition-colors duration-300 outline-none placeholder:text-creme/30 focus:border-or"
+            placeholder="Votre message…"></textarea>
+        </div>
+
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <button
+            type="submit"
+            class="group inline-flex items-center justify-center gap-3 border border-or bg-or px-10 py-4 text-sm font-medium tracking-[0.2em] text-noir uppercase transition-all duration-500 hover:bg-transparent hover:text-or"
+          >
+            Envoyer
+            <span
+              class="transition-transform duration-500 group-hover:translate-x-1"
+              aria-hidden="true">→</span
+            >
+          </button>
+          <p id="form-status" class="text-sm text-creme-muted" role="status" aria-live="polite">
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
