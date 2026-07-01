@@ -18,4 +18,4 @@ git push -f "$REMOTE_URL" production
 rm -rf .git
 
 echo "✔ Branche production mise à jour."
-echo "  Sur le serveur : cd ~/public_html && git fetch origin production && git reset --hard origin/production"
+echo "  Sur le serveur : cd ~/domains/distillerie-rolland.com/public_html && git fetch origin production && git reset --hard origin/production"

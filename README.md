@@ -48,14 +48,31 @@ https://www.distillerie-rolland.com/?acces=gaiac2026
 ## Déploiement vers Hostinger
 
 Le serveur mutualisé n'a pas Node : on ne déploie jamais les sources, uniquement
-le résultat du build.
+le résultat du build, publié sur la branche **`production`** du dépôt.
 
-1. `npm run build` (vérifier que `.env` contient la clé Web3Forms)
-2. Envoyer **tout le contenu de `dist/`** dans `public_html/` via FileZilla ou
-   le gestionnaire de fichiers Hostinger
-3. ⚠️ Le **`.htaccess` est un fichier caché** : vérifier qu'il est bien arrivé
-   sur le serveur (activer « afficher les fichiers cachés ») — c'est lui qui
-   porte le HTTPS, la sécurité, le cache et le mode pré-lancement
+### En local — publier une mise à jour
+
+```bash
+npm run deploy   # build + push de dist/ sur la branche production
+```
+
+### Sur le serveur — récupérer la mise à jour
+
+```bash
+ssh -p 65002 u387386676@153.92.8.133
+cd ~/domains/distillerie-rolland.com/public_html
+git fetch origin production && git reset --hard origin/production
+```
+
+> `reset --hard` plutôt que `git pull` : la branche `production` est réécrite
+> à chaque `npm run deploy`, le reset s'en accommode sans conflit.
+> (Mise en place initiale du dépôt déjà faite : `git init` + `remote add` +
+> `checkout -t origin/production` dans `public_html`.)
+
+### Option de secours — FTP manuel
+
+`npm run build` puis envoyer tout le contenu de `dist/` (y compris le
+**`.htaccess` caché**) dans `domains/distillerie-rolland.com/public_html/`.
 
 > Ne pas activer le « mode maintenance » de Hostinger dans hPanel : la page
 > « en préparation » avec code d'accès est déjà gérée par le `.htaccess`.
