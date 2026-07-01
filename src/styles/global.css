@@ -38,6 +38,9 @@ html {
   scroll-padding-top: 5rem;
   /* Même fond que le body : aucun blanc visible en cas d'overscroll */
   background-color: var(--color-noir);
+  /* Verrou anti-défilement latéral : `clip` (et non `hidden`) car il ne crée
+     pas de conteneur de scroll et préserve donc le hero sticky */
+  overflow-x: clip;
 }
 
 body {
