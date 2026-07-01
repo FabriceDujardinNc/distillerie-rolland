@@ -6,6 +6,14 @@
 const form = document.getElementById('contact-form') as HTMLFormElement | null;
 const status = document.getElementById('form-status');
 
+/**
+ * Anti-spam « time gate » : un humain met toujours plusieurs secondes à
+ * remplir le formulaire, un bot soumet instantanément. Complète le honeypot
+ * (champ botcheck) et le filtrage côté Web3Forms.
+ */
+const pageLoadedAt = Date.now();
+const MIN_FILL_TIME_MS = 4000;
+
 function setStatus(message: string, ok: boolean) {
   if (!status) return;
   status.textContent = message;
@@ -18,6 +26,11 @@ form?.addEventListener('submit', async (event) => {
 
   if (!form.checkValidity()) {
     form.reportValidity();
+    return;
+  }
+
+  if (Date.now() - pageLoadedAt < MIN_FILL_TIME_MS) {
+    setStatus('Vérification anti-spam : patientez un instant puis réessayez.', false);
     return;
   }
 
