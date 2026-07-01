@@ -28,6 +28,12 @@ export const site = {
     facebook: '',
     instagram: '',
   },
+  /**
+   * Date d'ouverture affichée par le compte à rebours de la page
+   * « en préparation » (fuseau Nouvelle-Calédonie, UTC+11).
+   * ⚠️ Date d'exemple — à ajuster avec le client.
+   */
+  launchDate: '2026-10-06T18:00:00+11:00',
 } as const;
 
 export type Product = {

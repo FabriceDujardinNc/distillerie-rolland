@@ -16,16 +16,17 @@ import { site } from '@/data/site';
   path="/en-preparation"
   noindex
 >
-  <main
-    class="bg-grain relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-5 text-center"
-  >
+  <!-- Centrage par marges auto (m-auto) et non par justify-center : si le
+       contenu dépasse la hauteur de l'écran, la page scrolle au lieu de
+       rogner le haut -->
+  <main class="bg-grain relative flex min-h-svh flex-col overflow-x-hidden px-5 py-10 text-center">
     <div
       class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgb(12_10_8/0.9)_100%)]"
       aria-hidden="true"
     >
     </div>
 
-    <div class="relative z-10 flex max-w-2xl flex-col items-center">
+    <div class="relative z-10 m-auto flex max-w-2xl flex-col items-center">
       <Image
         src={monogrammeOr}
         alt=""
@@ -55,6 +56,38 @@ import { site } from '@/data/site';
         {site.address.locality}, {site.address.country} — ouvre bientôt ses portes.
       </p>
 
+      <!-- Compte à rebours (piloté par src/scripts/countdown.ts).
+           Sans JS, la date reste affichée en toutes lettres. -->
+      <p class="mt-8 text-xs tracking-[0.35em] text-or uppercase">
+        Ouverture le {
+          new Date(site.launchDate).toLocaleDateString('fr-FR', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+            timeZone: 'Pacific/Noumea',
+          })
+        }
+      </p>
+      <div
+        id="countdown"
+        data-launch={site.launchDate}
+        class="mt-5 grid grid-cols-4 gap-3 opacity-0 transition-opacity duration-700 sm:gap-5"
+      >
+        {
+          ['jours', 'heures', 'minutes', 'secondes'].map((unit) => (
+            <div class="border border-or/25 bg-noir-800/60 px-3 py-4 sm:min-w-20 sm:px-5">
+              <p
+                data-unit={unit}
+                class="font-display text-2xl text-or tabular-nums sm:text-4xl"
+              >
+                0
+              </p>
+              <p class="mt-2 text-[0.6rem] tracking-[0.25em] text-creme/50 uppercase">{unit}</p>
+            </div>
+          ))
+        }
+      </div>
+
       <p class="font-script mt-8 text-2xl text-or-light md:text-3xl">{site.motto}</p>
 
       <a
@@ -63,12 +96,14 @@ import { site } from '@/data/site';
       >
         {site.email}
       </a>
-    </div>
 
-    <p
-      class="absolute bottom-6 left-1/2 w-full -translate-x-1/2 px-4 text-[0.65rem] tracking-widest text-creme/40 uppercase"
-    >
-      L'abus d'alcool est dangereux pour la santé. À consommer avec modération.
-    </p>
+      <p class="mt-12 text-[0.65rem] tracking-widest text-creme/40 uppercase">
+        L'abus d'alcool est dangereux pour la santé. À consommer avec modération.
+      </p>
+    </div>
   </main>
+
+  <script>
+    import '@/scripts/countdown.ts';
+  </script>
 </BaseLayout>
