@@ -5,6 +5,9 @@
 
 export const site = {
   name: 'Distillerie Rolland',
+  founder: 'S. Rolland',
+  foundingYear: 2020,
+  firstCollectionYear: 2026,
   domain: 'https://www.distillerie-rolland.com',
   tagline: "L'art de distiller, l'excellence à chaque goutte",
   motto: 'Tradition, Passion, Authenticité',

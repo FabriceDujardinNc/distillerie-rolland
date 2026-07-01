@@ -36,6 +36,12 @@ const jsonLd = {
       email: site.email,
       image: `${site.domain}/images/og-distillerie-rolland.jpg`,
       priceRange: '$$',
+      foundingDate: String(site.foundingYear),
+      founder: {
+        '@type': 'Person',
+        name: site.founder,
+        jobTitle: 'Maître distillateur',
+      },
       address: {
         '@type': 'PostalAddress',
         streetAddress: site.address.street,

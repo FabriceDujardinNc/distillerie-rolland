@@ -40,30 +40,40 @@ import { site } from '@/data/site';
       </h2>
 
       <p class="mt-8 leading-relaxed text-creme-muted">
-        À {site.address.locality}, en {site.address.country}, la Distillerie Rolland fait
-        naître des spiritueux d'exception entre terre rouge et pâturages. Ici, chaque
-        goutte est le fruit d'un savoir-faire de maître distillateur : fermentations
-        patientes, distillations précises, et une exigence absolue de la matière première
-        à la mise en bouteille.
+        Fondée en {site.foundingYear} sous l'impulsion de son créateur
+        <strong class="text-creme">{site.founder}</strong>, maître distillateur, la
+        Distillerie Rolland est née au cœur de la superbe commune de
+        {site.address.locality}, qu'elle représente avec fierté — une terre d'exigence et
+        de savoir-faire. Sa première collection a vu le jour en {site.firstCollectionYear},
+        fruit de plusieurs années de recherche.
       </p>
 
       <p class="mt-5 leading-relaxed text-creme-muted">
-        Une démarche artisanale et authentique, portée par une conviction simple :
-        l'excellence ne se décrète pas, elle se distille — lentement, passionnément.
+        Aujourd'hui, c'est avec une immense fierté que nous vous présentons une gamme de
+        spiritueux d'exception. Nos rhums traditionnels, élaborés selon des recettes
+        uniques au monde, incarnent l'excellence, l'authenticité et la rareté. Chaque
+        création est le reflet d'une quête permanente de perfection, où la passion se
+        conjugue à l'innovation.
+      </p>
+
+      <p class="mt-5 leading-relaxed text-creme-muted">
+        Cette première collection marque le début d'une aventure ambitieuse, qui laissera
+        bientôt place à de nouvelles créations tout aussi remarquables, destinées à
+        séduire les amateurs les plus exigeants.
       </p>
 
       <ul class="mt-10 grid grid-cols-3 gap-6 border-t border-or/20 pt-8">
         <li>
-          <p class="font-display text-2xl text-or md:text-3xl">100<span class="text-lg">%</span></p>
-          <p class="mt-1 text-xs tracking-widest text-creme/60 uppercase">Artisanal</p>
+          <p class="font-display text-2xl text-or md:text-3xl">{site.foundingYear}</p>
+          <p class="mt-1 text-xs tracking-widest text-creme/60 uppercase">Fondation à {site.address.locality}</p>
         </li>
         <li>
-          <p class="font-display text-2xl text-or md:text-3xl">NC</p>
-          <p class="mt-1 text-xs tracking-widest text-creme/60 uppercase">Made in Calédonie</p>
+          <p class="font-display text-2xl text-or md:text-3xl">{site.firstCollectionYear}</p>
+          <p class="mt-1 text-xs tracking-widest text-creme/60 uppercase">Première collection</p>
         </li>
         <li>
           <p class="font-display text-2xl text-or md:text-3xl">1<span class="text-lg">er</span></p>
-          <p class="mt-1 text-xs tracking-widest text-creme/60 uppercase">Rhum au gaïac</p>
+          <p class="mt-1 text-xs tracking-widest text-creme/60 uppercase">Rhum au gaïac au monde</p>
         </li>
       </ul>
     </div>
