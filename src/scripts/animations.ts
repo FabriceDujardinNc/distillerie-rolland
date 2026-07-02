@@ -13,6 +13,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Accès console en dev uniquement (debug des triggers)
+if (import.meta.env.DEV) {
+  (window as unknown as Record<string, unknown>).__ST = ScrollTrigger;
+}
+
 const EASE = 'power3.out';
 
 function initHeader() {
