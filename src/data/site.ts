@@ -34,9 +34,8 @@ export const site = {
   /**
    * Date d'ouverture affichée par le compte à rebours de la page
    * « en préparation » (fuseau Nouvelle-Calédonie, UTC+11).
-   * ⚠️ Date d'exemple — à ajuster avec le client.
    */
-  launchDate: '2026-10-06T18:00:00+11:00',
+  launchDate: '2026-07-10T18:00:00+11:00',
 } as const;
 
 export type Product = {
