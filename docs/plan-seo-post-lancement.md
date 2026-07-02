@@ -71,6 +71,3 @@ Le référencement **démarre réellement au lancement** : tant que le site est 
   viendra de la **fiche Google + avis + presse**, pas d'optimisations techniques supplémentaires.
 
 ---
-
-*Document préparé par Pacific Pro Web — juillet 2026. Le volet technique on-site est livré et
-n'appelle aucune action du client.*

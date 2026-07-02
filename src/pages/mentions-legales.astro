@@ -2,7 +2,6 @@
 /**
  * Mentions légales : éditeur, hébergeur, propriété intellectuelle,
  * données personnelles (formulaire) et rappels loi Évin.
- * ⚠️ Compléter le n° RIDET avant la mise en ligne.
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Footer from '@/components/Footer.astro';
@@ -37,7 +36,7 @@ import { site } from '@/data/site';
           {site.address.locality}, {site.address.country}<br />
           Téléphone : <a href={`tel:${site.phoneHref}`} class="text-or">{site.phone}</a><br />
           Email : <a href={`mailto:${site.email}`} class="text-or">{site.email}</a><br />
-          RIDET : [à compléter]
+          RIDET : 1500.271
         </p>
       </section>
 
