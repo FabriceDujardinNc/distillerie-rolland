@@ -1,0 +1,66 @@
+---
+/**
+ * Page 404 personnalisée — servie par Apache via ErrorDocument (.htaccess).
+ * Clin d'œil maison : en distillation, la part qui s'évapore des fûts
+ * s'appelle « la part des anges ».
+ */
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import monogrammeOr from '@/assets/images/logo-distillerie-rolland-monogramme-or.png';
+---
+
+<BaseLayout
+  title="Page introuvable — Distillerie Rolland"
+  description="Cette page s'est évaporée. Retrouvez les rhums et spiritueux de la Distillerie Rolland, Moindou, Nouvelle-Calédonie."
+  path="/404"
+  noindex
+>
+  <main class="bg-grain relative flex min-h-svh flex-col overflow-x-hidden px-5 py-10 text-center">
+    <div
+      class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgb(12_10_8/0.9)_100%)]"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div class="relative z-10 m-auto flex max-w-xl flex-col items-center">
+      <Image
+        src={monogrammeOr}
+        alt=""
+        width={300}
+        densities={[1, 2]}
+        loading="eager"
+        class="w-36 opacity-90 md:w-44"
+      />
+
+      <p class="font-display mt-8 text-7xl font-semibold text-or md:text-8xl">404</p>
+
+      <div class="gold-rule my-6 w-full max-w-xs">
+        <span class="text-or" aria-hidden="true">◆</span>
+      </div>
+
+      <h1 class="font-display text-2xl tracking-wide text-creme md:text-3xl">
+        La part des anges
+      </h1>
+
+      <p class="mt-5 leading-relaxed text-creme-muted">
+        Comme la précieuse part de rhum qui s'évapore des fûts pendant le vieillissement,
+        cette page s'est envolée… Les anges ont bon goût, mais vous, retournez plutôt
+        déguster nos créations.
+      </p>
+
+      <a
+        href="/"
+        class="group mt-10 inline-flex items-center gap-3 border border-or bg-or/10 px-8 py-3.5 text-sm tracking-[0.2em] text-or uppercase transition-all duration-500 hover:bg-or hover:text-noir"
+      >
+        <span class="transition-transform duration-500 group-hover:-translate-x-1" aria-hidden="true"
+          >←</span
+        >
+        Retour à la distillerie
+      </a>
+
+      <p class="mt-12 text-[0.65rem] tracking-widest text-creme/65 uppercase">
+        L'abus d'alcool est dangereux pour la santé. À consommer avec modération.
+      </p>
+    </div>
+  </main>
+</BaseLayout>

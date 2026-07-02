@@ -99,5 +99,5 @@ RedirectMatch 404 /\.git
   AddType font/woff2 .woff2
 </IfModule>
 
-# Page 404 personnalisée (retombe sur l'accueil one-page)
-ErrorDocument 404 /index.html
+# Page 404 personnalisée « La part des anges »
+ErrorDocument 404 /404.html
