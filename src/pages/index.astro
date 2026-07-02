@@ -120,7 +120,19 @@ const jsonLd = {
   <Footer />
 
   <script>
-    import '@/scripts/animations.ts';
+    // Immédiat : interactions essentielles (menu, header) et formulaire — légers
+    import '@/scripts/essentials.ts';
     import '@/scripts/contact.ts';
+
+    // Différé : GSAP + animations, importés après le premier rendu pour ne pas
+    // bloquer le chargement initial (gros gain Lighthouse mobile). Le contenu
+    // est visible sans elles ; elles prennent le relais dès que le navigateur
+    // souffle.
+    const loadAnimations = () => import('@/scripts/animations.ts');
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => loadAnimations(), { timeout: 1500 });
+    } else {
+      setTimeout(loadAnimations, 250);
+    }
   </script>
 </BaseLayout>
