@@ -17,6 +17,9 @@ pnpm-debug.log*
 # captures du script QA responsive
 responsive-shots/
 
+# dossiers temporaires créés par erreur par lighthouse/chrome-launcher sous WSL
+C:*
+
 # macOS / editors
 .DS_Store
 .idea/
