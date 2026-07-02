@@ -63,9 +63,12 @@ function initScrollReveals() {
     });
   });
 
-  // Groupes : les enfants directs apparaissent en cascade
+  // Groupes : les enfants directs apparaissent en cascade — sauf les titres
+  // [data-split], qui ont leur propre révélation mot à mot
   gsap.utils.toArray<HTMLElement>('[data-reveal-group]').forEach((group) => {
-    gsap.from(group.children, {
+    const items = [...group.children].filter((el) => !el.hasAttribute('data-split'));
+    if (!items.length) return;
+    gsap.from(items, {
       y: 26,
       opacity: 0,
       duration: 0.8,
@@ -73,6 +76,85 @@ function initScrollReveals() {
       ease: EASE,
       scrollTrigger: { trigger: group, start: 'top 94%' },
     });
+  });
+}
+
+function initSplitTitles() {
+  // Révélation typographique : chaque mot des grands titres monte derrière
+  // un masque invisible (overflow hidden), en cascade. Découpage maison —
+  // pas de plugin, et le texte reste intact sans JavaScript.
+  gsap.utils.toArray<HTMLElement>('[data-split]').forEach((title) => {
+    const words: HTMLElement[] = [];
+
+    // Découpe chaque nœud texte en mots masqués, en préservant les <span>
+    // de mise en couleur et les <br>
+    const splitNode = (node: Node) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const frag = document.createDocumentFragment();
+        (node.textContent ?? '').split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) {
+            frag.appendChild(document.createTextNode(' '));
+            return;
+          }
+          const mask = document.createElement('span');
+          mask.className = 'inline-block overflow-hidden align-bottom';
+          const word = document.createElement('span');
+          word.className = 'inline-block';
+          word.textContent = part;
+          mask.appendChild(word);
+          frag.appendChild(mask);
+          words.push(word);
+        });
+        node.parentNode?.replaceChild(frag, node);
+      } else if (node instanceof HTMLElement && node.tagName !== 'BR') {
+        [...node.childNodes].forEach(splitNode);
+      }
+    };
+    [...title.childNodes].forEach(splitNode);
+
+    gsap.from(words, {
+      yPercent: 112,
+      duration: 0.9,
+      stagger: 0.06,
+      ease: 'power4.out',
+      scrollTrigger: { trigger: title, start: 'top 90%' },
+    });
+  });
+}
+
+function initCounters() {
+  // Chiffres clés qui s'égrènent jusqu'à leur valeur (2020, 2026…)
+  gsap.utils.toArray<HTMLElement>('[data-counter]').forEach((el) => {
+    const target = Number(el.dataset.counter);
+    if (Number.isNaN(target)) return;
+    const proxy = { v: 0 };
+    gsap.to(proxy, {
+      v: target,
+      duration: 2,
+      ease: 'power3.out',
+      onUpdate: () => {
+        el.textContent = String(Math.round(proxy.v));
+      },
+      scrollTrigger: { trigger: el, start: 'top 92%' },
+    });
+  });
+}
+
+function initMaskReveals() {
+  // Les images se dévoilent par un volet qui s'ouvre (clip-path), plus
+  // cinématique que le simple fondu
+  gsap.utils.toArray<HTMLElement>('[data-mask-reveal]').forEach((el) => {
+    gsap.fromTo(
+      el,
+      { clipPath: 'inset(0% 0% 100% 0%)' },
+      {
+        clipPath: 'inset(0% 0% 0% 0%)',
+        duration: 1.3,
+        ease: 'power4.inOut',
+        scrollTrigger: { trigger: el, start: 'top 88%' },
+      }
+    );
   });
 }
 
@@ -146,6 +228,9 @@ const mm = gsap.matchMedia();
 mm.add('(prefers-reduced-motion: no-preference)', () => {
   initHeroIntro();
   initScrollReveals();
+  initSplitTitles();
+  initCounters();
+  initMaskReveals();
   initParallax();
   initCurtains();
 });

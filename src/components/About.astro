@@ -10,7 +10,7 @@ import { site } from '@/data/site';
 
 <section id="distillerie" class="relative z-10 overflow-hidden bg-noir py-24 md:py-36">
   <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 md:grid-cols-2 md:gap-16 md:px-8">
-    <div class="relative order-2 md:order-1" data-reveal>
+    <div class="relative order-2 md:order-1" data-mask-reveal>
       <div class="overflow-hidden">
         <Image
           src={cuves}
@@ -34,6 +34,7 @@ import { site } from '@/data/site';
       <p class="mb-4 text-xs tracking-[0.35em] text-or uppercase">La distillerie</p>
       <h2
         class="font-display text-balance text-3xl font-semibold tracking-wide text-creme md:text-4xl lg:text-5xl"
+        data-split
       >
         L'art de distiller,<br />
         <span class="text-or">au cœur du Caillou</span>
@@ -64,11 +65,18 @@ import { site } from '@/data/site';
 
       <ul class="mt-10 grid grid-cols-3 gap-6 border-t border-or/20 pt-8">
         <li>
-          <p class="font-display text-2xl text-or md:text-3xl">{site.foundingYear}</p>
+          <p class="font-display text-2xl text-or md:text-3xl" data-counter={site.foundingYear}>
+            {site.foundingYear}
+          </p>
           <p class="mt-1 text-xs tracking-widest text-creme/60 uppercase">Fondation à {site.address.locality}</p>
         </li>
         <li>
-          <p class="font-display text-2xl text-or md:text-3xl">{site.firstCollectionYear}</p>
+          <p
+            class="font-display text-2xl text-or md:text-3xl"
+            data-counter={site.firstCollectionYear}
+          >
+            {site.firstCollectionYear}
+          </p>
           <p class="mt-1 text-xs tracking-widest text-creme/60 uppercase">Première collection</p>
         </li>
         <li>

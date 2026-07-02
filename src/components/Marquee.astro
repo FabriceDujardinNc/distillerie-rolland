@@ -1,0 +1,37 @@
+---
+/**
+ * Bandeau défilant : les mots de la maison en Cinzel géant très transparent,
+ * qui glissent en continu. 100 % CSS (figé par prefers-reduced-motion).
+ * La piste contient deux fois la séquence → boucle sans couture à -50%.
+ */
+const mots = ['Rhum au gaïac', 'Moindou', 'La Métisse', 'Nouvelle-Calédonie'];
+const sequence = [...mots, ...mots];
+---
+
+<div
+  class="relative z-20 overflow-hidden border-y border-or/10 bg-noir py-8 md:py-10"
+  aria-hidden="true"
+>
+  <div class="marquee-track flex w-max items-center">
+    {
+      sequence.map((mot) => (
+        <span class="font-display flex items-center text-4xl tracking-[0.12em] whitespace-nowrap text-or/15 uppercase md:text-6xl">
+          {mot}
+          <span class="mx-8 text-xl text-or/25 md:mx-12 md:text-3xl">◆</span>
+        </span>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .marquee-track {
+    animation: defiler 48s linear infinite;
+  }
+
+  @keyframes defiler {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>
