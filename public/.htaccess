@@ -41,6 +41,8 @@ RedirectMatch 404 /\.git
   RewriteCond %{QUERY_STRING} !(^|&)acces=gaiac2026($|&)
   RewriteCond %{REQUEST_URI} !^/en-preparation
   RewriteCond %{REQUEST_URI} !^/_astro/
+  # Fichier de validation Google Search Console : toujours accessible
+  RewriteCond %{REQUEST_URI} !^/google[0-9a-f]+\.html$
   RewriteCond %{REQUEST_URI} !\.(css|js|mjs|jpg|jpeg|png|webp|avif|svg|gif|ico|woff2?|ttf|xml|txt|webmanifest)$
   RewriteRule ^ /en-preparation/index.html [L]
 
