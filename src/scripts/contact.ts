@@ -14,6 +14,44 @@ const status = document.getElementById('form-status');
 const pageLoadedAt = Date.now();
 const MIN_FILL_TIME_MS = 4000;
 
+/**
+ * Chargement différé du widget hCaptcha (via le script Web3Forms) : son
+ * proof-of-work est très coûteux en CPU, on ne le charge que lorsque le
+ * visiteur approche de la section contact (600px d'avance — prêt à temps).
+ */
+function initLazyCaptcha() {
+  const section = document.getElementById('contact');
+  if (!section) return;
+
+  let loaded = false;
+  const load = () => {
+    if (loaded) return;
+    loaded = true;
+    const script = document.createElement('script');
+    script.src = 'https://web3forms.com/client/script.js';
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+  };
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          load();
+          io.disconnect();
+        }
+      },
+      { rootMargin: '600px' }
+    );
+    io.observe(section);
+  } else {
+    load();
+  }
+}
+
+initLazyCaptcha();
+
 function setStatus(message: string, ok: boolean) {
   if (!status) return;
   status.textContent = message;

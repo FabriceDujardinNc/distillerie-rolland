@@ -173,8 +173,9 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_ACC
   </div>
 </section>
 
-<!-- Widget hCaptcha de Web3Forms (autorisé par la CSP du .htaccess) -->
-<script is:inline src="https://web3forms.com/client/script.js" async defer></script>
+<!-- Le script hCaptcha/Web3Forms est chargé en différé par contact.ts quand
+     la section contact approche du viewport : son proof-of-work coûte ~20s
+     de CPU en mobile émulé, il ne doit jamais peser sur le chargement initial -->
 
 <style>
   /* Le contenu de l'iframe hCaptcha est inaccessible, mais un filtre sur
