@@ -26,7 +26,7 @@ node scripts/make-og.mjs   # regénérer l'image Open Graph
 
 1. Copier `.env.example` en `.env`
 2. Créer une clé gratuite sur [web3forms.com](https://web3forms.com) avec l'adresse
-   `distillerie.rolland@gmail.com` et la coller dans `PUBLIC_WEB3FORMS_KEY`
+   `contact@distillerie-rolland.com` et la coller dans `PUBLIC_WEB3FORMS_KEY`
    (sans elle, le formulaire de contact ne délivre pas les messages)
 
 Tout le contenu (coordonnées, produits, textes produits) est centralisé dans

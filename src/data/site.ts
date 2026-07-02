@@ -15,7 +15,7 @@ export const site = {
     'Distillerie artisanale à Moindou, Nouvelle-Calédonie. Rhum blanc traditionnel La Métisse, rhum brun au cœur de gaïac torréfié unique au monde, rhums arrangés. Par un maître distillateur passionné.',
   phone: '+687 92 07 61',
   phoneHref: '+687920761',
-  email: 'distillerie.rolland@gmail.com',
+  email: 'contact@distillerie-rolland.com',
   address: {
     street: 'Lot 783, Moindou Pâturage',
     locality: 'Moindou',
