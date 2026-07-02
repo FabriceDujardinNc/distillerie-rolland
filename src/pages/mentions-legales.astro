@@ -30,10 +30,12 @@ import { site } from '@/data/site';
     >
       <section>
         <h2>Éditeur du site</h2>
+        <!-- Adresse limitée à la commune par choix de discrétion du client
+             (site de production isolé). À remplacer idéalement par une boîte
+             postale (BP) pour une conformité LCEN complète. -->
         <p class="mt-3">
           {site.name}<br />
-          {site.address.street}, {site.address.postalCode}
-          {site.address.locality}, {site.address.country}<br />
+          {site.address.postalCode}&nbsp;{site.address.locality}, {site.address.country}<br />
           Téléphone : <a href={`tel:${site.phoneHref}`} class="text-or">{site.phone}</a><br />
           Email : <a href={`mailto:${site.email}`} class="text-or">{site.email}</a><br />
           RIDET : 1500.271
