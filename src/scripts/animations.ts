@@ -59,7 +59,7 @@ function initScrollReveals() {
       opacity: 0,
       duration: 0.9,
       ease: EASE,
-      scrollTrigger: { trigger: el, start: 'top 94%' },
+      scrollTrigger: { trigger: el, start: 'top 94%', toggleActions: 'play none none reverse' },
     });
   });
 
@@ -74,7 +74,7 @@ function initScrollReveals() {
       duration: 0.8,
       stagger: 0.08,
       ease: EASE,
-      scrollTrigger: { trigger: group, start: 'top 94%' },
+      scrollTrigger: { trigger: group, start: 'top 94%', toggleActions: 'play none none reverse' },
     });
   });
 }
@@ -118,7 +118,7 @@ function initSplitTitles() {
       duration: 0.9,
       stagger: 0.06,
       ease: 'power4.out',
-      scrollTrigger: { trigger: title, start: 'top 90%' },
+      scrollTrigger: { trigger: title, start: 'top 90%', toggleActions: 'play none none reverse' },
     });
   });
 }
@@ -136,7 +136,7 @@ function initCounters() {
       onUpdate: () => {
         el.textContent = String(Math.round(proxy.v));
       },
-      scrollTrigger: { trigger: el, start: 'top 92%' },
+      scrollTrigger: { trigger: el, start: 'top 92%', toggleActions: 'play none none reverse' },
     });
   });
 }
@@ -152,7 +152,7 @@ function initMaskReveals() {
         clipPath: 'inset(0% 0% 0% 0%)',
         duration: 1.3,
         ease: 'power4.inOut',
-        scrollTrigger: { trigger: el, start: 'top 88%' },
+        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none reverse' },
       }
     );
   });
