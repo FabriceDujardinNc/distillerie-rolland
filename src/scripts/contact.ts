@@ -34,6 +34,13 @@ form?.addEventListener('submit', async (event) => {
     return;
   }
 
+  // Le jeton hCaptcha doit être présent (case cochée) avant l'envoi
+  const captcha = form.querySelector<HTMLTextAreaElement>('[name="h-captcha-response"]');
+  if (captcha && !captcha.value) {
+    setStatus('Merci de cocher la case « Je suis humain ».', false);
+    return;
+  }
+
   const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
   if (button) button.disabled = true;
   setStatus('Envoi en cours…', true);
@@ -48,6 +55,7 @@ form?.addEventListener('submit', async (event) => {
 
     if (response.ok && result.success) {
       form.reset();
+      (window as { hcaptcha?: { reset: () => void } }).hcaptcha?.reset();
       setStatus('Merci ! Votre message a bien été envoyé.', true);
     } else {
       setStatus("L'envoi a échoué. Écrivez-nous directement par email.", false);

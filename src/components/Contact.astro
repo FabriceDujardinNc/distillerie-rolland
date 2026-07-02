@@ -145,6 +145,11 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_ACC
             placeholder="Votre message…"></textarea>
         </div>
 
+        <!-- hCaptcha fourni par Web3Forms (gratuit, zéro config) : validé
+             côté serveur, il empêche tout envoi automatisé même avec la
+             clé d'accès publique -->
+        <div class="h-captcha" data-captcha="true" data-theme="dark"></div>
+
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <button
             type="submit"
@@ -163,3 +168,6 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_ACC
     </div>
   </div>
 </section>
+
+<!-- Widget hCaptcha de Web3Forms (autorisé par la CSP du .htaccess) -->
+<script is:inline src="https://web3forms.com/client/script.js" async defer></script>
