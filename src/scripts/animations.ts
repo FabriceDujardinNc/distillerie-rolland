@@ -225,14 +225,17 @@ function initParallax() {
 
 // Les animations ne s'exécutent que si l'utilisateur les accepte
 const mm = gsap.matchMedia();
-mm.add('(prefers-reduced-motion: no-preference)', () => {
+mm.add('(prefers-reduced-motion: no-preference)', (ctx) => {
+  // Visible immédiatement : l'intro du hero part tout de suite
   initHeroIntro();
-  initScrollReveals();
-  initSplitTitles();
-  initCounters();
-  initMaskReveals();
-  initParallax();
   initCurtains();
+
+  // Le reste est étalé en micro-tâches (une famille d'animations par tranche)
+  // pour ne jamais bloquer le fil principal d'un seul bloc — ctx.add garde
+  // chaque ajout tardif dans le contexte matchMedia (revert propre)
+  const differes = [initScrollReveals, initSplitTitles, initCounters, initMaskReveals, initParallax];
+  const timers = differes.map((fn, i) => setTimeout(() => ctx.add(fn), 80 + i * 90));
+  return () => timers.forEach(clearTimeout);
 });
 
 function initFloatingLogo() {
