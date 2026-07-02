@@ -47,19 +47,17 @@ const jsonLd = {
         name: site.founder,
         jobTitle: 'Maître distillateur',
       },
+      // Adresse volontairement limitée à la commune (pas de rue ni de GPS) :
+      // choix de discrétion du client, aligné avec la fiche Google en mode
+      // « zone desservie »
       address: {
         '@type': 'PostalAddress',
-        streetAddress: site.address.street,
         addressLocality: site.address.locality,
         postalCode: site.address.postalCode,
         addressRegion: site.address.region,
         addressCountry: site.address.countryCode,
       },
-      geo: {
-        '@type': 'GeoCoordinates',
-        latitude: site.geo.lat,
-        longitude: site.geo.lng,
-      },
+      areaServed: 'Nouvelle-Calédonie',
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'Spiritueux de la Distillerie Rolland',

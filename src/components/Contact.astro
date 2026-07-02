@@ -52,10 +52,11 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_ACC
           </a>
         </div>
         <div>
-          <p class="text-xs tracking-[0.3em] text-or uppercase">Adresse</p>
+          <p class="text-xs tracking-[0.3em] text-or uppercase">Localisation</p>
+          <!-- Adresse précise volontairement non publiée (sécurité du site
+               de production) — la commune suffit au public et au SEO local -->
           <p class="mt-2 text-lg leading-relaxed text-creme">
-            {site.address.street}<br />
-            {site.address.postalCode}&nbsp;{site.address.locality}<br />
+            {site.address.locality}<br />
             {site.address.country}
           </p>
         </div>

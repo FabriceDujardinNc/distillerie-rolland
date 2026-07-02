@@ -30,7 +30,7 @@ Le référencement **démarre réellement au lancement** : tant que le site est 
 | # | Action | Qui | Durée |
 |---|--------|-----|-------|
 | 3 | **Google Search Console** : ajouter la propriété `distillerie-rolland.com` (vérification DNS via Hostinger), soumettre le sitemap `sitemap-index.xml`, demander l'indexation de la page d'accueil | Fabrice | 20 min |
-| 4 | **Google Business Profile** ⭐ l'action n°1 du référencement local : créer la fiche sur business.google.com — catégorie « Distillerie », adresse *identique au site* (Lot 783, Moindou Pâturage, 98819 Moindou), téléphone +687 92 07 61, lien vers le site, horaires, photos (bouteille, alambic, logo) | Client (aidé de Fabrice) | 30 min + validation par courrier/tél. (1-2 sem.) |
+| 4 | **Google Business Profile** ⭐ l'action n°1 du référencement local : créer la fiche sur business.google.com — catégorie « Distillerie », en mode **« zone desservie » SANS adresse visible** (répondre « Non » à « les clients peuvent-ils se rendre à votre adresse ? ») — zone : Moindou / Nouvelle-Calédonie, téléphone +687 92 07 61, lien vers le site, photos (bouteille, alambic, logo). Choix de discrétion du client : l'adresse exacte n'apparaît ni sur Maps ni sur le site. | Client (aidé de Fabrice) | 30 min + validation (1-2 sem.) |
 | 5 | Compléter la fiche GBP à 100 % : description avec « premier rhum au cœur de gaïac torréfié au monde », produits, zone desservie | Client | 20 min |
 
 ## 📣 Semaines 2 à 4 — notoriété locale
