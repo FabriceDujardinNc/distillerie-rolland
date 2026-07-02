@@ -71,18 +71,18 @@ import { site } from '@/data/site';
       <div
         id="countdown"
         data-launch={site.launchDate}
-        class="mt-5 grid grid-cols-4 gap-3 opacity-0 transition-opacity duration-700 sm:gap-5"
+        class="mt-5 grid w-full max-w-md grid-cols-2 gap-3 opacity-0 transition-opacity duration-700 sm:max-w-none sm:grid-cols-4 sm:gap-5"
       >
         {
           ['jours', 'heures', 'minutes', 'secondes'].map((unit) => (
-            <div class="border border-or/25 bg-noir-800/60 px-3 py-4 sm:min-w-20 sm:px-5">
+            <div class="overflow-hidden border border-or/25 bg-noir-800/60 px-2 py-4 sm:min-w-20 sm:px-5">
               <p
                 data-unit={unit}
                 class="font-display text-2xl text-or tabular-nums sm:text-4xl"
               >
                 0
               </p>
-              <p class="mt-2 text-[0.6rem] tracking-[0.25em] text-creme/50 uppercase">{unit}</p>
+              <p class="mt-2 text-[0.6rem] tracking-[0.15em] text-creme/50 uppercase">{unit}</p>
             </div>
           ))
         }
