@@ -27,9 +27,11 @@
     </div>
 
     <div id="age-gate-question">
-      <h2 id="age-gate-title" class="font-display mt-6 text-xl leading-snug text-creme md:text-2xl">
+      <!-- Volontairement pas un <h2> : la modale précède le <h1> dans le DOM,
+           un titre sémantique casserait la hiérarchie des headings -->
+      <p id="age-gate-title" class="font-display mt-6 text-xl leading-snug text-creme md:text-2xl">
         Avez-vous l'âge légal pour consommer de l'alcool&nbsp;?
-      </h2>
+      </p>
       <p class="mt-4 text-sm leading-relaxed text-creme-muted">
         Ce site présente des boissons alcoolisées. Pour y accéder, vous devez avoir
         18&nbsp;ans ou plus.
@@ -53,9 +55,9 @@
     </div>
 
     <div id="age-gate-refused" class="hidden">
-      <h2 class="font-display mt-6 text-xl leading-snug text-creme md:text-2xl">
+      <p class="font-display mt-6 text-xl leading-snug text-creme md:text-2xl">
         Ce site est réservé aux adultes
-      </h2>
+      </p>
       <p class="mt-4 text-sm leading-relaxed text-creme-muted">
         Vous devez avoir l'âge légal pour consommer de l'alcool afin de visiter ce site.
         Merci de votre compréhension, et à bientôt&nbsp;!
