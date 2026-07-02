@@ -23,7 +23,7 @@ const description =
   'Distillerie artisanale à Moindou (Nouvelle-Calédonie) : rhum blanc traditionnel La Métisse, rhum brun au cœur de gaïac torréfié unique au monde, rhums arrangés letchi, passion, banane et épices.';
 
 // Profils sociaux (sameAs) : uniquement ceux renseignés dans site.ts
-const sameAs = [site.social.facebook, site.social.instagram].filter(Boolean);
+const sameAs = Object.values(site.social).filter(Boolean);
 
 const jsonLd = {
   '@context': 'https://schema.org',

@@ -27,9 +27,11 @@ export const site = {
   /** Coordonnées approximatives de Moindou — à affiner avec le point GPS exact */
   geo: { lat: -21.6925, lng: 165.6779 },
   social: {
-    // À compléter dès que les pages existent
+    // À compléter dès que les pages existent — chaque icône du footer (et le
+    // sameAs Schema.org) ne s'affiche que si l'URL correspondante est remplie
     facebook: '',
     instagram: '',
+    linkedin: '',
   },
   /**
    * Date d'ouverture affichée par le compte à rebours de la page
