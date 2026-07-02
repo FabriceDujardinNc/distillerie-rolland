@@ -147,8 +147,12 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_ACC
 
         <!-- hCaptcha fourni par Web3Forms (gratuit, zéro config) : validé
              côté serveur, il empêche tout envoi automatisé même avec la
-             clé d'accès publique -->
-        <div class="h-captcha" data-captcha="true" data-theme="dark"></div>
+             clé d'accès publique. Impossible de styler l'intérieur de
+             l'iframe : on l'habille (cadre or, fond noir) et on réchauffe
+             ses gris via un filtre CSS appliqué à l'iframe entière. -->
+        <div class="inline-block border border-or/25 bg-noir p-2">
+          <div class="h-captcha" data-captcha="true" data-theme="dark"></div>
+        </div>
 
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <button
@@ -171,3 +175,13 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_ACC
 
 <!-- Widget hCaptcha de Web3Forms (autorisé par la CSP du .htaccess) -->
 <script is:inline src="https://web3forms.com/client/script.js" async defer></script>
+
+<style>
+  /* Le contenu de l'iframe hCaptcha est inaccessible, mais un filtre sur
+     l'iframe elle-même teinte ses gris froids vers nos tons chauds noir/or.
+     :global() : l'iframe est injectée au runtime, hors du scope Astro. */
+  :global(.h-captcha iframe) {
+    filter: sepia(0.35) hue-rotate(-10deg) saturate(1.15) brightness(0.92);
+    display: block;
+  }
+</style>
