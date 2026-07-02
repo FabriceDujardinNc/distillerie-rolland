@@ -6,6 +6,10 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Footer from '@/components/Footer.astro';
 import { site } from '@/data/site';
+
+const mailtoAdresse = `mailto:${site.email}?subject=${encodeURIComponent(
+  "Demande d'adresse du siège — Distillerie Rolland"
+)}`;
 ---
 
 <BaseLayout
@@ -39,6 +43,13 @@ import { site } from '@/data/site';
           Téléphone : <a href={`tel:${site.phoneHref}`} class="text-or">{site.phone}</a><br />
           Email : <a href={`mailto:${site.email}`} class="text-or">{site.email}</a><br />
           RIDET : 1500.271
+        </p>
+        <p class="mt-3">
+          Pour des raisons de sécurité du site de production, l'adresse complète du siège
+          n'est pas publiée : elle est communiquée sur simple demande à&nbsp;<a
+            href={mailtoAdresse}
+            class="text-or">{site.email}</a
+          >.
         </p>
       </section>
 

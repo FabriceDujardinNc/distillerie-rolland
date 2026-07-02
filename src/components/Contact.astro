@@ -59,6 +59,13 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_ACC
             {site.address.locality}<br />
             {site.address.country}
           </p>
+          <p class="mt-2 text-sm text-creme/60">
+            Adresse complète sur demande par&nbsp;<a
+              href={`mailto:${site.email}?subject=${encodeURIComponent("Demande d'adresse — Distillerie Rolland")}`}
+              class="text-or-light underline decoration-or/40 underline-offset-4 transition-colors hover:text-or"
+              >email</a
+            >
+          </p>
         </div>
         <div class="border-t border-or/15 pt-8">
           <p class="font-script text-2xl text-or-light">{site.motto}</p>
