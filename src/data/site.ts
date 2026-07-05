@@ -47,31 +47,77 @@ export type Product = {
   notes?: string;
   available: boolean;
   signature?: boolean;
+  /** Slug de la page produit (/rhums/<slug>/) — absent = pas de page dédiée */
+  slug?: string;
+  /** Paragraphes factuels de la page produit (ton informatif, conforme loi Évin) */
+  longText?: string[];
+  /** Fiche technique affichée sur la page produit */
+  facts?: Record<string, string>;
 };
 
 export const products: Product[] = [
   {
     name: 'La Métisse — Rhum blanc traditionnel',
     category: 'Rhum blanc',
+    slug: 'la-metisse-rhum-blanc',
     description:
-      'Un rhum blanc traditionnel, franc et aromatique, pensé pour sublimer les cocktails : ti-punch, mojito, daïquiri… la base idéale des plus belles créations.',
+      'Un rhum blanc traditionnel élaboré à partir de mélasse et affiné par une double distillation, pour un profil franc et aromatique — la base des ti-punch, mojito et daïquiri.',
     available: true,
+    longText: [
+      "La Métisse Rhum blanc est élaborée selon la méthode traditionnelle, à partir de mélasse fermentée à l'Habitation La Métisse, à Moindou. Elle subit une double distillation : cette seconde passe dans l'alambic affine l'eau-de-vie, resserre son profil aromatique et lui donne une pureté et une rondeur supérieures à celles d'une distillation simple.",
+      "Embouteillée à 45 % vol. en Nouvelle-Calédonie, chaque bouteille est cachetée à la main à la cire bleue — la signature visuelle de la maison, réalisée bouteille par bouteille dans une casserole de cuivre.",
+      "Son profil franc et aromatique en fait une base de choix pour les cocktails classiques — ti-punch, mojito, daïquiri — comme pour les créations des professionnels du bar.",
+    ],
+    facts: {
+      Base: 'Mélasse — méthode traditionnelle',
+      Distillation: 'Double distillation',
+      'Degré': '45 % vol.',
+      Contenance: '70 cl',
+      Origine: 'Distillé et embouteillé en Nouvelle-Calédonie',
+      Signature: 'Cacheté à la main à la cire bleue',
+    },
   },
   {
     name: 'La Métisse — Rhum brun au cœur de gaïac torréfié',
     category: 'Rhum brun',
+    slug: 'la-metisse-rhum-brun-gaiac',
     description:
-      "Une exclusivité mondiale : le premier alcool vieilli au contact du cœur de gaïac torréfié, bois emblématique de Nouvelle-Calédonie. Excellent sec comme en cocktail.",
+      "Une exclusivité mondiale : le premier alcool vieilli au contact du cœur de gaïac torréfié, bois emblématique de Nouvelle-Calédonie. Issu d'une double distillation.",
     notes: 'Robe dorée aux reflets rouge acajou, notes boisées profondes.',
     available: true,
     signature: true,
+    longText: [
+      "Le rhum brun La Métisse est une première mondiale : c'est le premier alcool distillé vieilli au contact du cœur de gaïac torréfié. Le gaïac, bois précieux et dense emblématique de la Nouvelle-Calédonie, est torréfié puis mis au contact de l'eau-de-vie, à laquelle il transmet sa couleur et ses arômes.",
+      "Comme le rhum blanc de la maison, il est issu d'une double distillation de mélasse selon la méthode traditionnelle — un affinage supplémentaire qui garantit une eau-de-vie d'une grande netteté avant sa rencontre avec le gaïac.",
+      "Il en résulte une robe dorée aux reflets rouge acajou et des notes boisées profondes, qui se découvrent aussi bien sec, pour en apprécier la singularité, qu'en cocktail.",
+    ],
+    facts: {
+      Base: 'Mélasse — méthode traditionnelle',
+      Distillation: 'Double distillation',
+      'Élevage': 'Cœur de gaïac torréfié de Nouvelle-Calédonie',
+      Robe: 'Dorée, reflets rouge acajou',
+      Origine: 'Distillé et embouteillé en Nouvelle-Calédonie',
+      Particularité: 'Premier alcool au monde élevé au gaïac torréfié',
+    },
   },
   {
     name: 'Rhums arrangés',
     category: 'Letchi · Passion · Banane · Épices',
+    slug: 'rhums-arranges',
     description:
-      'Des fruits généreux et des épices macérés patiemment durant six mois dans notre rhum traditionnel, pour des arrangés intenses et gourmands.',
+      'Des fruits et des épices macérés patiemment durant six mois dans notre rhum traditionnel double distillation, pour des arrangés intenses et gourmands.',
     available: true,
+    longText: [
+      "Les rhums arrangés de la Distillerie Rolland naissent de la rencontre entre notre rhum blanc traditionnel — mélasse, double distillation — et des fruits et épices choisis : letchi, fruit de la passion, banane, épices.",
+      "La macération dure six mois : le temps nécessaire pour que les fruits livrent pleinement leurs arômes et que l'ensemble trouve son équilibre, sans arômes ajoutés ni raccourcis.",
+      'Chaque parfum exprime une facette du terroir calédonien et se déguste tel quel, bien frais, ou allongé selon les préférences.',
+    ],
+    facts: {
+      Base: 'Rhum blanc La Métisse (double distillation)',
+      'Parfums': 'Letchi · Passion · Banane · Épices',
+      'Macération': '6 mois',
+      Origine: 'Élaboré et embouteillé en Nouvelle-Calédonie',
+    },
   },
   {
     name: 'Whisky au cœur de gaïac torréfié',

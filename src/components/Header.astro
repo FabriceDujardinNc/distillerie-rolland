@@ -6,11 +6,13 @@
 import { Image } from 'astro:assets';
 import monogrammeOr from '@/assets/images/logo-distillerie-rolland-monogramme-or.png';
 
+// Ancres absolues : fonctionnent depuis la page d'accueil comme depuis
+// les pages produit (/rhums/…)
 const links = [
-  { href: '#distillerie', label: 'La distillerie' },
-  { href: '#gaiac', label: 'Le gaïac' },
-  { href: '#creations', label: 'Nos créations' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/#distillerie', label: 'La distillerie' },
+  { href: '/#gaiac', label: 'Le gaïac' },
+  { href: '/#creations', label: 'Nos créations' },
+  { href: '/#contact', label: 'Contact' },
 ];
 ---
 
@@ -23,7 +25,7 @@ const links = [
     aria-label="Navigation principale"
   >
     <a
-      href="#accueil"
+      href="/"
       class="font-display flex items-center gap-3 text-sm tracking-[0.25em] text-or transition-colors duration-300 hover:text-or-light md:text-base"
     >
       <Image

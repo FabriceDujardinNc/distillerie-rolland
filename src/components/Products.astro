@@ -6,10 +6,24 @@
  */
 import { Image } from 'astro:assets';
 import logoMetisse from '@/assets/images/logo-la-metisse-rhum-traditionnel-or.png';
+import blancBouteille from '@/assets/images/rhum-blanc-la-metisse-bouteille-nouvelle-caledonie.jpg';
+import brunBouteille from '@/assets/images/bouteille-rhum-brun-coeur-de-gaiac-nouvelle-caledonie.jpg';
 import { products } from '@/data/site';
 
 const disponibles = products.filter((p) => p.available);
 const aVenir = products.filter((p) => !p.available);
+
+// Photo de tête de carte, par slug (les arrangés attendent la leur)
+const vignettes: Record<string, { src: ImageMetadata; alt: string }> = {
+  'la-metisse-rhum-blanc': {
+    src: blancBouteille,
+    alt: 'Rhum blanc La Métisse, bouteille cachetée de cire bleue — Nouvelle-Calédonie',
+  },
+  'la-metisse-rhum-brun-gaiac': {
+    src: brunBouteille,
+    alt: 'Rhum brun au cœur de gaïac torréfié — robe dorée aux reflets acajou',
+  },
+};
 ---
 
 <section id="creations" class="bg-grain relative z-20 bg-noir py-24 md:py-36">
@@ -41,15 +55,38 @@ const aVenir = products.filter((p) => !p.available);
             ]}
           >
             {product.signature && (
-              <p class="absolute -top-3 left-1/2 -translate-x-1/2 bg-or px-4 py-1 text-[0.65rem] font-medium tracking-[0.2em] whitespace-nowrap text-noir uppercase">
+              <p class="absolute -top-3 left-1/2 z-10 -translate-x-1/2 bg-or px-4 py-1 text-[0.65rem] font-medium tracking-[0.2em] whitespace-nowrap text-noir uppercase">
                 Unique au monde
               </p>
+            )}
+            {product.slug && vignettes[product.slug] && (
+              <a
+                href={`/rhums/${product.slug}`}
+                class="-mx-8 -mt-8 mb-6 block overflow-hidden"
+                aria-hidden="true"
+                tabindex="-1"
+              >
+                <Image
+                  src={vignettes[product.slug].src}
+                  alt={vignettes[product.slug].alt}
+                  width={640}
+                  widths={[380, 640]}
+                  sizes="(min-width: 768px) 30vw, 92vw"
+                  class="aspect-[4/3] w-full object-cover object-[center_30%] transition-transform duration-700 hover:scale-105"
+                />
+              </a>
             )}
             <p class="text-xs tracking-[0.25em] text-or-light/80 uppercase">
               {product.category}
             </p>
             <h3 class="font-display mt-3 text-xl leading-snug font-semibold text-creme">
-              {product.name}
+              {product.slug ? (
+                <a href={`/rhums/${product.slug}`} class="transition-colors hover:text-or">
+                  {product.name}
+                </a>
+              ) : (
+                product.name
+              )}
             </h3>
             <p class="mt-4 flex-1 text-sm leading-relaxed text-creme-muted">
               {product.description}
@@ -58,6 +95,17 @@ const aVenir = products.filter((p) => !p.available);
               <p class="mt-4 border-t border-or/15 pt-4 text-sm text-or-light/90 italic">
                 {product.notes}
               </p>
+            )}
+            {product.slug && (
+              <a
+                href={`/rhums/${product.slug}`}
+                class="group/lien mt-6 inline-flex items-center gap-2 text-xs tracking-[0.25em] text-or uppercase transition-colors hover:text-or-light"
+              >
+                Découvrir
+                <span class="transition-transform duration-500 group-hover/lien:translate-x-1" aria-hidden="true">
+                  →
+                </span>
+              </a>
             )}
           </article>
         ))

@@ -1,0 +1,220 @@
+---
+/**
+ * Pages produit (/rhums/<slug>/) — une par création disponible.
+ * Ton strictement informatif (méthode, composition, origine) : la loi Évin
+ * autorise l'information factuelle, pas l'incitation — pas de prix, pas
+ * d'achat, pas de mise en scène de consommation.
+ * SEO : Schema.org Product (sans offre) + fil d'Ariane + page indexable.
+ */
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import AgeGate from '@/components/AgeGate.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { site, products } from '@/data/site';
+
+import blancBouteille from '@/assets/images/rhum-blanc-la-metisse-bouteille-nouvelle-caledonie.jpg';
+import blancCoucher from '@/assets/images/rhum-blanc-la-metisse-coucher-de-soleil.jpg';
+import blancPaysage from '@/assets/images/rhum-blanc-la-metisse-paysage-caledonien.jpg';
+import cireBleue from '@/assets/images/cire-bleue-cachetage-la-metisse.jpg';
+import brunBouteille from '@/assets/images/bouteille-rhum-brun-coeur-de-gaiac-nouvelle-caledonie.jpg';
+
+export function getStaticPaths() {
+  return products
+    .filter((p) => p.available && p.slug)
+    .map((p) => ({ params: { slug: p.slug }, props: { product: p } }));
+}
+
+const { product } = Astro.props;
+const path = `/rhums/${product.slug}`;
+
+// Visuels par produit (les arrangés attendent leurs photos)
+const galeries = {
+  'la-metisse-rhum-blanc': [
+    { src: blancBouteille, alt: 'Bouteille de rhum blanc La Métisse dans un pâturage de Nouvelle-Calédonie' },
+    { src: blancCoucher, alt: 'Rhum blanc La Métisse au coucher de soleil, Nouvelle-Calédonie' },
+    { src: blancPaysage, alt: 'La Métisse rhum blanc devant les collines calédoniennes au soleil couchant' },
+  ],
+  'la-metisse-rhum-brun-gaiac': [
+    {
+      src: brunBouteille,
+      alt: 'Rhum brun au cœur de gaïac torréfié, robe dorée aux reflets rouge acajou — Distillerie Rolland',
+    },
+  ],
+  'rhums-arranges': [],
+} as const;
+const photos = galeries[product.slug as keyof typeof galeries] ?? [];
+
+const title = `${product.name} — Distillerie Rolland, Nouvelle-Calédonie`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Product',
+      name: product.name,
+      description: product.description,
+      brand: { '@type': 'Brand', name: 'La Métisse' },
+      manufacturer: { '@id': `${site.domain}/#distillerie` },
+      countryOfOrigin: 'NC',
+      ...(photos.length > 0 && { image: photos.map((p) => new URL(p.src.src, site.domain).href) }),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${site.domain}/` },
+        { '@type': 'ListItem', position: 2, name: 'Nos créations', item: `${site.domain}/#creations` },
+        { '@type': 'ListItem', position: 3, name: product.name },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={product.description} path={path}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
+
+  <AgeGate />
+  <Header />
+
+  <main class="bg-grain min-h-svh pt-28 pb-24 md:pt-36">
+    <article class="mx-auto max-w-6xl px-5 md:px-8">
+      <nav aria-label="Fil d'Ariane" class="text-xs tracking-[0.2em] text-creme/50 uppercase">
+        <a href="/" class="transition-colors hover:text-or">Accueil</a>
+        <span class="mx-2" aria-hidden="true">/</span>
+        <a href="/#creations" class="transition-colors hover:text-or">Nos créations</a>
+      </nav>
+
+      <header class="mt-10 max-w-3xl">
+        <p class="mb-4 text-xs tracking-[0.35em] text-or uppercase">{product.category}</p>
+        <h1
+          class="font-display text-balance text-3xl font-semibold tracking-wide text-creme md:text-5xl"
+          data-split
+        >
+          {product.name}
+        </h1>
+        {
+          product.signature && (
+            <p class="mt-5 inline-block bg-or px-4 py-1 text-[0.65rem] font-medium tracking-[0.2em] text-noir uppercase">
+              Unique au monde
+            </p>
+          )
+        }
+      </header>
+
+      <div class="mt-14 grid gap-12 lg:grid-cols-5 lg:gap-16">
+        <!-- Texte + fiche -->
+        <div class="lg:col-span-3">
+          <div class="space-y-5 leading-relaxed text-creme-muted" data-reveal-group>
+            {(product.longText ?? [product.description]).map((paragraphe) => <p>{paragraphe}</p>)}
+          </div>
+
+          {
+            product.notes && (
+              <blockquote class="mt-8 border-l-2 border-or pl-6" data-reveal>
+                <p class="font-script text-2xl text-or-light">{product.notes}</p>
+              </blockquote>
+            )
+          }
+
+          {
+            product.facts && (
+              <div class="mt-12" data-reveal>
+                <h2 class="font-display text-lg tracking-widest text-or uppercase">
+                  Fiche technique
+                </h2>
+                <dl class="mt-6 divide-y divide-or/10 border-y border-or/20">
+                  {Object.entries(product.facts).map(([cle, valeur]) => (
+                    <div class="grid grid-cols-[38%_1fr] gap-4 py-3 text-sm">
+                      <dt class="tracking-widest text-creme/60 uppercase">{cle}</dt>
+                      <dd class="text-creme">{valeur}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )
+          }
+
+          <div class="mt-12 flex flex-wrap gap-4" data-reveal>
+            <a
+              href="/#contact"
+              class="group inline-flex items-center gap-3 border border-or bg-or/10 px-8 py-3.5 text-sm tracking-[0.2em] text-or uppercase transition-all duration-500 hover:bg-or hover:text-noir"
+            >
+              Nous contacter
+              <span class="transition-transform duration-500 group-hover:translate-x-1" aria-hidden="true">→</span>
+            </a>
+            <a
+              href="/#creations"
+              class="inline-flex items-center px-6 py-3.5 text-sm tracking-[0.2em] text-creme/70 uppercase transition-colors duration-500 hover:text-or"
+            >
+              ← Toutes nos créations
+            </a>
+          </div>
+        </div>
+
+        <!-- Galerie -->
+        <aside class="space-y-8 lg:col-span-2">
+          {
+            photos.map((photo, i) => (
+              <figure data-mask-reveal>
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  width={760}
+                  widths={[420, 760]}
+                  sizes="(min-width: 1024px) 34vw, 92vw"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  class="w-full border border-or/20 object-cover"
+                />
+              </figure>
+            ))
+          }
+
+          {
+            product.slug === 'la-metisse-rhum-blanc' && (
+              <figure data-reveal>
+                <div class="border border-or/20">
+                  <video
+                    src="/videos/cachetage-cire-bleue-la-metisse.mp4"
+                    poster={cireBleue.src}
+                    muted
+                    loop
+                    playsinline
+                    autoplay
+                    preload="none"
+                    class="w-full"
+                    aria-label="Cachetage à la main d'une bouteille La Métisse dans la cire bleue"
+                  />
+                </div>
+                <figcaption class="mt-3 text-center text-xs tracking-[0.2em] text-creme/50 uppercase">
+                  Le cachetage à la cire bleue, bouteille par bouteille
+                </figcaption>
+              </figure>
+            )
+          }
+
+          {
+            photos.length === 0 && product.slug === 'rhums-arranges' && (
+              <p class="border border-dashed border-or/25 p-6 text-sm text-creme/50">
+                Photos des rhums arrangés à venir — letchi, passion, banane et épices sont en
+                macération.
+              </p>
+            )
+          }
+        </aside>
+      </div>
+    </article>
+  </main>
+
+  <Footer />
+
+  <script>
+    import '@/scripts/essentials.ts';
+    const loadAnimations = () => import('@/scripts/animations.ts');
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => loadAnimations(), { timeout: 1500 });
+    } else {
+      setTimeout(loadAnimations, 250);
+    }
+  </script>
+</BaseLayout>
