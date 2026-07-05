@@ -8,7 +8,9 @@ export default defineConfig({
   // URL canonique du site — indispensable pour le sitemap, les canonical et l'Open Graph
   site: 'https://www.distillerie-rolland.com',
   output: 'static',
-  trailingSlash: 'never',
+  // « always » : aligné sur Apache, qui sert les dossiers avec slash final
+  // (dist/rhums/x/index.html) et 301-redirige les URL sans slash
+  trailingSlash: 'always',
   integrations: [
     sitemap({
       // Le site est en français, ciblé Nouvelle-Calédonie / France

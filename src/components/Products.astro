@@ -61,7 +61,7 @@ const vignettes: Record<string, { src: ImageMetadata; alt: string }> = {
             )}
             {product.slug && vignettes[product.slug] && (
               <a
-                href={`/rhums/${product.slug}`}
+                href={`/rhums/${product.slug}/`}
                 class="-mx-8 -mt-8 mb-6 block overflow-hidden"
                 aria-hidden="true"
                 tabindex="-1"
@@ -76,12 +76,19 @@ const vignettes: Record<string, { src: ImageMetadata; alt: string }> = {
                 />
               </a>
             )}
-            <p class="text-xs tracking-[0.25em] text-or-light/80 uppercase">
-              {product.category}
-            </p>
+            <div class="flex flex-wrap items-center gap-3">
+              <p class="text-xs tracking-[0.25em] text-or-light/80 uppercase">
+                {product.category}
+              </p>
+              {product.disponible === false && (
+                <p class="border border-or/40 px-2.5 py-0.5 text-[0.6rem] tracking-[0.2em] text-or-light uppercase">
+                  Bientôt disponible
+                </p>
+              )}
+            </div>
             <h3 class="font-display mt-3 text-xl leading-snug font-semibold text-creme">
               {product.slug ? (
-                <a href={`/rhums/${product.slug}`} class="transition-colors hover:text-or">
+                <a href={`/rhums/${product.slug}/`} class="transition-colors hover:text-or">
                   {product.name}
                 </a>
               ) : (
@@ -98,7 +105,7 @@ const vignettes: Record<string, { src: ImageMetadata; alt: string }> = {
             )}
             {product.slug && (
               <a
-                href={`/rhums/${product.slug}`}
+                href={`/rhums/${product.slug}/`}
                 class="group/lien mt-6 inline-flex items-center gap-2 text-xs tracking-[0.25em] text-or uppercase transition-colors hover:text-or-light"
               >
                 Découvrir

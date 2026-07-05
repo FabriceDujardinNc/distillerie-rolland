@@ -47,6 +47,8 @@ export type Product = {
   notes?: string;
   available: boolean;
   signature?: boolean;
+  /** true = actuellement en vente ; false = présenté mais bientôt disponible */
+  disponible?: boolean;
   /** Slug de la page produit (/rhums/<slug>/) — absent = pas de page dédiée */
   slug?: string;
   /** Paragraphes factuels de la page produit (ton informatif, conforme loi Évin) */
@@ -60,6 +62,7 @@ export const products: Product[] = [
     name: 'La Métisse — Rhum blanc traditionnel',
     category: 'Rhum blanc',
     slug: 'la-metisse-rhum-blanc',
+    disponible: true,
     description:
       'Un rhum blanc traditionnel élaboré à partir de mélasse et affiné par une double distillation, pour un profil franc et aromatique — la base des ti-punch, mojito et daïquiri.',
     available: true,
@@ -81,6 +84,7 @@ export const products: Product[] = [
     name: 'La Métisse — Rhum brun au cœur de gaïac torréfié',
     category: 'Rhum brun',
     slug: 'la-metisse-rhum-brun-gaiac',
+    disponible: false,
     description:
       "Une exclusivité mondiale : le premier alcool vieilli au contact du cœur de gaïac torréfié, bois emblématique de Nouvelle-Calédonie. Issu d'une double distillation.",
     notes: 'Robe dorée aux reflets rouge acajou, notes boisées profondes.',
@@ -104,6 +108,7 @@ export const products: Product[] = [
     name: 'Rhums arrangés',
     category: 'Letchi · Passion · Banane · Épices',
     slug: 'rhums-arranges',
+    disponible: false,
     description:
       'Des fruits et des épices macérés patiemment durant six mois dans notre rhum traditionnel double distillation, pour des arrangés intenses et gourmands.',
     available: true,

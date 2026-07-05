@@ -65,7 +65,10 @@ const jsonLd = {
           .filter((p) => p.available)
           .map((p) => ({
             '@type': 'Offer',
-            availability: 'https://schema.org/InStock',
+            availability:
+              p.disponible === false
+                ? 'https://schema.org/PreOrder'
+                : 'https://schema.org/InStock',
             itemOffered: {
               '@type': 'Product',
               name: p.name,
