@@ -40,15 +40,15 @@ const mailtoAdresse = `mailto:${site.email}?subject=${encodeURIComponent(
         <p class="mt-3">
           {site.name}<br />
           {site.address.postalCode}&nbsp;{site.address.locality}, {site.address.country}<br />
-          Téléphone : <a href={`tel:${site.phoneHref}`} class="text-or">{site.phone}</a><br />
-          Email : <a href={`mailto:${site.email}`} class="text-or">{site.email}</a><br />
+          Téléphone : <a href={`tel:${site.phoneHref}`} class="text-or underline decoration-or/40 underline-offset-4 hover:decoration-or">{site.phone}</a><br />
+          Email : <a href={`mailto:${site.email}`} class="text-or underline decoration-or/40 underline-offset-4 hover:decoration-or">{site.email}</a><br />
           RIDET : 1500.271
         </p>
         <p class="mt-3">
           Pour des raisons de sécurité du site de production, l'adresse complète du siège
           n'est pas publiée : elle est communiquée sur simple demande à&nbsp;<a
             href={mailtoAdresse}
-            class="text-or">{site.email}</a
+            class="text-or underline decoration-or/40 underline-offset-4 hover:decoration-or">{site.email}</a
           >.
         </p>
       </section>
@@ -60,7 +60,7 @@ const mailtoAdresse = `mailto:${site.email}?subject=${encodeURIComponent(
           61 Lordou Vironos Street, 6023 Larnaca, Chypre —&nbsp;<a
             href="https://www.hostinger.fr"
             rel="noopener"
-            class="text-or">hostinger.fr</a
+            class="text-or underline decoration-or/40 underline-offset-4 hover:decoration-or">hostinger.fr</a
           >
         </p>
       </section>
@@ -83,7 +83,7 @@ const mailtoAdresse = `mailto:${site.email}?subject=${encodeURIComponent(
           le service Web3Forms. Vous disposez d'un droit d'accès, de rectification et de
           suppression de vos données en écrivant à&nbsp;<a
             href={`mailto:${site.email}`}
-            class="text-or">{site.email}</a
+            class="text-or underline decoration-or/40 underline-offset-4 hover:decoration-or">{site.email}</a
           >. Ce site n'utilise
           aucun cookie de suivi ou de publicité.
         </p>
