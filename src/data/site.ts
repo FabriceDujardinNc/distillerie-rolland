@@ -68,16 +68,18 @@ export const products: Product[] = [
     available: true,
     longText: [
       "La Métisse Rhum blanc est élaborée selon la méthode traditionnelle, à partir de mélasse fermentée à l'Habitation La Métisse, à Moindou. Elle subit une double distillation : cette seconde passe dans l'alambic affine l'eau-de-vie, resserre son profil aromatique et lui donne une pureté et une rondeur supérieures à celles d'une distillation simple.",
-      "Embouteillée à 45 % vol. en Nouvelle-Calédonie, chaque bouteille est cachetée à la main à la cire bleue — la signature visuelle de la maison, réalisée bouteille par bouteille dans une casserole de cuivre.",
+      "La distillation s'effectue dans un alambic à cuve inox équipé d'un col de cygne et d'un condenseur en cuivre : le passage du distillat au contact du cuivre catalyse et affine son goût.",
+      "Embouteillée à 45 % vol. en Nouvelle-Calédonie, chaque bouteille est cachetée à la main, à la cire — chaque création de la maison portera sa propre couleur de cire et son étiquette.",
       "Son profil franc et aromatique en fait une base de choix pour les cocktails classiques — ti-punch, mojito, daïquiri — comme pour les créations des professionnels du bar.",
     ],
     facts: {
       Base: 'Mélasse — méthode traditionnelle',
       Distillation: 'Double distillation',
+      Alambic: 'Cuve inox, col de cygne, condenseur en cuivre',
       'Degré': '45 % vol.',
       Contenance: '70 cl',
       Origine: 'Distillé et embouteillé en Nouvelle-Calédonie',
-      Signature: 'Cacheté à la main à la cire bleue',
+      Signature: 'Cacheté à la main, à la cire',
     },
   },
   {
@@ -98,6 +100,7 @@ export const products: Product[] = [
     facts: {
       Base: 'Mélasse — méthode traditionnelle',
       Distillation: 'Double distillation',
+      Alambic: 'Cuve inox, col de cygne, condenseur en cuivre',
       'Élevage': 'Cœur de gaïac torréfié de Nouvelle-Calédonie',
       Robe: 'Dorée, reflets rouge acajou',
       Origine: 'Distillé et embouteillé en Nouvelle-Calédonie',

@@ -13,7 +13,8 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import { site, products } from '@/data/site';
 
-import blancBouteille from '@/assets/images/rhum-blanc-la-metisse-bouteille-nouvelle-caledonie.jpg';
+import blancCiel from '@/assets/images/rhum-blanc-la-metisse-bouteille-ciel-caledonien.jpg';
+import blancVallee from '@/assets/images/rhum-blanc-la-metisse-vallee-moindou.jpg';
 import blancCoucher from '@/assets/images/rhum-blanc-la-metisse-coucher-de-soleil.jpg';
 import blancPaysage from '@/assets/images/rhum-blanc-la-metisse-paysage-caledonien.jpg';
 import cireBleue from '@/assets/images/cire-bleue-cachetage-la-metisse.jpg';
@@ -28,7 +29,7 @@ export function getStaticPaths() {
 const { product } = Astro.props;
 const path = `/rhums/${product.slug}/`;
 
-// Visuels par produit : bannière hero + galerie complémentaire
+// Visuels par produit : bannière hero + galerie complémentaire + vidéos
 const medias = {
   'la-metisse-rhum-blanc': {
     hero: {
@@ -37,10 +38,24 @@ const medias = {
       position: 'object-[center_60%]',
     },
     galerie: [
-      { src: blancBouteille, alt: 'Bouteille de rhum blanc La Métisse dans un pâturage de Nouvelle-Calédonie' },
+      { src: blancCiel, alt: 'Bouteille de rhum blanc La Métisse sous le ciel bleu de Nouvelle-Calédonie' },
+      { src: blancVallee, alt: 'Rhum blanc La Métisse dans la vallée de Moindou' },
       { src: blancCoucher, alt: 'Rhum blanc La Métisse au coucher de soleil, Nouvelle-Calédonie' },
     ],
-    video: true,
+    videos: [
+      {
+        src: '/videos/rhum-blanc-la-metisse-presentation.mp4',
+        poster: blancCiel.src,
+        caption: 'La Métisse, rhum blanc traditionnel',
+        aria: 'Présentation de la bouteille de rhum blanc La Métisse',
+      },
+      {
+        src: '/videos/cachetage-cire-bleue-la-metisse.mp4',
+        poster: cireBleue.src,
+        caption: 'Le cachetage à la cire, bouteille par bouteille',
+        aria: "Cachetage à la main d'une bouteille La Métisse dans la cire",
+      },
+    ],
   },
   'la-metisse-rhum-brun-gaiac': {
     hero: {
@@ -49,11 +64,11 @@ const medias = {
       position: 'object-[center_35%]',
     },
     galerie: [],
-    video: false,
+    videos: [],
   },
-  'rhums-arranges': { hero: null, galerie: [], video: false },
+  'rhums-arranges': { hero: null, galerie: [], videos: [] },
 } as const;
-const media = medias[product.slug as keyof typeof medias] ?? { hero: null, galerie: [], video: false };
+const media = medias[product.slug as keyof typeof medias] ?? { hero: null, galerie: [], videos: [] };
 
 const title = `${product.name} — Distillerie Rolland, Nouvelle-Calédonie`;
 
@@ -209,10 +224,10 @@ const jsonLd = {
         }
       </div>
 
-      <!-- Galerie horizontale sous le contenu -->
+      <!-- Galerie horizontale sous le contenu : photos puis vidéos -->
       {
-        (media.galerie.length > 0 || media.video) && (
-          <div class="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-3" data-reveal-group>
+        (media.galerie.length > 0 || media.videos.length > 0) && (
+          <div class="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-4" data-reveal-group>
             {media.galerie.map((photo) => (
               <figure data-mask-reveal>
                 <Image
@@ -220,30 +235,30 @@ const jsonLd = {
                   alt={photo.alt}
                   width={760}
                   widths={[420, 760]}
-                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 92vw"
+                  sizes="(min-width: 1024px) 23vw, (min-width: 640px) 46vw, 92vw"
                   loading="lazy"
                   class="aspect-[4/5] w-full border border-or/20 object-cover"
                 />
               </figure>
             ))}
-            {media.video && (
+            {media.videos.map((video) => (
               <figure>
                 <video
-                  src="/videos/cachetage-cire-bleue-la-metisse.mp4"
-                  poster={cireBleue.src}
+                  src={video.src}
+                  poster={video.poster}
                   muted
                   loop
                   playsinline
                   autoplay
                   preload="none"
                   class="aspect-[4/5] w-full border border-or/20 object-cover"
-                  aria-label="Cachetage à la main d'une bouteille La Métisse dans la cire bleue"
+                  aria-label={video.aria}
                 />
                 <figcaption class="mt-3 text-center text-xs tracking-[0.2em] text-creme/50 uppercase">
-                  Le cachetage à la cire bleue, bouteille par bouteille
+                  {video.caption}
                 </figcaption>
               </figure>
-            )}
+            ))}
           </div>
         )
       }
