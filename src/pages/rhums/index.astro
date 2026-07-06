@@ -1,0 +1,143 @@
+---
+/**
+ * Page hub /rhums/ : liste des créations de la maison avec liens vers les
+ * pages produit. Ton informatif (loi Évin) — présentation, pas d'incitation.
+ */
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import AgeGate from '@/components/AgeGate.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { site, products } from '@/data/site';
+
+import blancBouteille from '@/assets/images/rhum-blanc-la-metisse-bouteille-nouvelle-caledonie.jpg';
+import brunBouteille from '@/assets/images/bouteille-rhum-brun-coeur-de-gaiac-nouvelle-caledonie.jpg';
+
+const creations = products.filter((p) => p.available && p.slug);
+
+const vignettes: Record<string, { src: ImageMetadata; alt: string }> = {
+  'la-metisse-rhum-blanc': {
+    src: blancBouteille,
+    alt: 'Rhum blanc La Métisse, bouteille cachetée de cire bleue — Nouvelle-Calédonie',
+  },
+  'la-metisse-rhum-brun-gaiac': {
+    src: brunBouteille,
+    alt: 'Rhum brun au cœur de gaïac torréfié — robe dorée aux reflets acajou',
+  },
+};
+
+const title = 'Nos rhums — La Métisse, rhums de Nouvelle-Calédonie | Distillerie Rolland';
+const description =
+  'Les rhums La Métisse de la Distillerie Rolland (Moindou, Nouvelle-Calédonie) : rhum blanc traditionnel double distillation, rhum brun au cœur de gaïac torréfié, rhums arrangés.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Rhums et spiritueux de la Distillerie Rolland',
+  itemListElement: creations.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: p.name,
+    url: `${site.domain}/rhums/${p.slug}/`,
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} path="/rhums/">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
+
+  <AgeGate />
+  <Header />
+
+  <main class="bg-grain min-h-svh pt-28 pb-24 md:pt-36">
+    <div class="mx-auto max-w-6xl px-5 md:px-8">
+      <nav aria-label="Fil d'Ariane" class="text-xs tracking-[0.2em] text-creme/50 uppercase">
+        <a href="/" class="transition-colors hover:text-or">Accueil</a>
+        <span class="mx-2" aria-hidden="true">/</span>
+        <span class="text-creme/70">Nos rhums</span>
+      </nav>
+
+      <header class="mt-10 max-w-3xl">
+        <p class="mb-4 text-xs tracking-[0.35em] text-or uppercase">La collection</p>
+        <h1
+          class="font-display text-balance text-3xl font-semibold tracking-wide text-creme md:text-5xl"
+          data-split
+        >
+          Nos rhums <span class="text-or">de Nouvelle-Calédonie</span>
+        </h1>
+        <p class="mt-6 leading-relaxed text-creme-muted">
+          Élaborés à Moindou selon la méthode traditionnelle et affinés par une double
+          distillation, les rhums La Métisse expriment le caractère du Caillou — jusqu'au
+          cœur de gaïac torréfié, une première mondiale.
+        </p>
+      </header>
+
+      <div class="mt-14 grid gap-8 md:grid-cols-3" data-reveal-group>
+        {
+          creations.map((product) => (
+            <article class="group flex flex-col border border-or/15 bg-noir-800/60 transition-[border-color] duration-500 hover:border-or/40">
+              {vignettes[product.slug!] && (
+                <a href={`/rhums/${product.slug}/`} class="block overflow-hidden" tabindex="-1" aria-hidden="true">
+                  <Image
+                    src={vignettes[product.slug!].src}
+                    alt={vignettes[product.slug!].alt}
+                    width={640}
+                    widths={[380, 640]}
+                    sizes="(min-width: 768px) 30vw, 92vw"
+                    class="aspect-[4/3] w-full object-cover object-[center_30%] transition-transform duration-700 group-hover:scale-105"
+                  />
+                </a>
+              )}
+              <div class="flex flex-1 flex-col p-7">
+                <div class="flex flex-wrap items-center gap-3">
+                  <p class="text-xs tracking-[0.25em] text-or-light/80 uppercase">{product.category}</p>
+                  {product.disponible === false && (
+                    <p class="border border-or/40 px-2.5 py-0.5 text-[0.6rem] tracking-[0.2em] text-or-light uppercase">
+                      Bientôt disponible
+                    </p>
+                  )}
+                </div>
+                <h2 class="font-display mt-3 text-xl leading-snug font-semibold text-creme">
+                  <a href={`/rhums/${product.slug}/`} class="transition-colors hover:text-or">
+                    {product.name}
+                  </a>
+                </h2>
+                <p class="mt-4 flex-1 text-sm leading-relaxed text-creme-muted">{product.description}</p>
+                <a
+                  href={`/rhums/${product.slug}/`}
+                  class="group/lien mt-6 inline-flex items-center gap-2 text-xs tracking-[0.25em] text-or uppercase transition-colors hover:text-or-light"
+                >
+                  Découvrir
+                  <span class="transition-transform duration-500 group-hover/lien:translate-x-1" aria-hidden="true">
+                    →
+                  </span>
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="mt-16 text-center" data-reveal>
+        <a
+          href="/#creations"
+          class="inline-flex items-center px-6 py-3 text-sm tracking-[0.2em] text-creme/70 uppercase transition-colors duration-500 hover:text-or"
+        >
+          ← Retour à l'accueil
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+
+  <script>
+    import '@/scripts/essentials.ts';
+    const loadAnimations = () => import('@/scripts/animations.ts');
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => loadAnimations(), { timeout: 1500 });
+    } else {
+      setTimeout(loadAnimations, 250);
+    }
+  </script>
+</BaseLayout>

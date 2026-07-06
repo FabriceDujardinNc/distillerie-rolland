@@ -63,7 +63,7 @@ const jsonLd = {
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${site.domain}/` },
-        { '@type': 'ListItem', position: 2, name: 'Nos créations', item: `${site.domain}/#creations` },
+        { '@type': 'ListItem', position: 2, name: 'Nos rhums', item: `${site.domain}/rhums/` },
         { '@type': 'ListItem', position: 3, name: product.name },
       ],
     },
@@ -82,7 +82,7 @@ const jsonLd = {
       <nav aria-label="Fil d'Ariane" class="text-xs tracking-[0.2em] text-creme/50 uppercase">
         <a href="/" class="transition-colors hover:text-or">Accueil</a>
         <span class="mx-2" aria-hidden="true">/</span>
-        <a href="/#creations" class="transition-colors hover:text-or">Nos créations</a>
+        <a href="/rhums/" class="transition-colors hover:text-or">Nos rhums</a>
       </nav>
 
       <header class="mt-10 max-w-3xl">
