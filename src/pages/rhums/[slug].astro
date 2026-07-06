@@ -28,24 +28,39 @@ export function getStaticPaths() {
 const { product } = Astro.props;
 const path = `/rhums/${product.slug}/`;
 
-// Visuels par produit (les arrangés attendent leurs photos)
-const galeries = {
-  'la-metisse-rhum-blanc': [
-    { src: blancBouteille, alt: 'Bouteille de rhum blanc La Métisse dans un pâturage de Nouvelle-Calédonie' },
-    { src: blancCoucher, alt: 'Rhum blanc La Métisse au coucher de soleil, Nouvelle-Calédonie' },
-    { src: blancPaysage, alt: 'La Métisse rhum blanc devant les collines calédoniennes au soleil couchant' },
-  ],
-  'la-metisse-rhum-brun-gaiac': [
-    {
-      src: brunBouteille,
-      alt: 'Rhum brun au cœur de gaïac torréfié, robe dorée aux reflets rouge acajou — Distillerie Rolland',
+// Visuels par produit : bannière hero + galerie complémentaire
+const medias = {
+  'la-metisse-rhum-blanc': {
+    hero: {
+      src: blancPaysage,
+      alt: 'La Métisse rhum blanc devant les collines calédoniennes au soleil couchant',
+      position: 'object-[center_60%]',
     },
-  ],
-  'rhums-arranges': [],
+    galerie: [
+      { src: blancBouteille, alt: 'Bouteille de rhum blanc La Métisse dans un pâturage de Nouvelle-Calédonie' },
+      { src: blancCoucher, alt: 'Rhum blanc La Métisse au coucher de soleil, Nouvelle-Calédonie' },
+    ],
+    video: true,
+  },
+  'la-metisse-rhum-brun-gaiac': {
+    hero: {
+      src: brunBouteille,
+      alt: 'Rhum brun au cœur de gaïac torréfié, robe dorée aux reflets rouge acajou',
+      position: 'object-[center_35%]',
+    },
+    galerie: [],
+    video: false,
+  },
+  'rhums-arranges': { hero: null, galerie: [], video: false },
 } as const;
-const photos = galeries[product.slug as keyof typeof galeries] ?? [];
+const media = medias[product.slug as keyof typeof medias] ?? { hero: null, galerie: [], video: false };
 
 const title = `${product.name} — Distillerie Rolland, Nouvelle-Calédonie`;
+
+const imagesLd = [
+  ...(media.hero ? [media.hero.src] : []),
+  ...media.galerie.map((g) => g.src),
+].map((img) => new URL(img.src, site.domain).href);
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -57,7 +72,7 @@ const jsonLd = {
       brand: { '@type': 'Brand', name: 'La Métisse' },
       manufacturer: { '@id': `${site.domain}/#distillerie` },
       countryOfOrigin: 'NC',
-      ...(photos.length > 0 && { image: photos.map((p) => new URL(p.src.src, site.domain).href) }),
+      ...(imagesLd.length > 0 && { image: imagesLd }),
     },
     {
       '@type': 'BreadcrumbList',
@@ -77,42 +92,76 @@ const jsonLd = {
   <AgeGate />
   <Header />
 
-  <main class="bg-grain min-h-svh pt-28 pb-24 md:pt-36">
+  <main class="bg-grain min-h-svh pb-24">
+    <!-- Bannière hero : grande image d'ambiance, titre en surimpression -->
+    {
+      media.hero ? (
+        <section class="relative flex min-h-[52svh] items-end overflow-hidden md:min-h-[62svh]">
+          <Image
+            src={media.hero.src}
+            alt={media.hero.alt}
+            width={1600}
+            widths={[768, 1200, 1600]}
+            sizes="100vw"
+            loading="eager"
+            fetchpriority="high"
+            class:list={['absolute inset-0 h-full w-full object-cover', media.hero.position]}
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-noir via-noir/40 to-noir/30" aria-hidden="true" />
+
+          <div class="relative z-10 mx-auto w-full max-w-6xl px-5 pt-40 pb-10 md:px-8">
+            <nav aria-label="Fil d'Ariane" class="text-xs tracking-[0.2em] text-creme/60 uppercase">
+              <a href="/" class="transition-colors hover:text-or">Accueil</a>
+              <span class="mx-2" aria-hidden="true">/</span>
+              <a href="/rhums/" class="transition-colors hover:text-or">Nos rhums</a>
+            </nav>
+            <p class="mt-6 mb-3 text-xs tracking-[0.35em] text-or-light uppercase">{product.category}</p>
+            <h1
+              class="font-display max-w-3xl text-balance text-3xl font-semibold tracking-wide text-creme md:text-5xl"
+              data-split
+            >
+              {product.name}
+            </h1>
+            <div class="mt-5 flex flex-wrap items-center gap-3">
+              {product.signature && (
+                <p class="inline-block bg-or px-4 py-1 text-[0.65rem] font-medium tracking-[0.2em] text-noir uppercase">
+                  Unique au monde
+                </p>
+              )}
+              {product.disponible === false && (
+                <p class="inline-block border border-or/60 bg-noir/60 px-4 py-1 text-[0.65rem] tracking-[0.2em] text-or-light uppercase">
+                  Bientôt disponible
+                </p>
+              )}
+            </div>
+          </div>
+        </section>
+      ) : (
+        <header class="mx-auto max-w-6xl px-5 pt-28 md:px-8 md:pt-36">
+          <nav aria-label="Fil d'Ariane" class="text-xs tracking-[0.2em] text-creme/50 uppercase">
+            <a href="/" class="transition-colors hover:text-or">Accueil</a>
+            <span class="mx-2" aria-hidden="true">/</span>
+            <a href="/rhums/" class="transition-colors hover:text-or">Nos rhums</a>
+          </nav>
+          <p class="mt-10 mb-4 text-xs tracking-[0.35em] text-or uppercase">{product.category}</p>
+          <h1
+            class="font-display max-w-3xl text-balance text-3xl font-semibold tracking-wide text-creme md:text-5xl"
+            data-split
+          >
+            {product.name}
+          </h1>
+          {product.disponible === false && (
+            <p class="mt-5 inline-block border border-or/40 px-4 py-1 text-[0.65rem] tracking-[0.2em] text-or-light uppercase">
+              Bientôt disponible
+            </p>
+          )}
+        </header>
+      )
+    }
+
     <article class="mx-auto max-w-6xl px-5 md:px-8">
-      <nav aria-label="Fil d'Ariane" class="text-xs tracking-[0.2em] text-creme/50 uppercase">
-        <a href="/" class="transition-colors hover:text-or">Accueil</a>
-        <span class="mx-2" aria-hidden="true">/</span>
-        <a href="/rhums/" class="transition-colors hover:text-or">Nos rhums</a>
-      </nav>
-
-      <header class="mt-10 max-w-3xl">
-        <p class="mb-4 text-xs tracking-[0.35em] text-or uppercase">{product.category}</p>
-        <h1
-          class="font-display text-balance text-3xl font-semibold tracking-wide text-creme md:text-5xl"
-          data-split
-        >
-          {product.name}
-        </h1>
-        <div class="mt-5 flex flex-wrap items-center gap-3">
-          {
-            product.signature && (
-              <p class="inline-block bg-or px-4 py-1 text-[0.65rem] font-medium tracking-[0.2em] text-noir uppercase">
-                Unique au monde
-              </p>
-            )
-          }
-          {
-            product.disponible === false && (
-              <p class="inline-block border border-or/40 px-4 py-1 text-[0.65rem] tracking-[0.2em] text-or-light uppercase">
-                Bientôt disponible
-              </p>
-            )
-          }
-        </div>
-      </header>
-
-      <div class="mt-14 grid gap-12 lg:grid-cols-5 lg:gap-16">
-        <!-- Texte + fiche -->
+      <!-- Texte à gauche, fiche technique en regard à droite : plus de vide -->
+      <div class="mt-14 grid items-start gap-12 lg:grid-cols-5 lg:gap-16">
         <div class="lg:col-span-3">
           <div class="space-y-5 leading-relaxed text-creme-muted" data-reveal-group>
             {(product.longText ?? [product.description]).map((paragraphe) => <p>{paragraphe}</p>)}
@@ -126,24 +175,6 @@ const jsonLd = {
             )
           }
 
-          {
-            product.facts && (
-              <div class="mt-12" data-reveal>
-                <h2 class="font-display text-lg tracking-widest text-or uppercase">
-                  Fiche technique
-                </h2>
-                <dl class="mt-6 divide-y divide-or/10 border-y border-or/20">
-                  {Object.entries(product.facts).map(([cle, valeur]) => (
-                    <div class="grid grid-cols-[38%_1fr] gap-4 py-3 text-sm">
-                      <dt class="tracking-widest text-creme/60 uppercase">{cle}</dt>
-                      <dd class="text-creme">{valeur}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-            )
-          }
-
           <div class="mt-12 flex flex-wrap gap-4" data-reveal>
             <a
               href="/#contact"
@@ -153,65 +184,77 @@ const jsonLd = {
               <span class="transition-transform duration-500 group-hover:translate-x-1" aria-hidden="true">→</span>
             </a>
             <a
-              href="/#creations"
+              href="/rhums/"
               class="inline-flex items-center px-6 py-3.5 text-sm tracking-[0.2em] text-creme/70 uppercase transition-colors duration-500 hover:text-or"
             >
-              ← Toutes nos créations
+              ← Tous nos rhums
             </a>
           </div>
         </div>
 
-        <!-- Galerie -->
-        <aside class="space-y-8 lg:col-span-2">
-          {
-            photos.map((photo, i) => (
+        {
+          product.facts && (
+            <aside class="border border-or/20 bg-noir-800/60 p-7 lg:col-span-2" data-reveal>
+              <h2 class="font-display text-lg tracking-widest text-or uppercase">Fiche technique</h2>
+              <dl class="mt-6 divide-y divide-or/10">
+                {Object.entries(product.facts).map(([cle, valeur]) => (
+                  <div class="py-3 text-sm">
+                    <dt class="tracking-widest text-creme/60 uppercase">{cle}</dt>
+                    <dd class="mt-1 text-creme">{valeur}</dd>
+                  </div>
+                ))}
+              </dl>
+            </aside>
+          )
+        }
+      </div>
+
+      <!-- Galerie horizontale sous le contenu -->
+      {
+        (media.galerie.length > 0 || media.video) && (
+          <div class="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-3" data-reveal-group>
+            {media.galerie.map((photo) => (
               <figure data-mask-reveal>
                 <Image
                   src={photo.src}
                   alt={photo.alt}
                   width={760}
                   widths={[420, 760]}
-                  sizes="(min-width: 1024px) 34vw, 92vw"
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                  class="w-full border border-or/20 object-cover"
+                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 92vw"
+                  loading="lazy"
+                  class="aspect-[4/5] w-full border border-or/20 object-cover"
                 />
               </figure>
-            ))
-          }
-
-          {
-            product.slug === 'la-metisse-rhum-blanc' && (
-              <figure data-reveal>
-                <div class="border border-or/20">
-                  <video
-                    src="/videos/cachetage-cire-bleue-la-metisse.mp4"
-                    poster={cireBleue.src}
-                    muted
-                    loop
-                    playsinline
-                    autoplay
-                    preload="none"
-                    class="w-full"
-                    aria-label="Cachetage à la main d'une bouteille La Métisse dans la cire bleue"
-                  />
-                </div>
+            ))}
+            {media.video && (
+              <figure>
+                <video
+                  src="/videos/cachetage-cire-bleue-la-metisse.mp4"
+                  poster={cireBleue.src}
+                  muted
+                  loop
+                  playsinline
+                  autoplay
+                  preload="none"
+                  class="aspect-[4/5] w-full border border-or/20 object-cover"
+                  aria-label="Cachetage à la main d'une bouteille La Métisse dans la cire bleue"
+                />
                 <figcaption class="mt-3 text-center text-xs tracking-[0.2em] text-creme/50 uppercase">
                   Le cachetage à la cire bleue, bouteille par bouteille
                 </figcaption>
               </figure>
-            )
-          }
+            )}
+          </div>
+        )
+      }
 
-          {
-            photos.length === 0 && product.slug === 'rhums-arranges' && (
-              <p class="border border-dashed border-or/25 p-6 text-sm text-creme/50">
-                Photos des rhums arrangés à venir — letchi, passion, banane et épices sont en
-                macération.
-              </p>
-            )
-          }
-        </aside>
-      </div>
+      {
+        product.slug === 'rhums-arranges' && (
+          <p class="mt-16 border border-dashed border-or/25 p-6 text-sm text-creme/50" data-reveal>
+            Photos des rhums arrangés à venir — letchi, passion, banane et épices sont en macération.
+          </p>
+        )
+      }
     </article>
   </main>
 
