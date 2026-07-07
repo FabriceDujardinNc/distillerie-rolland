@@ -67,7 +67,7 @@ export const products: Product[] = [
       'Un rhum blanc traditionnel élaboré à partir de mélasse et affiné par une double distillation, pour un profil franc et aromatique — la base des ti-punch, mojito et daïquiri.',
     available: true,
     longText: [
-      "La Métisse Rhum blanc est élaborée selon la méthode traditionnelle, à partir de mélasse fermentée à l'Habitation La Métisse, à Moindou. Elle subit une double distillation : cette seconde passe dans l'alambic affine l'eau-de-vie, resserre son profil aromatique et lui donne une pureté et une rondeur supérieures à celles d'une distillation simple.",
+      "La Métisse Rhum blanc est élaborée selon la méthode traditionnelle, à partir de mélasse fermentée sur la commune de Moindou. Elle subit une double distillation : cette seconde passe dans l'alambic affine l'eau-de-vie, resserre son profil aromatique et lui donne une pureté et une rondeur supérieures à celles d'une distillation simple.",
       "La distillation s'effectue dans un alambic à cuve inox équipé d'un col de cygne et d'un condenseur en cuivre : le passage du distillat au contact du cuivre catalyse et affine son goût.",
       "Embouteillée à 45 % vol. en Nouvelle-Calédonie, chaque bouteille est cachetée à la main, à la cire — chaque création de la maison portera sa propre couleur de cire et son étiquette.",
       "Son profil franc et aromatique en fait une base de choix pour les cocktails classiques — ti-punch, mojito, daïquiri — comme pour les créations des professionnels du bar.",
