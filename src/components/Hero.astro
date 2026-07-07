@@ -5,7 +5,7 @@
  * rendu immédiatement, GSAP n'anime que des transforms/opacity après coup.
  */
 import { Image } from 'astro:assets';
-import bouteille from '@/assets/images/bouteille-rhum-brun-coeur-de-gaiac-nouvelle-caledonie.jpg';
+import paysage from '@/assets/images/paysage-moindou-collines-distillerie-rolland.jpg';
 import monogrammeOr from '@/assets/images/logo-distillerie-rolland-monogramme-or.png';
 import { site } from '@/data/site';
 ---
@@ -23,19 +23,19 @@ import { site } from '@/data/site';
   class="sticky top-0 z-0 flex min-h-svh flex-col items-center justify-center overflow-hidden px-5 py-24 text-center"
 >
   <!--
-    Image d'ambiance plein écran : lent zoom à l'arrivée,
-    parallax au scroll. Photo provisoire — à remplacer par un visuel
-    haute résolution du client (alambic, fûts, paysage…) au même endroit.
+    Image d'ambiance plein écran : les collines de Moindou (photo du client,
+    haute résolution). Lent zoom à l'arrivée, parallax au scroll.
   -->
   <div class="absolute inset-0 overflow-hidden" aria-hidden="true">
     <Image
-      src={bouteille}
+      src={paysage}
       alt=""
-      width={720}
-      densities={[1]}
+      width={1920}
+      widths={[768, 1280, 1920]}
+      sizes="100vw"
       loading="eager"
       fetchpriority="high"
-      class="h-full w-full scale-110 object-cover object-[center_35%]"
+      class="h-full w-full scale-110 object-cover object-[center_55%]"
       data-hero-zoom
     />
     <!-- Voile sombre : lisibilité du texte + ambiance nocturne premium -->
