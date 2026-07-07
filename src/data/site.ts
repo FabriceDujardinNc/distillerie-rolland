@@ -29,7 +29,7 @@ export const site = {
   social: {
     // À compléter dès que les pages existent — chaque icône du footer (et le
     // sameAs Schema.org) ne s'affiche que si l'URL correspondante est remplie
-    facebook: '',
+    facebook: 'https://www.facebook.com/profile.php?id=61591778339114',
     instagram: 'https://www.instagram.com/distillerierolland/',
     linkedin: '',
   },
