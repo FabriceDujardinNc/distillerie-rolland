@@ -28,17 +28,17 @@ RedirectMatch 404 /\.git
   # 2) MODE PRÉ-LANCEMENT — ⚠️ SUPPRIMER CE BLOC AU LANCEMENT OFFICIEL ⚠️
   #
   # Par défaut, tous les visiteurs voient la page « site en préparation ».
-  # L'URL https://www.distillerie-rolland.com/?acces=gaiac2026 débloque le
+  # L'URL https://www.distillerie-rolland.com/?acces=rhumgaiac débloque le
   # vrai site pour 30 jours (cookie). Le code se change ici (2 occurrences).
   # ------------------------------------------------------------------------
 
   # Le code d'accès dans l'URL pose un cookie d'aperçu
-  RewriteCond %{QUERY_STRING} (^|&)acces=gaiac2026($|&)
+  RewriteCond %{QUERY_STRING} (^|&)acces=rhumgaiac($|&)
   RewriteRule ^ - [E=DR_PREVIEW_OK:1]
 
   # Sans cookie ni code → page teaser (les assets restent accessibles)
-  RewriteCond %{HTTP_COOKIE} !dr_preview=ok
-  RewriteCond %{QUERY_STRING} !(^|&)acces=gaiac2026($|&)
+  RewriteCond %{HTTP_COOKIE} !dr_acces=ok
+  RewriteCond %{QUERY_STRING} !(^|&)acces=rhumgaiac($|&)
   RewriteCond %{REQUEST_URI} !^/en-preparation
   RewriteCond %{REQUEST_URI} !^/_astro/
   # Fichier de validation Google Search Console : toujours accessible
@@ -51,7 +51,7 @@ RedirectMatch 404 /\.git
 
 <IfModule mod_headers.c>
   # Pose le cookie d'aperçu quand le code d'accès est présent (pré-lancement)
-  Header always set Set-Cookie "dr_preview=ok; Path=/; Max-Age=2592000; Secure; SameSite=Lax" env=DR_PREVIEW_OK
+  Header always set Set-Cookie "dr_acces=ok; Path=/; Max-Age=2592000; Secure; SameSite=Lax" env=DR_PREVIEW_OK
 
   # --------------------------------------------------------------------------
   # 3) Sécurité

@@ -38,10 +38,10 @@ Le `.htaccess` sert la page « site en préparation » à tous les visiteurs.
 Le vrai site se débloque (cookie 30 jours) avec :
 
 ```
-https://www.distillerie-rolland.com/?acces=gaiac2026
+https://www.distillerie-rolland.com/?acces=rhumgaiac
 ```
 
-- **Changer le code** : 2 occurrences de `gaiac2026` dans `public/.htaccess`
+- **Changer le code** : 2 occurrences de `rhumgaiac` dans `public/.htaccess`
 - **Lancement officiel** : supprimer le bloc `MODE PRÉ-LANCEMENT` du `.htaccess`,
   puis rebuild + redéployer
 
