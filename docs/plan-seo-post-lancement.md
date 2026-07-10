@@ -52,15 +52,36 @@ Le référencement **démarre réellement au lancement** : tant que le site est 
 
 ---
 
-## 🎯 Requêtes cibles
+## 🎯 Carte complète des requêtes cibles (~25-30 requêtes réalistes)
 
-| Requête | Difficulté | Où on joue |
-|---|---|---|
-| rhum au gaïac / rhum gaïac torréfié | Nulle (personne d'autre au monde) | Position 1 quasi garantie |
-| distillerie Nouvelle-Calédonie | Faible | Site + fiche Google |
-| rhum Nouvelle-Calédonie / rhum calédonien | Faible-moyenne | Site + presse + avis |
-| distillerie Moindou | Nulle | Fiche Google |
-| La Métisse rhum | Marque | Site (déjà optimisé) |
+### 🥇 Monopoles absolus — position 1 quasi mécanique, sous 1-2 semaines
+*Personne d'autre au monde n'a de page sur ces sujets :*
+- rhum au gaïac · rhum gaïac torréfié · alcool au gaïac · rhum vieilli au gaïac
+- premier rhum au gaïac au monde
+- distillerie Moindou · rhum Moindou
+- distillerie Rolland · La Métisse rhum (marque)
+
+### 🟢 Faible concurrence — top 3 visé sous 2-6 semaines
+- distillerie Nouvelle-Calédonie · distillerie artisanale NC
+- rhum Nouvelle-Calédonie · rhum calédonien · rhum made in Calédonie
+- rhum blanc Nouvelle-Calédonie · rhum local NC
+- rhum arrangé Nouvelle-Calédonie (+ letchi, passion, banane)
+
+### 🟡 Dépendantes de la fiche Google Business (zone desservie : Nouméa)
+- distillerie Nouméa · rhum Nouméa (le site mentionne Nouméa, la fiche Maps fera l'essentiel)
+- « distillerie près de moi » depuis la côte ouest
+
+### 🔵 Longue traîne bonus
+- rhum double distillation · méthode traditionnelle mélasse
+- bouteille cachetée à la cire
+- Google Images (toutes les photos sont nommées et balisées)
+
+### 🔮 Semées pour le futur (dès la sortie des produits, une page dédiée = un nouveau monopole)
+- whisky Nouvelle-Calédonie · whisky au gaïac
+- brandy d'hydromel
+
+*Note : volumes de recherche calédoniens modestes mais visiteurs ultra-qualifiés —
+exactement le trafic qui remplit un carnet de commandes B2B.*
 
 ## ⏱️ Attentes réalistes
 
