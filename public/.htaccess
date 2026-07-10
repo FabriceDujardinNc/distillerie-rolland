@@ -39,7 +39,7 @@ RedirectMatch 404 /\.git
   # OUVERTURE AUTOMATIQUE : la barrière expire d'elle-même le 10 juillet 2026
   # à 18h00 heure de Nouméa (= 07h00 UTC, fuseau du serveur) — synchronisée
   # avec le compte à rebours. Après cette heure, le site est public.
-  RewriteCond %{TIME} <20260710070000
+  RewriteCond %{TIME} <20260710000500
   # Sans cookie ni code → page teaser (les assets restent accessibles)
   RewriteCond %{HTTP_COOKIE} !dr_acces=ok
   RewriteCond %{QUERY_STRING} !(^|&)acces=rhumgaiac($|&)
