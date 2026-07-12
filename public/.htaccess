@@ -24,39 +24,9 @@ RedirectMatch 404 /\.git
   RewriteCond %{HTTP_HOST} ^distillerie-rolland\.com$ [NC]
   RewriteRule ^ https://www.distillerie-rolland.com%{REQUEST_URI} [R=301,L]
 
-  # ------------------------------------------------------------------------
-  # 2) MODE PRÉ-LANCEMENT — ⚠️ SUPPRIMER CE BLOC AU LANCEMENT OFFICIEL ⚠️
-  #
-  # Par défaut, tous les visiteurs voient la page « site en préparation ».
-  # L'URL https://www.distillerie-rolland.com/?acces=rhumgaiac débloque le
-  # vrai site pour 30 jours (cookie). Le code se change ici (2 occurrences).
-  # ------------------------------------------------------------------------
-
-  # Le code d'accès dans l'URL pose un cookie d'aperçu
-  RewriteCond %{QUERY_STRING} (^|&)acces=rhumgaiac($|&)
-  RewriteRule ^ - [E=DR_PREVIEW_OK:1]
-
-  # OUVERTURE AUTOMATIQUE : la barrière expire d'elle-même le 10 juillet 2026
-  # à 18h00 heure de Nouméa (= 07h00 UTC, fuseau du serveur) — synchronisée
-  # avec le compte à rebours. Après cette heure, le site est public.
-  RewriteCond %{TIME} <20260710070000
-  # Sans cookie ni code → page teaser (les assets restent accessibles)
-  RewriteCond %{HTTP_COOKIE} !dr_acces=ok
-  RewriteCond %{QUERY_STRING} !(^|&)acces=rhumgaiac($|&)
-  RewriteCond %{REQUEST_URI} !^/en-preparation
-  RewriteCond %{REQUEST_URI} !^/_astro/
-  # Fichier de validation Google Search Console : toujours accessible
-  RewriteCond %{REQUEST_URI} !^/google[0-9a-f]+\.html$
-  RewriteCond %{REQUEST_URI} !\.(css|js|mjs|jpg|jpeg|png|webp|avif|svg|gif|ico|woff2?|ttf|xml|txt|webmanifest)$
-  RewriteRule ^ /en-preparation/index.html [L]
-
-  # ---------------------------- FIN DU BLOC PRÉ-LANCEMENT -------------------
 </IfModule>
 
 <IfModule mod_headers.c>
-  # Pose le cookie d'aperçu quand le code d'accès est présent (pré-lancement)
-  Header always set Set-Cookie "dr_acces=ok; Path=/; Max-Age=2592000; Secure; SameSite=Lax" env=DR_PREVIEW_OK
-
   # --------------------------------------------------------------------------
   # 3) Sécurité
   # --------------------------------------------------------------------------
