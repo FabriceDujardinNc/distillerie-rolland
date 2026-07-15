@@ -18,7 +18,10 @@ import blancVallee from '@/assets/images/rhum-blanc-la-metisse-vallee-moindou.jp
 import blancCoucher from '@/assets/images/rhum-blanc-la-metisse-coucher-de-soleil.jpg';
 import blancPaysage from '@/assets/images/rhum-blanc-la-metisse-paysage-caledonien.jpg';
 import cireBleue from '@/assets/images/cire-bleue-cachetage-la-metisse.jpg';
-import brunBouteille from '@/assets/images/bouteille-rhum-brun-coeur-de-gaiac-nouvelle-caledonie.jpg';
+import brunContreJour from '@/assets/images/rhum-brun-gaiac-bouteilles-contre-jour-acajou.jpg';
+import brunMiseEnBouteille from '@/assets/images/rhum-brun-gaiac-mise-en-bouteille-moindou.jpg';
+import brunRobeDoree from '@/assets/images/rhum-brun-gaiac-robe-doree-soleil.jpg';
+import brunRangees from '@/assets/images/rhum-brun-gaiac-rangees-bouteilles-acajou.jpg';
 
 export function getStaticPaths() {
   return products
@@ -59,12 +62,23 @@ const medias = {
   },
   'la-metisse-rhum-brun-gaiac': {
     hero: {
-      src: brunBouteille,
-      alt: 'Rhum brun au cœur de gaïac torréfié, robe dorée aux reflets rouge acajou',
-      position: 'object-[center_35%]',
+      src: brunContreJour,
+      alt: 'Bouteilles de rhum brun au cœur de gaïac torréfié à contre-jour, robe rouge acajou',
+      position: 'object-[center_45%]',
     },
-    galerie: [],
-    videos: [],
+    galerie: [
+      { src: brunRangees, alt: 'Rangées de bouteilles de rhum brun au gaïac, reflets rouge acajou au soleil — Distillerie Rolland' },
+      { src: brunMiseEnBouteille, alt: 'Mise en bouteille du rhum brun au cœur de gaïac torréfié à Moindou' },
+      { src: brunRobeDoree, alt: 'Robe dorée aux reflets rouge acajou du rhum brun au gaïac dans la lumière' },
+    ],
+    videos: [
+      {
+        src: '/videos/remplissage-rhum-brun-gaiac.mp4',
+        poster: brunRangees.src,
+        caption: 'Le remplissage, bouteille par bouteille',
+        aria: "Remplissage d'une bouteille de rhum brun au cœur de gaïac torréfié",
+      },
+    ],
   },
   'rhums-arranges': { hero: null, galerie: [], videos: [] },
 } as const;

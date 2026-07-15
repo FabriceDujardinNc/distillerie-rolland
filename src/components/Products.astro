@@ -7,18 +7,21 @@
 import { Image } from 'astro:assets';
 import logoMetisse from '@/assets/images/logo-la-metisse-rhum-traditionnel-or.png';
 import blancBouteille from '@/assets/images/rhum-blanc-la-metisse-bouteille-ciel-caledonien.jpg';
+import brunContreJour from '@/assets/images/rhum-brun-gaiac-bouteilles-contre-jour-acajou.jpg';
 import { products } from '@/data/site';
 
 const disponibles = products.filter((p) => p.available);
 const aVenir = products.filter((p) => !p.available);
 
-// Photo de tête de carte, par slug. Le rhum brun n'en a volontairement pas :
-// sa bouteille provisoire figure déjà dans la section gaïac plus haut — la
-// vraie bouteille arrivera bientôt. Les arrangés attendent aussi la leur.
+// Photo de tête de carte, par slug (les arrangés attendent la leur)
 const vignettes: Record<string, { src: ImageMetadata; alt: string }> = {
   'la-metisse-rhum-blanc': {
     src: blancBouteille,
     alt: 'Rhum blanc La Métisse, bouteille cachetée à la cire — Nouvelle-Calédonie',
+  },
+  'la-metisse-rhum-brun-gaiac': {
+    src: brunContreJour,
+    alt: 'Rhum brun au cœur de gaïac torréfié, robe rouge acajou à contre-jour',
   },
 };
 ---

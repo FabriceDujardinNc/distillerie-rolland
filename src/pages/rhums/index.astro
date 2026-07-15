@@ -11,14 +11,19 @@ import Footer from '@/components/Footer.astro';
 import { site, products } from '@/data/site';
 
 import blancBouteille from '@/assets/images/rhum-blanc-la-metisse-bouteille-ciel-caledonien.jpg';
+import brunContreJour from '@/assets/images/rhum-brun-gaiac-bouteilles-contre-jour-acajou.jpg';
 
 const creations = products.filter((p) => p.available && p.slug);
 
-// Le rhum brun attend la photo de sa vraie bouteille ; les arrangés aussi
+// Les arrangés attendent leur photo
 const vignettes: Record<string, { src: ImageMetadata; alt: string }> = {
   'la-metisse-rhum-blanc': {
     src: blancBouteille,
     alt: 'Rhum blanc La Métisse, bouteille cachetée à la cire — Nouvelle-Calédonie',
+  },
+  'la-metisse-rhum-brun-gaiac': {
+    src: brunContreJour,
+    alt: 'Rhum brun au cœur de gaïac torréfié, robe rouge acajou à contre-jour',
   },
 };
 
