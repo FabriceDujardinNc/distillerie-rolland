@@ -16,7 +16,7 @@ import Products from '@/components/Products.astro';
 import Marquee from '@/components/Marquee.astro';
 import Contact from '@/components/Contact.astro';
 import Footer from '@/components/Footer.astro';
-import { site, products } from '@/data/site';
+import { site } from '@/data/site';
 
 const title =
   'Distillerie Rolland — Rhum artisanal au cœur de gaïac | Moindou, Nouvelle-Calédonie';
@@ -58,25 +58,10 @@ const jsonLd = {
         addressCountry: site.address.countryCode,
       },
       areaServed: ['Moindou', 'Nouméa', 'Nouvelle-Calédonie'],
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'Spiritueux de la Distillerie Rolland',
-        itemListElement: products
-          .filter((p) => p.available)
-          .map((p) => ({
-            '@type': 'Offer',
-            availability:
-              p.disponible === false
-                ? 'https://schema.org/PreOrder'
-                : 'https://schema.org/InStock',
-            itemOffered: {
-              '@type': 'Product',
-              name: p.name,
-              description: p.description,
-              brand: { '@type': 'Brand', name: 'La Métisse' },
-            },
-          })),
-      },
+      // Pas de catalogue Product ici : sans prix (choix loi Évin) ni avis,
+      // les entités Product ne sont pas éligibles aux extraits enrichis et
+      // génèrent des erreurs Search Console. Les pages /rhums/… portent le
+      // balisage produit détaillé.
     },
     {
       '@type': 'WebSite',
