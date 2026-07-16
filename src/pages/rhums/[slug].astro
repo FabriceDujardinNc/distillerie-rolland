@@ -21,7 +21,6 @@ import cireBleue from '@/assets/images/cire-bleue-cachetage-la-metisse.jpg';
 import brunContreJour from '@/assets/images/rhum-brun-gaiac-bouteilles-contre-jour-acajou.jpg';
 import brunMiseEnBouteille from '@/assets/images/rhum-brun-gaiac-mise-en-bouteille-moindou.jpg';
 import brunRobeDoree from '@/assets/images/rhum-brun-gaiac-robe-doree-soleil.jpg';
-import brunRangees from '@/assets/images/rhum-brun-gaiac-rangees-bouteilles-acajou.jpg';
 
 export function getStaticPaths() {
   return products
@@ -67,14 +66,13 @@ const medias = {
       position: 'object-[center_45%]',
     },
     galerie: [
-      { src: brunRangees, alt: 'Rangées de bouteilles de rhum brun au gaïac, reflets rouge acajou au soleil — Distillerie Rolland' },
       { src: brunMiseEnBouteille, alt: 'Mise en bouteille du rhum brun au cœur de gaïac torréfié à Moindou' },
       { src: brunRobeDoree, alt: 'Robe dorée aux reflets rouge acajou du rhum brun au gaïac dans la lumière' },
     ],
     videos: [
       {
         src: '/videos/remplissage-rhum-brun-gaiac.mp4',
-        poster: brunRangees.src,
+        poster: brunContreJour.src,
         caption: 'Le remplissage, bouteille par bouteille',
         aria: "Remplissage d'une bouteille de rhum brun au cœur de gaïac torréfié",
       },
