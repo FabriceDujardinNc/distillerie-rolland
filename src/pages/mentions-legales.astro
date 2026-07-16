@@ -40,7 +40,11 @@ const mailtoAdresse = `mailto:${site.email}?subject=${encodeURIComponent(
         <p class="mt-3">
           {site.name}<br />
           {site.address.postalCode}&nbsp;{site.address.locality}, {site.address.country}<br />
-          Téléphone : <a href={`tel:${site.phoneHref}`} class="text-or underline decoration-or/40 underline-offset-4 hover:decoration-or">{site.phone}</a><br />
+          {site.phone && (
+            <>
+              Téléphone : <a href={`tel:${site.phoneHref}`} class="text-or underline decoration-or/40 underline-offset-4 hover:decoration-or">{site.phone}</a><br />
+            </>
+          )}
           Email : <a href={`mailto:${site.email}`} class="text-or underline decoration-or/40 underline-offset-4 hover:decoration-or">{site.email}</a><br />
           RIDET : 1500.271
         </p>

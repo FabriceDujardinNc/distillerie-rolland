@@ -37,7 +37,7 @@ const jsonLd = {
       description: site.description,
       slogan: site.tagline,
       url: `${site.domain}/`,
-      telephone: site.phoneHref,
+      ...(site.phoneHref && { telephone: site.phoneHref }),
       email: site.email,
       image: `${site.domain}/images/og-distillerie-rolland.jpg`,
       priceRange: '$$',

@@ -33,15 +33,19 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_ACC
     <div class="mt-16 grid gap-12 md:grid-cols-5 md:gap-16">
       <!-- Coordonnées -->
       <address class="space-y-8 not-italic md:col-span-2" data-reveal-group>
-        <div>
-          <p class="text-xs tracking-[0.3em] text-or uppercase">Téléphone</p>
-          <a
-            href={`tel:${site.phoneHref}`}
-            class="mt-2 inline-block text-lg text-creme transition-colors hover:text-or"
-          >
-            {site.phone}
-          </a>
-        </div>
+        {
+          site.phone && (
+            <div>
+              <p class="text-xs tracking-[0.3em] text-or uppercase">Téléphone</p>
+              <a
+                href={`tel:${site.phoneHref}`}
+                class="mt-2 inline-block text-lg text-creme transition-colors hover:text-or"
+              >
+                {site.phone}
+              </a>
+            </div>
+          )
+        }
         <div>
           <p class="text-xs tracking-[0.3em] text-or uppercase">Email</p>
           <a
