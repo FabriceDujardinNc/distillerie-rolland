@@ -19,8 +19,10 @@ import blancCoucher from '@/assets/images/rhum-blanc-la-metisse-coucher-de-solei
 import blancPaysage from '@/assets/images/rhum-blanc-la-metisse-paysage-caledonien.jpg';
 import cireBleue from '@/assets/images/cire-bleue-cachetage-la-metisse.jpg';
 import brunContreJour from '@/assets/images/rhum-brun-gaiac-bouteilles-contre-jour-acajou.jpg';
-import brunMiseEnBouteille from '@/assets/images/rhum-brun-gaiac-mise-en-bouteille-moindou.jpg';
-import brunRobeDoree from '@/assets/images/rhum-brun-gaiac-robe-doree-soleil.jpg';
+import brunEtiquette from '@/assets/images/rhum-brun-gaiac-la-metisse-robe-acajou-etiquette.jpg';
+import brunHerbe from '@/assets/images/rhum-brun-gaiac-la-metisse-bouteille-herbe.jpg';
+import brunJungle from '@/assets/images/rhum-brun-gaiac-la-metisse-ambiance-jungle.jpg';
+import brunLagon from '@/assets/images/rhum-brun-gaiac-la-metisse-terrasse-lagon.jpg';
 
 export function getStaticPaths() {
   return products
@@ -61,13 +63,14 @@ const medias = {
   },
   'la-metisse-rhum-brun-gaiac': {
     hero: {
-      src: brunContreJour,
-      alt: 'Bouteilles de rhum brun au cœur de gaïac torréfié à contre-jour, robe rouge acajou',
-      position: 'object-[center_45%]',
+      src: brunEtiquette,
+      alt: 'Bouteille La Métisse rhum brun au cœur de gaïac torréfié, robe rouge acajou — Nouvelle-Calédonie',
+      position: 'object-[center_42%]',
     },
     galerie: [
-      { src: brunMiseEnBouteille, alt: 'Mise en bouteille du rhum brun au cœur de gaïac torréfié à Moindou' },
-      { src: brunRobeDoree, alt: 'Robe dorée aux reflets rouge acajou du rhum brun au gaïac dans la lumière' },
+      { src: brunHerbe, alt: 'Bouteille La Métisse rhum brun, cachetée à la cire, dans la nature calédonienne' },
+      { src: brunJungle, alt: 'La Métisse rhum brun au cœur de gaïac au milieu de la végétation tropicale' },
+      { src: brunLagon, alt: 'La Métisse rhum brun face au lagon — rhum de Nouvelle-Calédonie' },
     ],
     videos: [
       {

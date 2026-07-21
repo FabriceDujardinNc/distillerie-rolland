@@ -7,7 +7,7 @@
 import { Image } from 'astro:assets';
 import logoMetisse from '@/assets/images/logo-la-metisse-rhum-traditionnel-or.png';
 import blancBouteille from '@/assets/images/rhum-blanc-la-metisse-bouteille-ciel-caledonien.jpg';
-import brunContreJour from '@/assets/images/rhum-brun-gaiac-bouteilles-contre-jour-acajou.jpg';
+import brunEtiquette from '@/assets/images/rhum-brun-gaiac-la-metisse-robe-acajou-etiquette.jpg';
 import { products } from '@/data/site';
 
 const disponibles = products.filter((p) => p.available);
@@ -20,8 +20,8 @@ const vignettes: Record<string, { src: ImageMetadata; alt: string }> = {
     alt: 'Rhum blanc La Métisse, bouteille cachetée à la cire — Nouvelle-Calédonie',
   },
   'la-metisse-rhum-brun-gaiac': {
-    src: brunContreJour,
-    alt: 'Rhum brun au cœur de gaïac torréfié, robe rouge acajou à contre-jour',
+    src: brunEtiquette,
+    alt: 'Bouteille La Métisse rhum brun au cœur de gaïac torréfié, robe rouge acajou',
   },
 };
 ---
