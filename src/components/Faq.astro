@@ -1,0 +1,70 @@
+---
+/**
+ * Questions fréquentes : contenu SEO ciblant les recherches locales
+ * (« distillerie Nouvelle-Calédonie », « distillerie Nouméa ») avec
+ * balisage FAQPage. Ton informatif — pas d'incitation à l'achat.
+ */
+const questions = [
+  {
+    q: 'Où se trouve la Distillerie Rolland ?',
+    a: "La distillerie est installée à Moindou, commune de la côte ouest de la Nouvelle-Calédonie, à environ une heure et demie de route de Nouméa. L'adresse complète est communiquée sur demande par email.",
+  },
+  {
+    q: 'Peut-on visiter la distillerie ?',
+    a: 'Les visites et dégustations sont réservées aux professionnels — bars, restaurants, cavistes — sur rendez-vous, via le formulaire de contact.',
+  },
+  {
+    q: "Qu'est-ce qui rend cette distillerie calédonienne unique ?",
+    a: "C'est la première distillerie au monde à faire vieillir un rhum au cœur de gaïac torréfié, un bois emblématique de la Nouvelle-Calédonie. Tous les rhums La Métisse sont élaborés à Moindou selon la méthode traditionnelle et affinés par une double distillation.",
+  },
+  {
+    q: 'Où découvrir les rhums La Métisse en Nouvelle-Calédonie ?',
+    a: 'La première collection est présentée aux professionnels calédoniens, de Nouméa à la côte ouest. Les établissements intéressés peuvent nous écrire pour organiser une présentation.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: questions.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+---
+
+<section id="faq" class="relative z-10 border-t border-or/10 bg-noir py-24 md:py-32">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <div class="mx-auto max-w-3xl px-5 md:px-8">
+    <div class="text-center">
+      <p class="mb-4 text-xs tracking-[0.35em] text-or uppercase">En pratique</p>
+      <h2
+        class="font-display text-balance text-3xl font-semibold tracking-wide text-creme md:text-4xl"
+        data-split
+      >
+        Questions <span class="text-or">fréquentes</span>
+      </h2>
+    </div>
+
+    <div class="mt-12" data-reveal-group>
+      {
+        questions.map(({ q, a }) => (
+          <details class="faq-item group border-b border-or/15">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left text-creme transition-colors hover:text-or [&::-webkit-details-marker]:hidden">
+              <span class="text-base font-medium tracking-wide md:text-lg">{q}</span>
+              <span
+                class="shrink-0 text-xl text-or transition-transform duration-300 group-open:rotate-45"
+                aria-hidden="true"
+              >
+                +
+              </span>
+            </summary>
+            <p class="pb-6 leading-relaxed text-creme-muted">{a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
