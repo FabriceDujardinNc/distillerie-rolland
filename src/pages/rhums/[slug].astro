@@ -89,6 +89,19 @@ const imagesLd = [
   ...media.galerie.map((g) => g.src),
 ].map((img) => new URL(img.src, site.domain).href);
 
+// Balisage VideoObject : sans lui, Google traite les <video> de la galerie
+// comme du décor et ne les indexe pas (rapport « Vidéo indexée » de la GSC).
+// uploadDate = date de lancement du site, où ces vidéos ont été publiées.
+const videosLd = media.videos.map((v) => ({
+  '@type': 'VideoObject',
+  name: v.caption,
+  description: v.aria,
+  contentUrl: new URL(v.src, site.domain).href,
+  thumbnailUrl: new URL(v.poster, site.domain).href,
+  uploadDate: '2026-07-10',
+  inLanguage: 'fr',
+}));
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -101,6 +114,7 @@ const jsonLd = {
       countryOfOrigin: 'NC',
       ...(imagesLd.length > 0 && { image: imagesLd }),
     },
+    ...videosLd,
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
