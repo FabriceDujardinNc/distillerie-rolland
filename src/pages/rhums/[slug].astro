@@ -18,11 +18,11 @@ import blancVallee from '@/assets/images/rhum-blanc-la-metisse-vallee-moindou.jp
 import blancCoucher from '@/assets/images/rhum-blanc-la-metisse-coucher-de-soleil.jpg';
 import blancPaysage from '@/assets/images/rhum-blanc-la-metisse-paysage-caledonien.jpg';
 import cireBleue from '@/assets/images/cire-bleue-cachetage-la-metisse.jpg';
-import brunContreJour from '@/assets/images/rhum-brun-gaiac-bouteilles-contre-jour-acajou.jpg';
-import brunEtiquette from '@/assets/images/rhum-brun-gaiac-la-metisse-robe-acajou-etiquette.jpg';
-import brunHerbe from '@/assets/images/rhum-brun-gaiac-la-metisse-bouteille-herbe.jpg';
-import brunJungle from '@/assets/images/rhum-brun-gaiac-la-metisse-ambiance-jungle.jpg';
-import brunLagon from '@/assets/images/rhum-brun-gaiac-la-metisse-terrasse-lagon.jpg';
+import brunBrousse from '@/assets/images/rhum-brun-gaiac-la-metisse-brousse-caledonienne.jpg';
+import brunCollines from '@/assets/images/rhum-brun-gaiac-la-metisse-collines-cote-ouest.jpg';
+import brunCiel from '@/assets/images/rhum-brun-gaiac-la-metisse-ciel-caledonien.jpg';
+import brunRobeAmbree from '@/assets/images/rhum-brun-gaiac-la-metisse-robe-ambree-ciel.jpg';
+import brunFleurs from '@/assets/images/rhum-brun-gaiac-la-metisse-fleurs-sauvages.jpg';
 
 export function getStaticPaths() {
   return products
@@ -63,19 +63,19 @@ const medias = {
   },
   'la-metisse-rhum-brun-gaiac': {
     hero: {
-      src: brunEtiquette,
-      alt: 'Bouteille La Métisse rhum brun au cœur de gaïac torréfié, robe rouge acajou — Nouvelle-Calédonie',
-      position: 'object-[center_42%]',
+      src: brunBrousse,
+      alt: 'Bouteille La Métisse rhum brun au cœur de gaïac torréfié dans la brousse calédonienne',
+      position: 'object-[center_55%]',
     },
     galerie: [
-      { src: brunHerbe, alt: 'Bouteille La Métisse rhum brun, cachetée à la cire, dans la nature calédonienne' },
-      { src: brunJungle, alt: 'La Métisse rhum brun au cœur de gaïac au milieu de la végétation tropicale' },
-      { src: brunLagon, alt: 'La Métisse rhum brun face au lagon — rhum de Nouvelle-Calédonie' },
+      { src: brunCollines, alt: 'La Métisse rhum brun au gaïac devant les collines de la côte ouest, Nouvelle-Calédonie' },
+      { src: brunCiel, alt: 'Rhum brun La Métisse, robe ambrée sous le ciel de Nouvelle-Calédonie' },
+      { src: brunRobeAmbree, alt: 'Reflets ambrés du rhum brun au cœur de gaïac torréfié La Métisse' },
     ],
     videos: [
       {
         src: '/videos/remplissage-rhum-brun-gaiac.mp4',
-        poster: brunContreJour.src,
+        poster: brunFleurs.src,
         caption: 'Le remplissage, bouteille par bouteille',
         aria: "Remplissage d'une bouteille de rhum brun au cœur de gaïac torréfié",
       },
