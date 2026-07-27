@@ -1,0 +1,195 @@
+---
+/**
+ * Page savoir « Le gaïac » : contenu éditorial sur l'arbre (Acacia spirorbis),
+ * son bois et sa place dans la pharmacopée traditionnelle kanak.
+ * Prudence légale : les usages traditionnels concernent LA PLANTE, jamais le
+ * rhum — aucune allégation de santé ne doit être associée à l'alcool
+ * (loi Évin / réglementation NC). L'encadré d'avertissement est obligatoire.
+ * SEO : cible les requêtes informationnelles (faux gaïac, acacia spirorbis,
+ * gaïac Nouvelle-Calédonie) et renforce l'autorité thématique du site.
+ */
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import AgeGate from '@/components/AgeGate.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { site } from '@/data/site';
+import brunJungle from '@/assets/images/rhum-brun-gaiac-la-metisse-ambiance-jungle.jpg';
+
+const title = 'Le gaïac de Nouvelle-Calédonie (Acacia spirorbis) — arbre, bois et tradition | Distillerie Rolland';
+const description =
+  "Le faux gaïac (Acacia spirorbis), arbre emblématique de la brousse calédonienne : un bois dense et durable, une place dans la pharmacopée traditionnelle kanak, et le cœur torréfié qui signe le rhum brun La Métisse.";
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Article',
+      headline: 'Le gaïac de Nouvelle-Calédonie (Acacia spirorbis) : un arbre pas comme les autres',
+      description,
+      inLanguage: 'fr-FR',
+      author: { '@id': `${site.domain}/#distillerie` },
+      publisher: { '@id': `${site.domain}/#distillerie` },
+      mainEntityOfPage: `${site.domain}/le-gaiac/`,
+      about: [
+        { '@type': 'Thing', name: 'Acacia spirorbis (faux gaïac)' },
+        { '@type': 'Place', name: 'Nouvelle-Calédonie' },
+      ],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${site.domain}/` },
+        { '@type': 'ListItem', position: 2, name: 'Le gaïac' },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} path="/le-gaiac/">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
+
+  <AgeGate />
+  <Header />
+
+  <main class="bg-grain min-h-svh pt-28 pb-24 md:pt-36">
+    <article class="mx-auto max-w-6xl px-5 md:px-8">
+      <nav aria-label="Fil d'Ariane" class="text-xs tracking-[0.2em] text-creme/50 uppercase">
+        <a href="/" class="transition-colors hover:text-or">Accueil</a>
+        <span class="mx-2" aria-hidden="true">/</span>
+        <span class="text-creme/70">Le gaïac</span>
+      </nav>
+
+      <header class="mt-10 max-w-3xl">
+        <p class="mb-4 text-xs tracking-[0.35em] text-or uppercase">Savoir &amp; tradition</p>
+        <h1
+          class="font-display text-balance text-3xl font-semibold tracking-wide text-creme md:text-5xl"
+          data-split
+        >
+          Le gaïac de Nouvelle-Calédonie, <span class="text-or">un arbre pas comme les autres</span>
+        </h1>
+        <p class="mt-6 leading-relaxed text-creme-muted">
+          Derrière le rhum brun La Métisse, il y a un arbre : le faux gaïac
+          (<em>Acacia spirorbis</em>), que l'on appelle simplement « gaïac » sur le Caillou.
+          Bois de brousse, bois de stockmen, bois de tradition — voici son histoire.
+        </p>
+      </header>
+
+      <div class="mt-14 grid items-start gap-12 lg:grid-cols-5 lg:gap-16">
+        <div class="space-y-12 lg:col-span-3">
+          <section data-reveal-group>
+            <h2 class="font-display text-xl tracking-widest text-or uppercase">
+              Un bois emblématique du Caillou
+            </h2>
+            <p class="mt-5 leading-relaxed text-creme-muted">
+              Le gaïac calédonien pousse en abondance dans la brousse de la côte ouest, celle-là
+              même qui entoure la distillerie à Moindou. Son bois, d'une densité et d'une dureté
+              remarquables, résiste au temps comme peu d'essences au monde : c'est lui que les
+              stockmen choisissent depuis des générations pour les piquets de clôture et les
+              poteaux des stations d'élevage, plantés en terre pour des décennies.
+            </p>
+            <p class="mt-4 leading-relaxed text-creme-muted">
+              À ne pas confondre avec le gaïac officinal des Caraïbes (<em>Guaiacum
+              officinale</em>) : le « faux gaïac » du Pacifique est un acacia, dont le nom
+              vernaculaire varie d'une région à l'autre de la Nouvelle-Calédonie. C'est ce bois
+              d'ici, dense et aromatique, que la maison a choisi de torréfier.
+            </p>
+          </section>
+
+          <section data-reveal-group>
+            <h2 class="font-display text-xl tracking-widest text-or uppercase">
+              Dans la pharmacopée traditionnelle kanak
+            </h2>
+            <p class="mt-5 leading-relaxed text-creme-muted">
+              Le faux gaïac occupe une place bien documentée dans la pharmacopée traditionnelle
+              kanak. Les usages diffèrent selon les clans et les îles, mais l'arbre est
+              notamment employé en décoction ou en infusion, dans des remèdes traditionnels
+              contre la gratte (ciguatera) et certains maux de reins.
+            </p>
+            <p class="mt-4 leading-relaxed text-creme-muted">
+              La tradition orale lui attribue aussi d'autres propriétés : apaiser les douleurs
+              et courbatures, aider à lutter contre les états fébriles, favoriser la
+              récupération après une maladie, redonner des forces en tonique général, ou encore
+              soulager certains troubles digestifs. Un patrimoine vivant, transmis de
+              génération en génération, qui dit la place singulière de cet arbre dans la
+              culture du pays.
+            </p>
+
+            <aside
+              class="mt-8 border border-or/25 bg-noir-800/60 p-6 text-sm leading-relaxed text-creme/70"
+              role="note"
+            >
+              <p class="font-medium tracking-[0.15em] text-or-light uppercase">À lire avant tout</p>
+              <p class="mt-3">
+                Ces usages appartiennent à la tradition orale kanak et sont rapportés ici à
+                titre culturel et documentaire uniquement. Ils ne constituent ni un conseil
+                médical, ni une allégation de santé — et ils concernent la plante, en aucun
+                cas nos rhums. Le rhum est une boisson alcoolisée qui ne possède aucune vertu
+                thérapeutique. L'abus d'alcool est dangereux pour la santé, à consommer avec
+                modération.
+              </p>
+            </aside>
+          </section>
+
+          <section data-reveal-group>
+            <h2 class="font-display text-xl tracking-widest text-or uppercase">
+              Et dans nos rhums&nbsp;?
+            </h2>
+            <p class="mt-5 leading-relaxed text-creme-muted">
+              À la distillerie, le gaïac intervient pour ce qu'il fait de mieux : son bois.
+              Torréfié puis mis au contact de notre eau-de-vie de mélasse double distillation,
+              le cœur de gaïac transmet au rhum brun La Métisse sa robe dorée aux reflets
+              rouge acajou et ses notes boisées profondes — une première mondiale, née de la
+              rencontre entre un arbre du pays et un savoir-faire de distillateur.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-4">
+              <a
+                href="/rhums/la-metisse-rhum-brun-gaiac/"
+                class="group inline-flex items-center gap-3 border border-or bg-or/10 px-8 py-3.5 text-sm tracking-[0.2em] text-or uppercase transition-all duration-500 hover:bg-or hover:text-noir"
+              >
+                Le rhum brun au gaïac
+                <span class="transition-transform duration-500 group-hover:translate-x-1" aria-hidden="true">→</span>
+              </a>
+              <a
+                href="/rhums/"
+                class="inline-flex items-center px-6 py-3.5 text-sm tracking-[0.2em] text-creme/70 uppercase transition-colors duration-500 hover:text-or"
+              >
+                Tous nos rhums
+              </a>
+            </div>
+          </section>
+        </div>
+
+        <div class="relative mx-auto w-full max-w-sm lg:col-span-2" data-mask-reveal>
+          <div class="overflow-hidden rounded-t-full border border-or/25 p-3">
+            <Image
+              src={brunJungle}
+              alt="Bouteille La Métisse rhum brun au cœur de gaïac torréfié au milieu de la végétation calédonienne"
+              width={680}
+              widths={[400, 680]}
+              sizes="(min-width: 1024px) 24rem, 88vw"
+              class="aspect-[9/16] w-full rounded-t-full object-cover"
+              data-parallax-img
+            />
+          </div>
+          <p class="mt-5 text-center text-xs tracking-[0.3em] text-creme/50 uppercase">
+            Un bois d'ici, un goût d'ailleurs
+          </p>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <Footer />
+
+  <script>
+    import '@/scripts/essentials.ts';
+    const loadAnimations = () => import('@/scripts/animations.ts');
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => loadAnimations(), { timeout: 1500 });
+    } else {
+      setTimeout(loadAnimations, 250);
+    }
+  </script>
+</BaseLayout>
