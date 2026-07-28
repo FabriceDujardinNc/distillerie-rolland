@@ -89,7 +89,7 @@ export const products: Product[] = [
     name: 'La Métisse — Rhum brun au cœur de gaïac torréfié',
     category: 'Rhum brun',
     slug: 'la-metisse-rhum-brun-gaiac',
-    disponible: false,
+    disponible: true,
     description:
       "Une exclusivité mondiale : le premier alcool vieilli au contact du cœur de gaïac torréfié, bois emblématique de Nouvelle-Calédonie. Issu d'une double distillation.",
     notes: 'Robe dorée aux reflets rouge acajou, notes boisées profondes.',
