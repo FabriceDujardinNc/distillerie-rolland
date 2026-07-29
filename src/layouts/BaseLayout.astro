@@ -11,6 +11,7 @@ import '@fontsource-variable/jost';
 import '@fontsource/great-vibes';
 import '@/styles/global.css';
 import cinzel600Url from '@fontsource/cinzel/files/cinzel-latin-600-normal.woff2?url';
+import jostUrl from '@fontsource-variable/jost/files/jost-latin-wght-normal.woff2?url';
 import { site } from '@/data/site';
 
 interface Props {
@@ -74,8 +75,11 @@ const ogImageUrl = new URL(ogImage, site.domain).href;
     <meta name="theme-color" content="#0c0a08" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <!-- Preload de la police des titres : le H1 du hero est le LCP -->
+    <!-- Preload des deux polices critiques : Cinzel (H1 du hero = LCP)
+         et Jost (corps de texte) — les maillons les plus lents de la
+         chaîne critique relevés par Lighthouse -->
     <link rel="preload" as="font" type="font/woff2" href={cinzel600Url} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={jostUrl} crossorigin />
 
     <slot name="head" />
   </head>

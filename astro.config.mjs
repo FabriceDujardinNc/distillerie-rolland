@@ -32,7 +32,10 @@ export default defineConfig({
     },
   },
   build: {
-    // Inline les petits assets CSS pour réduire les requêtes bloquantes
-    inlineStylesheets: 'auto',
+    // « always » et non « auto » : le seuil d'« auto » est assetsInlineLimit,
+    // que l'on force à 0 pour la CSP — « auto » n'inlinerait donc plus rien.
+    // Le CSS (~12 Kio) part dans le HTML : zéro requête bloquant le rendu.
+    // La CSP autorise style-src 'unsafe-inline' (requis aussi par hCaptcha).
+    inlineStylesheets: 'always',
   },
 });
