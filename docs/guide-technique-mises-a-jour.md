@@ -122,7 +122,20 @@ Dans les deux cas, exigez du prestataire qu'il travaille **via GitHub** (jamais 
 
 Mode d'emploi condensé à remettre au prestataire qui interviendra. Prérequis : Node.js 24+, npm, Git, un accès au dépôt GitHub et les accès Hostinger (SSH).
 
-### A. Récupérer le projet (première fois uniquement)
+### A. Configuration initiale du poste (première fois uniquement)
+
+Avant toute chose, le poste du développeur doit être configuré :
+
+1. **Accès au dépôt GitHub** : le propriétaire du dépôt doit inviter le compte GitHub du prestataire en **collaborateur** (Settings → Collaborators sur le dépôt) — sans droit d'écriture, impossible de pousser des modifications ou de déployer.
+2. **Authentification GitHub sur le poste** : une clé SSH liée au compte GitHub, ou un token d'accès personnel (PAT) enregistré dans le gestionnaire d'identifiants Git. C'est ce qui permet `git push` **et** `npm run deploy` (le script pousse la branche `production` sur GitHub).
+3. **Identité Git** :
+   ```bash
+   git config --global user.name "Prénom Nom"
+   git config --global user.email "email@exemple.nc"
+   ```
+4. **Node.js 24+** (idéalement via nvm) et npm.
+
+Puis récupérer le projet :
 
 ```bash
 git clone https://github.com/FabriceDujardinNc/distillerie-rolland.git
