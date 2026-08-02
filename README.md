@@ -59,7 +59,8 @@ npm run deploy   # build + push de dist/ sur la branche production
 ### Sur le serveur — récupérer la mise à jour
 
 ```bash
-ssh -p 65002 u387386676@153.92.8.133
+# identifiants SSH : panneau Hostinger → Avancé → Accès SSH
+ssh -p <port> <utilisateur>@<serveur>
 cd ~/domains/distillerie-rolland.com/public_html
 git fetch origin production && git reset --hard origin/production
 ```
