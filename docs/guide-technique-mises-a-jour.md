@@ -177,13 +177,18 @@ git commit -m "Description claire de la modification"
 git push origin main
 ```
 
-### E. Déployer en production
+### E. Publier le build sur GitHub
 
 ```bash
 npm run deploy     # compile et pousse la branche « production » sur GitHub
 ```
 
-Puis, sur le serveur Hostinger (identifiants SSH dans le panneau Hostinger — port 65002) :
+> ⚠ À ce stade, **le site en ligne n'a pas encore changé** : le build est
+> seulement prêt sur GitHub. C'est l'étape F qui met à jour Hostinger.
+
+### F. Mettre en ligne sur le serveur Hostinger (obligatoire)
+
+Se connecter en SSH (identifiants dans le panneau Hostinger → Avancé → Accès SSH — port 65002) et récupérer la nouvelle version :
 
 ```bash
 ssh -p 65002 <utilisateur>@<serveur>
@@ -192,7 +197,9 @@ git fetch origin production
 git reset --hard origin/production
 ```
 
-### F. Contrôler
+Le site est mis à jour instantanément dès le `git reset` terminé.
+
+### G. Contrôler
 
 - Ouvrir https://www.distillerie-rolland.com/ (vider le cache si besoin : Ctrl+Maj+R) et vérifier la modification sur mobile et desktop.
 - Si des contenus indexables ont changé : Google Search Console → Inspection d'URL → « Demander une indexation ».
