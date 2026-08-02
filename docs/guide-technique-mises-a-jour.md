@@ -1,6 +1,6 @@
 # Site distillerie-rolland.com — Guide technique des mises à jour
 
-**Document de passation** — Distillerie Rolland · rédigé par Pacific Pro Web · août 2026
+**Document de passation** — Distillerie Rolland · rédigé par Fabrice Dujardin · août 2026
 
 Ce document explique comment le site est construit et ce qu'implique concrètement **toute modification** (changer un texte, une photo, ajouter une page…). Il sert de référence pour vous-même ou pour tout prestataire qui interviendrait sur le site à l'avenir.
 
