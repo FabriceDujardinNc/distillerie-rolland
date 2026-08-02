@@ -118,4 +118,72 @@ Dans les deux cas, exigez du prestataire qu'il travaille **via GitHub** (jamais 
 
 ---
 
+## 7. Annexe — procédure pas à pas (pour un développeur)
+
+Mode d'emploi condensé à remettre au prestataire qui interviendra. Prérequis : Node.js 24+, npm, Git, un accès au dépôt GitHub et les accès Hostinger (SSH).
+
+### A. Récupérer le projet (première fois uniquement)
+
+```bash
+git clone https://github.com/FabriceDujardinNc/distillerie-rolland.git
+cd distillerie-rolland
+npm install
+```
+
+### B. Travailler en local
+
+```bash
+npm run dev        # serveur de développement → http://localhost:4321
+```
+
+Où se trouve quoi :
+
+| Contenu à modifier | Fichier(s) |
+|---|---|
+| Textes produits, coordonnées, réseaux sociaux, disponibilité | `src/data/site.ts` (source unique de vérité) |
+| Sections de la page d'accueil (hero, distillerie, gaïac, contact…) | `src/components/*.astro` |
+| Pages (produits, gaïac, mentions légales, 404…) | `src/pages/` |
+| Images (à retraiter : WebP, EXIF supprimés, noms SEO) | `src/assets/images/` |
+| Vidéos | `public/videos/` |
+| Sécurité serveur, redirections, cache | `public/.htaccess` |
+
+⚠ Pièges connus du projet : jamais de classe `transition-all` sur un élément animé par GSAP (contenu invisible) · attention aux espaces avalés par Astro avant les expressions `{...}` (utiliser `&nbsp;`) · tout nouveau texte doit rester conforme à la réglementation NC sur l'alcool.
+
+### C. Compiler et vérifier
+
+```bash
+npm run build      # doit se terminer sans erreur
+npm run preview    # vérifier le rendu final en local
+```
+
+### D. Versionner
+
+```bash
+git add -A
+git commit -m "Description claire de la modification"
+git push origin main
+```
+
+### E. Déployer en production
+
+```bash
+npm run deploy     # compile et pousse la branche « production » sur GitHub
+```
+
+Puis, sur le serveur Hostinger (identifiants SSH dans le panneau Hostinger — port 65002) :
+
+```bash
+ssh -p 65002 <utilisateur>@<serveur>
+cd ~/domains/distillerie-rolland.com/public_html
+git fetch origin production
+git reset --hard origin/production
+```
+
+### F. Contrôler
+
+- Ouvrir https://www.distillerie-rolland.com/ (vider le cache si besoin : Ctrl+Maj+R) et vérifier la modification sur mobile et desktop.
+- Si des contenus indexables ont changé : Google Search Console → Inspection d'URL → « Demander une indexation ».
+
+---
+
 *Document remis à titre de passation technique. Le code source du site, propriété de la Distillerie Rolland, est intégralement versionné sur GitHub avec l'historique de sa construction.*
