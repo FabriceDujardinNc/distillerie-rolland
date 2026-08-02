@@ -120,7 +120,19 @@ Dans les deux cas, exigez du prestataire qu'il travaille **via GitHub** (jamais 
 
 ## 7. Annexe — procédure pas à pas (pour un développeur)
 
-Mode d'emploi condensé à remettre au prestataire qui interviendra. Prérequis : Node.js 24+, npm, Git, un accès au dépôt GitHub et les accès Hostinger (SSH).
+Mode d'emploi condensé à remettre au prestataire qui interviendra.
+
+### Prérequis — logiciels à installer sur le poste
+
+| Logiciel | Version / détail |
+|---|---|
+| **Node.js** | 24 ou supérieure (recommandé : installation via nvm / nvm-windows) — inclut npm |
+| **Git** | Dernière version stable |
+| **Éditeur de code** | VS Code recommandé (extensions utiles : Astro, Tailwind CSS IntelliSense) |
+| **Client SSH** | Inclus dans Windows 10+/macOS/Linux (commande `ssh` dans le terminal) |
+| Divers | ~500 Mo d'espace disque (projet + dépendances), connexion internet |
+
+Fonctionne sous Windows, macOS ou Linux — le projet a été développé sous Windows/WSL.
 
 ### A. Configuration initiale du poste (première fois uniquement)
 
