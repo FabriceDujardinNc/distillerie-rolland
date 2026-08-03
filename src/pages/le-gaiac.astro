@@ -16,6 +16,7 @@ import Footer from '@/components/Footer.astro';
 import { site } from '@/data/site';
 import feuillageGaiac from '@/assets/images/feuillage-gaiac-acacia-spirorbis-ciel-caledonien.jpg';
 import arbreGaiac from '@/assets/images/arbre-gaiac-brousse-cote-ouest-nouvelle-caledonie.jpg';
+import troncGaiac from '@/assets/images/tronc-gaiac-acacia-spirorbis-distillerie-rolland.jpg';
 
 const title = 'Le gaïac de Nouvelle-Calédonie (Acacia spirorbis) — arbre, bois et tradition | Distillerie Rolland';
 const description =
@@ -193,6 +194,23 @@ const jsonLd = {
           <p class="mt-5 text-center text-xs tracking-[0.3em] text-creme/50 uppercase">
             Un bois d'ici, un goût d'ailleurs
           </p>
+
+          <figure class="mt-12" data-mask-reveal>
+            <div class="overflow-hidden border border-or/25 p-3">
+              <Image
+                src={troncGaiac}
+                alt="Tronc et écorce d'un gaïac (Acacia spirorbis), le bois dense torréfié pour le rhum brun de la Distillerie Rolland"
+                width={680}
+                widths={[400, 680]}
+                sizes="(min-width: 1024px) 24rem, 88vw"
+                quality={65}
+                class="aspect-[4/5] w-full object-cover"
+              />
+            </div>
+            <figcaption class="mt-5 text-center text-xs tracking-[0.3em] text-creme/50 uppercase">
+              Acacia spirorbis · Bois dense du Caillou
+            </figcaption>
+          </figure>
         </div>
       </div>
     </article>
