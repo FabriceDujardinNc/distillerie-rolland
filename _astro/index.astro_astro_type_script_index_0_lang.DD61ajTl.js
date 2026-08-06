@@ -1,0 +1,1 @@
+import{t as e}from"./preload-helper.C5M4u277.js";var t=()=>e(()=>import(`./animations.B-mKtOZs.js`),[]);`requestIdleCallback`in window?requestIdleCallback(()=>t(),{timeout:1500}):setTimeout(t,250);

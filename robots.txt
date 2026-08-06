@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /en-preparation
+
+Sitemap: https://www.distillerie-rolland.com/sitemap-index.xml
