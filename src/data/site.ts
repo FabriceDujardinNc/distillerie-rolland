@@ -5,7 +5,7 @@
 
 export const site = {
   name: 'Distillerie Rolland',
-  founder: 'S. Rolland',
+  founder: 'Steve Rolland',
   foundingYear: 2020,
   firstCollectionYear: 2026,
   domain: 'https://www.distillerie-rolland.com',
@@ -13,11 +13,10 @@ export const site = {
   motto: 'Tradition, Passion, Authenticité',
   description:
     'Distillerie artisanale à Moindou, Nouvelle-Calédonie. Rhum blanc traditionnel La Métisse, rhum brun au cœur de gaïac torréfié unique au monde, rhums arrangés. Par un maître distillateur passionné.',
-  // Numéro retiré à la demande du client (ligne perso) — renseigner ici le
-  // futur numéro de société et il réapparaîtra partout (contact, mentions
-  // légales, JSON-LD). Format : phone '+687 XX XX XX', phoneHref '+687XXXXXX'.
-  phone: '',
-  phoneHref: '',
+  // Ligne professionnelle de la distillerie (affichée partout : contact,
+  // mentions légales, JSON-LD LocalBusiness)
+  phone: '+687 90 31 40',
+  phoneHref: '+687903140',
   email: 'contact@distillerie-rolland.com',
   address: {
     street: 'Lot 783, Moindou Pâturage',
