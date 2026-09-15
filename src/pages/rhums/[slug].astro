@@ -207,8 +207,10 @@ const jsonLd = {
     }
 
     <article class="mx-auto max-w-6xl px-5 md:px-8">
-      <!-- Texte à gauche, fiche technique en regard à droite : plus de vide -->
-      <div class="mt-14 grid items-start gap-12 lg:grid-cols-5 lg:gap-16">
+      <!-- Texte à gauche, bouteille en regard à droite (centrée sur la hauteur du
+           texte) ; la fiche technique s'étale ensuite sur toute la largeur en
+           colonnes : aucune colonne ne dépasse l'autre, pas de vide. -->
+      <div class="mt-14 grid items-center gap-12 lg:grid-cols-5 lg:gap-16">
         <div class="lg:col-span-3">
           <div class="space-y-5 leading-relaxed text-creme-muted" data-reveal-group>
             {(product.longText ?? [product.description]).map((paragraphe) => <p>{paragraphe}</p>)}
@@ -240,42 +242,41 @@ const jsonLd = {
         </div>
 
         {
-          (media.bouteille || product.facts) && (
-            <div class="space-y-10 lg:col-span-2">
-              {media.bouteille && (
-                <figure class="fond-halo flex justify-center py-6" data-reveal>
-                  <Image
-                    src={media.bouteille.src}
-                    alt={media.bouteille.alt}
-                    width={560}
-                    widths={[380, 560]}
-                    sizes="18rem"
-                    class="packshot h-80 w-auto md:h-96"
-                  />
-                </figure>
-              )}
-              {product.facts && (
-                <aside class="border border-or/20 bg-noir-800/60 p-7" data-reveal>
-                  <h2 class="font-display text-lg tracking-widest text-or uppercase">Fiche technique</h2>
-                  <dl class="mt-6 divide-y divide-or/10">
-                    {Object.entries(product.facts).map(([cle, valeur]) => (
-                      <div class="py-3 text-sm">
-                        <dt class="tracking-widest text-creme/60 uppercase">{cle}</dt>
-                        <dd class="mt-1 text-creme">{valeur}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                </aside>
-              )}
-            </div>
+          media.bouteille && (
+            <figure class="fond-halo flex justify-center py-6 lg:col-span-2" data-reveal>
+              <Image
+                src={media.bouteille.src}
+                alt={media.bouteille.alt}
+                width={560}
+                widths={[380, 560]}
+                sizes="18rem"
+                class="packshot h-80 w-auto md:h-96"
+              />
+            </figure>
           )
         }
       </div>
 
+      {
+        product.facts && (
+          <aside class="mt-16 border border-or/20 bg-noir-800/60 p-7 md:p-9" data-reveal>
+            <h2 class="font-display text-lg tracking-widest text-or uppercase">Fiche technique</h2>
+            <dl class="mt-6 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-4">
+              {Object.entries(product.facts).map(([cle, valeur]) => (
+                <div class="border-t border-or/10 py-3 text-sm">
+                  <dt class="tracking-widest text-creme/60 uppercase">{cle}</dt>
+                  <dd class="mt-1 text-creme">{valeur}</dd>
+                </div>
+              ))}
+            </dl>
+          </aside>
+        )
+      }
+
       <!-- Vidéos de fabrication sous le contenu -->
       {
         media.videos.length > 0 && (
-          <div class="mt-20 flex flex-wrap justify-center gap-8" data-reveal-group>
+          <div class="mt-16 flex flex-wrap justify-center gap-8" data-reveal-group>
             {media.videos.map((video) => (
               <figure class="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)]">
                 <video
