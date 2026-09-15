@@ -78,7 +78,7 @@ const jsonLd = {
           première mondiale.
         </p>
       </header>
-      <figure class="fond-halo flex justify-center py-6 md:col-span-2" data-reveal>
+      <figure class="flex justify-center py-6 md:col-span-2" data-reveal>
         <Image
           src={duoDetoure}
           alt="Les deux rhums La Métisse : rhum brun au cœur de gaïac torréfié (42 % vol.) et rhum blanc traditionnel (45 % vol.), 70 cl"
@@ -95,7 +95,7 @@ const jsonLd = {
           creations.map((product) => (
             <article class="group flex flex-col border border-or/15 bg-noir-800/60 transition-[border-color] duration-500 hover:border-or/40">
               {vignettes[product.slug!] && (
-                <a href={`/rhums/${product.slug}/`} class="fond-halo block overflow-hidden pt-6" tabindex="-1" aria-hidden="true">
+                <a href={`/rhums/${product.slug}/`} class="block overflow-hidden pt-6" tabindex="-1" aria-hidden="true">
                   <Image
                     src={vignettes[product.slug!].src}
                     alt={vignettes[product.slug!].alt}
