@@ -1,9 +1,13 @@
 ---
 /**
  * Pages produit (/rhums/<slug>/) — une par création disponible.
- * Ton strictement informatif (méthode, composition, origine) : la loi Évin
- * autorise l'information factuelle, pas l'incitation — pas de prix, pas
- * d'achat, pas de mise en scène de consommation.
+ * Ton strictement informatif (méthode, composition, origine) : la loi du pays
+ * 2018-6 (lutte contre l'alcoolisme, art. 3, 5 et 6) autorise l'information
+ * factuelle, pas l'incitation — pas de prix, pas d'achat, pas de mise en scène.
+ * Visuels : packshots neutres détourés + paysages sans bouteille
+ * uniquement (courrier DECAT du 14/09/2026 : les bouteilles photographiées
+ * dans la nature ont été qualifiées de publicité illicite). Seules les vidéos
+ * de fabrication (cachetage à la cire, remplissage) sont conservées.
  * SEO : Schema.org Product (sans offre) + fil d'Ariane + page indexable.
  */
 import { Image } from 'astro:assets';
@@ -13,16 +17,12 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import { site, products } from '@/data/site';
 
-import blancCiel from '@/assets/images/rhum-blanc-la-metisse-bouteille-ciel-caledonien.jpg';
-import blancVallee from '@/assets/images/rhum-blanc-la-metisse-vallee-moindou.jpg';
-import blancCoucher from '@/assets/images/rhum-blanc-la-metisse-coucher-de-soleil.jpg';
-import blancPaysage from '@/assets/images/rhum-blanc-la-metisse-paysage-caledonien.jpg';
+import blancDetoure from '@/assets/images/la-metisse-rhum-blanc-bouteille-detouree.png';
+import brunDetoure from '@/assets/images/la-metisse-rhum-brun-bouteille-detouree.png';
 import cireBleue from '@/assets/images/cire-bleue-cachetage-la-metisse.jpg';
-import brunBrousse from '@/assets/images/rhum-brun-gaiac-la-metisse-brousse-caledonienne.jpg';
-import brunCollines from '@/assets/images/rhum-brun-gaiac-la-metisse-collines-cote-ouest.jpg';
-import brunCiel from '@/assets/images/rhum-brun-gaiac-la-metisse-ciel-caledonien.jpg';
-import brunRobeAmbree from '@/assets/images/rhum-brun-gaiac-la-metisse-robe-ambree-ciel.jpg';
-import brunFleurs from '@/assets/images/rhum-brun-gaiac-la-metisse-fleurs-sauvages.jpg';
+import remplissageAffiche from '@/assets/images/remplissage-rhum-brun-gaiac-affiche.jpg';
+import paysageMoindou from '@/assets/images/paysage-moindou-collines-distillerie-rolland.jpg';
+import arbreGaiac from '@/assets/images/arbre-gaiac-brousse-cote-ouest-nouvelle-caledonie.jpg';
 
 export function getStaticPaths() {
   return products
@@ -33,26 +33,28 @@ export function getStaticPaths() {
 const { product } = Astro.props;
 const path = `/rhums/${product.slug}/`;
 
-// Visuels par produit : bannière hero + galerie complémentaire + vidéos
-const medias = {
+// Visuels par produit : bannière hero (paysage, sans bouteille), packshot
+// neutre en regard de la fiche technique, vidéos de fabrication.
+type Visuel = { src: ImageMetadata; alt: string };
+type Video = { src: string; poster: string; caption: string; aria: string };
+type Medias = {
+  hero: (Visuel & { position: string }) | null;
+  bouteille: Visuel | null;
+  videos: readonly Video[];
+};
+const vide: Medias = { hero: null, bouteille: null, videos: [] };
+const medias: Record<string, Medias> = {
   'la-metisse-rhum-blanc': {
     hero: {
-      src: blancPaysage,
-      alt: 'La Métisse rhum blanc devant les collines calédoniennes au soleil couchant',
+      src: paysageMoindou,
+      alt: 'Collines de Moindou, côte ouest de la Nouvelle-Calédonie, où est distillé le rhum blanc La Métisse',
       position: 'object-[center_60%]',
     },
-    galerie: [
-      { src: blancCiel, alt: 'Bouteille de rhum blanc La Métisse sous le ciel bleu de Nouvelle-Calédonie' },
-      { src: blancVallee, alt: 'Rhum blanc La Métisse dans la vallée de Moindou' },
-      { src: blancCoucher, alt: 'Rhum blanc La Métisse au coucher de soleil, Nouvelle-Calédonie' },
-    ],
+    bouteille: {
+      src: blancDetoure,
+      alt: 'Bouteille La Métisse rhum blanc traditionnel, 70 cl, 45 % vol. — Distillerie Rolland, Nouvelle-Calédonie',
+    },
     videos: [
-      {
-        src: '/videos/rhum-blanc-la-metisse-presentation.mp4',
-        poster: blancCiel.src,
-        caption: 'La Métisse, rhum blanc traditionnel',
-        aria: 'Présentation de la bouteille de rhum blanc La Métisse',
-      },
       {
         src: '/videos/cachetage-cire-bleue-la-metisse.mp4',
         poster: cireBleue.src,
@@ -63,33 +65,34 @@ const medias = {
   },
   'la-metisse-rhum-brun-gaiac': {
     hero: {
-      src: brunBrousse,
-      alt: 'Bouteille La Métisse rhum brun au cœur de gaïac torréfié dans la brousse calédonienne',
+      src: arbreGaiac,
+      alt: 'Gaïac (Acacia spirorbis) dans la brousse de la côte ouest calédonienne, le bois au cœur du rhum brun La Métisse',
       position: 'object-[center_55%]',
     },
-    galerie: [
-      { src: brunCollines, alt: 'La Métisse rhum brun au gaïac devant les collines de la côte ouest, Nouvelle-Calédonie' },
-      { src: brunCiel, alt: 'Rhum brun La Métisse, robe ambrée sous le ciel de Nouvelle-Calédonie' },
-      { src: brunRobeAmbree, alt: 'Reflets ambrés du rhum brun au cœur de gaïac torréfié La Métisse' },
-    ],
+    bouteille: {
+      src: brunDetoure,
+      alt: 'Bouteille La Métisse rhum brun au cœur de gaïac torréfié, 70 cl, 42 % vol. — Distillerie Rolland, Nouvelle-Calédonie',
+    },
     videos: [
       {
+        // Affiche = image extraite de la vidéo elle-même (l'ancienne, bouteille
+        // dans les fleurs, était une mise en scène).
         src: '/videos/remplissage-rhum-brun-gaiac.mp4',
-        poster: brunFleurs.src,
+        poster: remplissageAffiche.src,
         caption: 'Le remplissage, bouteille par bouteille',
         aria: "Remplissage d'une bouteille de rhum brun au cœur de gaïac torréfié",
       },
     ],
   },
-  'rhums-arranges': { hero: null, galerie: [], videos: [] },
-} as const;
-const media = medias[product.slug as keyof typeof medias] ?? { hero: null, galerie: [], videos: [] };
+  'rhums-arranges': vide,
+};
+const media = medias[product.slug as string] ?? vide;
 
 const title = `${product.name} — Distillerie Rolland, Nouvelle-Calédonie`;
 
 const imagesLd = [
+  ...(media.bouteille ? [media.bouteille.src] : []),
   ...(media.hero ? [media.hero.src] : []),
-  ...media.galerie.map((g) => g.src),
 ].map((img) => new URL(img.src, site.domain).href);
 
 // Balisage VideoObject : sans lui, Google traite les <video> de la galerie
@@ -237,41 +240,44 @@ const jsonLd = {
         </div>
 
         {
-          product.facts && (
-            <aside class="border border-or/20 bg-noir-800/60 p-7 lg:col-span-2" data-reveal>
-              <h2 class="font-display text-lg tracking-widest text-or uppercase">Fiche technique</h2>
-              <dl class="mt-6 divide-y divide-or/10">
-                {Object.entries(product.facts).map(([cle, valeur]) => (
-                  <div class="py-3 text-sm">
-                    <dt class="tracking-widest text-creme/60 uppercase">{cle}</dt>
-                    <dd class="mt-1 text-creme">{valeur}</dd>
-                  </div>
-                ))}
-              </dl>
-            </aside>
+          (media.bouteille || product.facts) && (
+            <div class="space-y-10 lg:col-span-2">
+              {media.bouteille && (
+                <figure class="fond-halo flex justify-center py-6" data-reveal>
+                  <Image
+                    src={media.bouteille.src}
+                    alt={media.bouteille.alt}
+                    width={560}
+                    widths={[380, 560]}
+                    sizes="18rem"
+                    class="packshot h-80 w-auto md:h-96"
+                  />
+                </figure>
+              )}
+              {product.facts && (
+                <aside class="border border-or/20 bg-noir-800/60 p-7" data-reveal>
+                  <h2 class="font-display text-lg tracking-widest text-or uppercase">Fiche technique</h2>
+                  <dl class="mt-6 divide-y divide-or/10">
+                    {Object.entries(product.facts).map(([cle, valeur]) => (
+                      <div class="py-3 text-sm">
+                        <dt class="tracking-widest text-creme/60 uppercase">{cle}</dt>
+                        <dd class="mt-1 text-creme">{valeur}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </aside>
+              )}
+            </div>
           )
         }
       </div>
 
-      <!-- Galerie horizontale sous le contenu : photos puis vidéos -->
+      <!-- Vidéos de fabrication sous le contenu -->
       {
-        (media.galerie.length > 0 || media.videos.length > 0) && (
-          <div class="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-4" data-reveal-group>
-            {media.galerie.map((photo) => (
-              <figure data-mask-reveal>
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  width={760}
-                  widths={[420, 760]}
-                  sizes="(min-width: 1024px) 23vw, (min-width: 640px) 46vw, 92vw"
-                  loading="lazy"
-                  class="aspect-[4/5] w-full border border-or/20 object-cover"
-                />
-              </figure>
-            ))}
+        media.videos.length > 0 && (
+          <div class="mt-20 flex flex-wrap justify-center gap-8" data-reveal-group>
             {media.videos.map((video) => (
-              <figure>
+              <figure class="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)]">
                 <video
                   src={video.src}
                   poster={video.poster}

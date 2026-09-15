@@ -92,6 +92,26 @@ body {
     radial-gradient(circle at 80% 70%, rgb(201 164 92 / 0.04), transparent 40%);
 }
 
+/* Packshot : bouteille détourée (PNG transparent, fond blanc du studio retiré
+   au script) posée sur le noir du site — visuel neutre imposé par la
+   réglementation calédonienne sur la publicité des alcools. Ombre portée
+   profonde + halo doré qui suivent la silhouette, pour que la bouteille ait
+   de la matière au lieu de flotter. */
+@utility packshot {
+  filter: drop-shadow(0 22px 34px rgb(0 0 0 / 0.6))
+    drop-shadow(0 0 26px rgb(201 164 92 / 0.22));
+}
+
+/* Nappe lumineuse dorée derrière un packshot (sur le conteneur) */
+@utility fond-halo {
+  background: radial-gradient(
+    ellipse 60% 70% at 50% 55%,
+    rgb(201 164 92 / 0.14),
+    rgb(201 164 92 / 0.04) 55%,
+    transparent 80%
+  );
+}
+
 /* --------------------------------------------------------------------------
    Accessibilité : si l'utilisateur refuse les animations, tout est visible
    et immobile. GSAP est également désactivé côté JS via matchMedia.

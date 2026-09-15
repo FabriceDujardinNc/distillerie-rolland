@@ -6,22 +6,24 @@
  */
 import { Image } from 'astro:assets';
 import logoMetisse from '@/assets/images/logo-la-metisse-rhum-traditionnel-or.png';
-import blancBouteille from '@/assets/images/rhum-blanc-la-metisse-bouteille-ciel-caledonien.jpg';
-import brunFleurs from '@/assets/images/rhum-brun-gaiac-la-metisse-fleurs-sauvages.jpg';
+import blancDetoure from '@/assets/images/la-metisse-rhum-blanc-bouteille-detouree.png';
+import brunDetoure from '@/assets/images/la-metisse-rhum-brun-bouteille-detouree.png';
 import { products } from '@/data/site';
 
 const disponibles = products.filter((p) => p.available);
 const aVenir = products.filter((p) => !p.available);
 
-// Photo de tête de carte, par slug (les arrangés attendent la leur)
+// Photo de tête de carte, par slug (les arrangés attendent la leur).
+// Packshots neutres détourés (posés sur le noir du site) uniquement : la loi du pays 2018-6 interdit
+// toute mise en scène des bouteilles (courrier DECAT du 14/09/2026).
 const vignettes: Record<string, { src: ImageMetadata; alt: string }> = {
   'la-metisse-rhum-blanc': {
-    src: blancBouteille,
-    alt: 'Rhum blanc La Métisse, bouteille cachetée à la cire — Nouvelle-Calédonie',
+    src: blancDetoure,
+    alt: 'Bouteille La Métisse rhum blanc traditionnel, 70 cl, 45 % vol. — Distillerie Rolland, Nouvelle-Calédonie',
   },
   'la-metisse-rhum-brun-gaiac': {
-    src: brunFleurs,
-    alt: 'Bouteille La Métisse rhum brun au cœur de gaïac torréfié, fleurs sauvages de Nouvelle-Calédonie',
+    src: brunDetoure,
+    alt: 'Bouteille La Métisse rhum brun au cœur de gaïac torréfié, 70 cl, 42 % vol. — Distillerie Rolland, Nouvelle-Calédonie',
   },
 };
 ---
@@ -62,17 +64,17 @@ const vignettes: Record<string, { src: ImageMetadata; alt: string }> = {
             {product.slug && vignettes[product.slug] && (
               <a
                 href={`/rhums/${product.slug}/`}
-                class="-mx-8 -mt-8 mb-6 block overflow-hidden"
+                class="fond-halo -mx-8 -mt-8 mb-6 flex justify-center overflow-hidden pt-6"
                 aria-hidden="true"
                 tabindex="-1"
               >
                 <Image
                   src={vignettes[product.slug].src}
                   alt={vignettes[product.slug].alt}
-                  width={640}
-                  widths={[380, 640]}
-                  sizes="(min-width: 768px) 30vw, 92vw"
-                  class="aspect-[4/3] w-full object-cover object-[center_30%] transition-transform duration-700 hover:scale-105"
+                  width={420}
+                  widths={[280, 420]}
+                  sizes="14rem"
+                  class="packshot h-72 w-auto transition-transform duration-700 hover:scale-105"
                 />
               </a>
             )}

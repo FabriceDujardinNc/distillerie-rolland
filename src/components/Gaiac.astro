@@ -2,10 +2,12 @@
 /**
  * Section signature « Le cœur de gaïac torréfié » : le storytelling clé de la
  * maison — premier alcool au monde vieilli au gaïac. Fond noir plus profond,
- * photo de la bouteille ambrée, parallax.
+ * photo du rondin de gaïac au cœur rouge acajou (pas de bouteille mise en
+ * scène : réglementation calédonienne sur la publicité des alcools, courrier
+ * DECAT du 14/09/2026), parallax.
  */
 import { Image } from 'astro:assets';
-import bouteille from '@/assets/images/rhum-brun-gaiac-la-metisse-ambiance-jungle.jpg';
+import rondinGaiac from '@/assets/images/rondin-gaiac-coupe-coeur-rouge-acajou-distillerie-rolland.jpg';
 ---
 
 <section id="gaiac" class="relative z-10 overflow-hidden bg-noir-800 py-24 md:py-36">
@@ -58,13 +60,13 @@ import bouteille from '@/assets/images/rhum-brun-gaiac-la-metisse-ambiance-jungl
     <div class="relative mx-auto w-full max-w-sm" data-mask-reveal>
       <div class="overflow-hidden rounded-t-full border border-or/25 p-3">
         <Image
-          src={bouteille}
-          alt="Bouteille La Métisse rhum brun au cœur de gaïac torréfié dans la végétation tropicale — Distillerie Rolland"
+          src={rondinGaiac}
+          alt="Rondin de gaïac (Acacia spirorbis) fraîchement coupé : les cernes et le cœur rouge acajou du bois torréfié pour le rhum brun de la Distillerie Rolland"
           width={680}
           widths={[400, 680, 1020]}
           sizes="(min-width: 768px) 24rem, 88vw"
           quality={60}
-          class="aspect-[9/16] w-full rounded-t-full object-cover"
+          class="aspect-square w-full rounded-t-full object-cover object-[54%_center]"
           data-parallax-img
         />
       </div>

@@ -10,20 +10,23 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import { site, products } from '@/data/site';
 
-import blancBouteille from '@/assets/images/rhum-blanc-la-metisse-bouteille-ciel-caledonien.jpg';
-import brunCollines from '@/assets/images/rhum-brun-gaiac-la-metisse-collines-cote-ouest.jpg';
+import blancDetoure from '@/assets/images/la-metisse-rhum-blanc-bouteille-detouree.png';
+import brunDetoure from '@/assets/images/la-metisse-rhum-brun-bouteille-detouree.png';
+import duoDetoure from '@/assets/images/la-metisse-rhum-brun-et-rhum-blanc-duo-detoure.png';
 
 const creations = products.filter((p) => p.available && p.slug);
 
-// Les arrangés attendent leur photo
+// Les arrangés attendent leur photo.
+// Packshots neutres détourés (posés sur le noir du site) uniquement : la loi du pays 2018-6 interdit
+// toute mise en scène des bouteilles (courrier DECAT du 14/09/2026).
 const vignettes: Record<string, { src: ImageMetadata; alt: string }> = {
   'la-metisse-rhum-blanc': {
-    src: blancBouteille,
-    alt: 'Rhum blanc La Métisse, bouteille cachetée à la cire — Nouvelle-Calédonie',
+    src: blancDetoure,
+    alt: 'Bouteille La Métisse rhum blanc traditionnel, 70 cl, 45 % vol. — Distillerie Rolland, Nouvelle-Calédonie',
   },
   'la-metisse-rhum-brun-gaiac': {
-    src: brunCollines,
-    alt: 'Bouteille La Métisse rhum brun au gaïac devant les collines calédoniennes',
+    src: brunDetoure,
+    alt: 'Bouteille La Métisse rhum brun au cœur de gaïac torréfié, 70 cl, 42 % vol. — Distillerie Rolland, Nouvelle-Calédonie',
   },
 };
 
@@ -58,7 +61,8 @@ const jsonLd = {
         <span class="text-creme/70">Nos rhums</span>
       </nav>
 
-      <header class="mt-10 max-w-3xl">
+      <div class="mt-10 grid items-center gap-10 md:grid-cols-5">
+      <header class="max-w-3xl md:col-span-3">
         <p class="mb-4 text-xs tracking-[0.35em] text-or uppercase">La collection</p>
         <h1
           class="font-display text-balance text-3xl font-semibold tracking-wide text-creme md:text-5xl"
@@ -74,20 +78,31 @@ const jsonLd = {
           première mondiale.
         </p>
       </header>
+      <figure class="fond-halo flex justify-center py-6 md:col-span-2" data-reveal>
+        <Image
+          src={duoDetoure}
+          alt="Les deux rhums La Métisse : rhum brun au cœur de gaïac torréfié (42 % vol.) et rhum blanc traditionnel (45 % vol.), 70 cl"
+          width={640}
+          widths={[420, 640]}
+          sizes="(min-width: 768px) 20rem, 70vw"
+          class="packshot h-64 w-auto md:h-80"
+        />
+      </figure>
+      </div>
 
       <div class="mt-14 grid gap-8 md:grid-cols-3" data-reveal-group>
         {
           creations.map((product) => (
             <article class="group flex flex-col border border-or/15 bg-noir-800/60 transition-[border-color] duration-500 hover:border-or/40">
               {vignettes[product.slug!] && (
-                <a href={`/rhums/${product.slug}/`} class="block overflow-hidden" tabindex="-1" aria-hidden="true">
+                <a href={`/rhums/${product.slug}/`} class="fond-halo block overflow-hidden pt-6" tabindex="-1" aria-hidden="true">
                   <Image
                     src={vignettes[product.slug!].src}
                     alt={vignettes[product.slug!].alt}
-                    width={640}
-                    widths={[380, 640]}
-                    sizes="(min-width: 768px) 30vw, 92vw"
-                    class="aspect-[4/3] w-full object-cover object-[center_30%] transition-transform duration-700 group-hover:scale-105"
+                    width={420}
+                    widths={[280, 420]}
+                    sizes="14rem"
+                    class="packshot mx-auto h-72 w-auto transition-transform duration-700 group-hover:scale-105"
                   />
                 </a>
               )}
