@@ -56,11 +56,6 @@ const vignettes: Record<string, { src: ImageMetadata; alt: string }> = {
                 : 'border-or/15 hover:border-or/40',
             ]}
           >
-            {product.signature && (
-              <p class="absolute -top-3 left-1/2 z-10 -translate-x-1/2 bg-or px-4 py-1 text-[0.65rem] font-medium tracking-[0.2em] whitespace-nowrap text-noir uppercase">
-                Unique au monde
-              </p>
-            )}
             {product.slug && vignettes[product.slug] && (
               <a
                 href={`/rhums/${product.slug}/`}
