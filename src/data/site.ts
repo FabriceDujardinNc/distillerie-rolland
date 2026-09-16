@@ -43,7 +43,7 @@ export const site = {
   /** Crédit du développeur du site (pied de page + mentions légales) */
   developer: {
     name: 'Fabrice Dujardin',
-    role: 'Développeur web, Nouvelle-Calédonie',
+    role: 'développeur web, Nouvelle-Calédonie',
     url: 'https://fabricedujardinportfolio.github.io/',
   },
 } as const;
