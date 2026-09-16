@@ -109,7 +109,7 @@ export const products: Product[] = [
       Base: 'Mélasse de Bundaberg (Australie) — méthode traditionnelle',
       Distillation: 'Double distillation',
       Alambic: 'Cuve inox, col de cygne, condenseur en cuivre',
-      'Élevage': 'Cœur de gaïac torréfié de Nouvelle-Calédonie',
+      'Élevage': 'Cœur de gaïac torréfié de Nouvelle-Calédonie — technique mise au point à la distillerie de Moindou',
       Robe: 'Dorée, reflets rouge acajou',
       Origine: 'Distillé et embouteillé en Nouvelle-Calédonie',
     },
