@@ -40,6 +40,12 @@ export const site = {
    * « en préparation » (fuseau Nouvelle-Calédonie, UTC+11).
    */
   launchDate: '2026-07-10T18:00:00+11:00',
+  /** Crédit du développeur du site (pied de page + mentions légales) */
+  developer: {
+    name: 'Fabrice Dujardin',
+    role: 'Développeur web, Nouvelle-Calédonie',
+    url: 'https://fabricedujardinportfolio.github.io/',
+  },
 } as const;
 
 export type Product = {
