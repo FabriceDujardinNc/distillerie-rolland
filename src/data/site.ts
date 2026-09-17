@@ -72,7 +72,7 @@ export const products: Product[] = [
     slug: 'la-metisse-rhum-blanc',
     disponible: true,
     description:
-      'Un rhum blanc traditionnel élaboré à partir de mélasse et affiné par une double distillation, pour un profil franc et aromatique — la base des ti-punch, mojito et daïquiri.',
+      'Un rhum blanc traditionnel élaboré à partir de mélasse et affiné par une double distillation, pour un profil franc et aromatique.',
     available: true,
     longText: [
       "La Métisse Rhum blanc est élaborée selon la méthode traditionnelle, à partir d'une mélasse de qualité provenant de Bundaberg (Queensland, Australie), fermentée sur la commune de Moindou. Elle subit une double distillation : cette seconde passe dans l'alambic affine l'eau-de-vie, resserre son profil aromatique et lui donne une pureté et une rondeur supérieures à celles d'une distillation simple.",

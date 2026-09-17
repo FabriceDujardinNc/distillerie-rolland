@@ -1,6 +1,6 @@
 # Distillerie Rolland
 
-> Distillerie artisanale fondée en 2020 à Moindou, sur la côte ouest de la Nouvelle-Calédonie, à 1 h 30 de Nouméa. Elle produit les rhums La Métisse — rhum blanc traditionnel de mélasse double distillation, et un rhum brun vieilli au cœur de gaïac torréfié (Acacia spirorbis). Site informatif : pas de vente en ligne, pas de prix (réglementation calédonienne sur les boissons alcoolisées). Contenu réservé aux adultes (18+).
+> Distillerie artisanale fondée en 2020 à Moindou, sur la côte ouest de la Nouvelle-Calédonie, à 1 h 30 de Nouméa. Elle produit les rhums La Métisse — rhum blanc traditionnel de mélasse double distillation, et un rhum brun vieilli au cœur de gaïac torréfié (Acacia spirorbis), une technique de vieillissement mise au point à la distillerie de Moindou, développée pour la première fois en Nouvelle-Calédonie. Mélasse de qualité provenant de Bundaberg (Australie). Site informatif : pas de vente en ligne, pas de prix (réglementation calédonienne sur les boissons alcoolisées). Contenu réservé aux adultes (18+).
 
 Fondateur et maître distillateur : Steve Rolland. Marque : La Métisse. Visites et dégustations réservées aux professionnels, sur rendez-vous.
 
@@ -8,8 +8,8 @@ Fondateur et maître distillateur : Steve Rolland. Marque : La Métisse. Visites
 
 - [Accueil](https://www.distillerie-rolland.com/) : présentation de la distillerie, du gaïac et des créations
 - [Nos rhums](https://www.distillerie-rolland.com/rhums/) : la collection La Métisse
-- [Rhum blanc traditionnel](https://www.distillerie-rolland.com/rhums/la-metisse-rhum-blanc/) : mélasse fermentée à Moindou, double distillation, cacheté à la cire
-- [Rhum brun au cœur de gaïac torréfié](https://www.distillerie-rolland.com/rhums/la-metisse-rhum-brun-gaiac/) : vieilli au gaïac torréfié, robe dorée aux reflets rouge acajou
+- [Rhum blanc traditionnel](https://www.distillerie-rolland.com/rhums/la-metisse-rhum-blanc/) : mélasse de Bundaberg (Australie) fermentée à Moindou, double distillation, 45 % vol., cacheté à la cire
+- [Rhum brun au cœur de gaïac torréfié](https://www.distillerie-rolland.com/rhums/la-metisse-rhum-brun-gaiac/) : double distillation, vieilli au contact du cœur de gaïac torréfié, 42 % vol., robe dorée aux reflets rouge acajou
 - [Rhums arrangés](https://www.distillerie-rolland.com/rhums/rhums-arranges/) : letchi, passion, banane, épices (en préparation)
 - [Le gaïac](https://www.distillerie-rolland.com/le-gaiac/) : l'arbre Acacia spirorbis, son bois et sa place dans la tradition kanak
 

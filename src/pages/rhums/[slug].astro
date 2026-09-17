@@ -88,7 +88,7 @@ const medias: Record<string, Medias> = {
 };
 const media = medias[product.slug as string] ?? vide;
 
-const title = `${product.name} — Distillerie Rolland, Nouvelle-Calédonie`;
+const title = `${product.name} | Distillerie Rolland`;
 
 const imagesLd = [
   ...(media.bouteille ? [media.bouteille.src] : []),

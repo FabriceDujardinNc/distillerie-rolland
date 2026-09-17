@@ -30,18 +30,18 @@ Le référencement **démarre réellement au lancement** : tant que le site est 
 | # | Action | Qui | Durée |
 |---|--------|-----|-------|
 | 3 | **Google Search Console** : ajouter la propriété `distillerie-rolland.com` (vérification DNS via Hostinger), soumettre le sitemap `sitemap-index.xml`, demander l'indexation de la page d'accueil | Fabrice | 20 min |
-| 4 | **Google Business Profile** ⭐ l'action n°1 du référencement local : créer la fiche sur business.google.com — catégorie « Distillerie », en mode **« zone desservie » SANS adresse visible** (répondre « Non » à « les clients peuvent-ils se rendre à votre adresse ? ») — zone : Moindou / Nouvelle-Calédonie, téléphone +687 92 07 61, lien vers le site, photos (bouteille, alambic, logo). Choix de discrétion du client : l'adresse exacte n'apparaît ni sur Maps ni sur le site. | Client (aidé de Fabrice) | 30 min + validation (1-2 sem.) |
-| 5 | Compléter la fiche GBP à 100 % : description avec « premier rhum au cœur de gaïac torréfié au monde », produits, zone desservie | Client | 20 min |
+| 4 | **Google Business Profile** ⭐ l'action n°1 du référencement local : créer la fiche sur business.google.com — catégorie « Distillerie », avec l'adresse Lot 783, Moindou Pâturage, 98819 Moindou (publiée sur le site depuis le 16/09/2026, accord du client) ou en mode « zone desservie » si le client préfère ne pas recevoir de visiteurs — zone : Moindou / Nouvelle-Calédonie, téléphone +687 90 31 40, lien vers le site, photos (packshot neutre de la bouteille, alambic, logo ; pas de bouteille mise en scène). | Client (aidé de Fabrice) | 30 min + validation (1-2 sem.) |
+| 5 | Compléter la fiche GBP à 100 % : description factuelle conforme à la loi du pays 2018-6 (pas de superlatif sur la boisson : dire « technique de vieillissement au cœur de gaïac torréfié mise au point à Moindou, une première en Nouvelle-Calédonie »), produits, zone desservie, message sanitaire | Client | 20 min |
 
 ## 📣 Semaines 2 à 4 — notoriété locale
 
 | # | Action | Détail |
 |---|--------|--------|
 | 6 | **Avis Google** | Demander aux premiers clients/partenaires satisfaits de laisser un avis sur la fiche. 5 avis 5★ suffisent à faire décoller la visibilité Maps. Répondre à chaque avis. |
-| 7 | **Presse locale** | L'angle est en or : *« Le premier alcool au monde vieilli au cœur de gaïac torréfié est calédonien »*. Contacter Les Nouvelles Calédoniennes, NC la 1ère, Actu.nc. Un article = notoriété + un lien puissant. |
+| 7 | **Presse locale** | L'angle : *« Un distillateur de Moindou a mis au point le vieillissement au cœur de gaïac torréfié »*. La presse peut, elle, écrire « première mondiale » : c'est de l'information, pas de la publicité de la marque (courrier DECAT du 14/09/2026). Contacter Les Nouvelles Calédoniennes, NC la 1ère, Actu.nc. Un article = notoriété + un lien puissant. |
 | 8 | **Citations locales** | Inscrire la distillerie (nom + adresse + téléphone identiques partout) : annuaires calédoniens, office de tourisme de la côte ouest / Moindou, guides « produits locaux NC ». Viser 3-5 mentions de qualité. |
 | 9 | **Partenaires B2B** | Chaque bar/restaurant qui référence les rhums : demander une mention « Distillerie Rolland » avec lien sur leur site ou leurs réseaux. |
-| 10 | **Réseaux sociaux** | Créer/relier les pages Facebook et Instagram (les liens sont prévus dans le site — me donner les URL pour les activer). Publier régulièrement : photos de production, gaïac, cocktails. |
+| 10 | **Réseaux sociaux** | Créer/relier les pages Facebook et Instagram (les liens sont prévus dans le site — me donner les URL pour les activer). Publier régulièrement dans les limites de la loi du pays 2018-6 : photos de production, gaïac, paysages, packshots neutres avec message sanitaire — jamais de bouteille mise en scène ni de consommateur (courrier DECAT du 14/09/2026). |
 
 ## 🔄 En continu
 
